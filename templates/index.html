@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>yoii mannn</title>
+{% endblock %}
+
+{% block body %}
+    <h1>backend go brrrrrrrrr</h1>
+    <div class="content">
+        <table>
+        <tr>
+            <th>informasi hehe</th>
+            <th>value</th>
+            <th>actions</th>
+        </tr>
+        <tr>
+            <td>testing informasi</td>
+            <td>testing value</td>
+            <td>
+                <a href="">delete</a>
+                <a href="">update</a>
+            </td>
+        </tr>
+        </table>
+
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="add information">
+        </form>
+    </div>
+
+
+{% endblock %}
