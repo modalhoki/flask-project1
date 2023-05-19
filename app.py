@@ -14,9 +14,10 @@ class Fact(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'<information added on {self.information}>'
+        return f'<information on {self.information}>'
 
 
+# post data ke database
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
@@ -34,7 +35,6 @@ def index():
         print(new_task.information)
         print(new_task.value)
 
-
         try:
             print("----trying----")
             app.app_context().push()
@@ -51,6 +51,41 @@ def index():
         tasks = Fact.query.order_by(Fact.date_created).all()
         return render_template("index.html", tasks=tasks)
 
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    # get current data
+    information_to_delete = Fact.query.get_or_404(id)
+    print(information_to_delete)
+
+    # delete data
+    try:
+        db.session.delete(information_to_delete)
+        print("is deleted")
+        db.session.commit()
+        print("is committed")
+        return redirect('/')
+    except:
+        return "there is an issue while deleting the information"
+
+
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
+def update(id):
+    # get data
+    information_to_update = Fact.query.get_or_404(id)
+
+    if request.method == 'POST':
+        information_to_update.information = request.form['information_input_updated']
+        information_to_update.value = request.form['value_input_updated']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'there is an issue ma man'
+
+    else:
+        return render_template('update.html', task=information_to_update)
 
 
 if __name__ == '__main__':
