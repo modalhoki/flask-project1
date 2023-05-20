@@ -1,5 +1,9 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+import deepLearning
+import vector
+import expertSystem
+
 from datetime import datetime
 
 app = Flask(__name__)
@@ -8,19 +12,20 @@ db = SQLAlchemy(app)
 
 
 class Fact(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    age = db.Column(db.Integer, nullable=False)
-    sex = db.Column(db.Integer, nullable=False)
-    sex2 = db.Column(db.Integer, nullable=False)
-    chestPainType2 = db.Column(db.Integer, nullable=False)
-    # resting_bp = db.Column(db.Integer, nullable=False)
-    # cholesterol = db.Column(db.Integer, nullable=False)
-    # fasting_blood_sugar = db.Column(db.Integer, nullable=False)
-    # resting_ecg = db.Column(db.Integer, nullable=False)
-    # max_heart_rate = db.Column(db.Integer, nullable=False)
-    # exercise_angina = db.Column(db.Integer, nullable=False)
-    # old_peak = db.Column(db.Float, nullable=False)
-    # st_slope = db.Column(db.Integer, nullable=False)
+    # id = db.Column(db.Integer, primary_key=True)
+    # age = db.Column(db.Integer, nullable=False)
+    # sex = db.Column(db.Integer, nullable=False)
+    # sex2 = db.Column(db.Integer, nullable=False)
+    # chestPainType2 = db.Column(db.Integer, nullable=False)
+    #
+    # # resting_bp = db.Column(db.Integer, nullable=False)
+    # # cholesterol = db.Column(db.Integer, nullable=False)
+    # # fasting_blood_sugar = db.Column(db.Integer, nullable=False)
+    # # resting_ecg = db.Column(db.Integer, nullable=False)
+    # # max_heart_rate = db.Column(db.Integer, nullable=False)
+    # # exercise_angina = db.Column(db.Integer, nullable=False)
+    # # old_peak = db.Column(db.Float, nullable=False)
+    # # st_slope = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f'<data on {self.id}>'
@@ -29,49 +34,57 @@ class Fact(db.Model):
 # post data ke database
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    # if request.method == 'POST':
-    #     # get data from form
-    #     age = request.form['age']
-    #     sex = request.form['sex']
-    #     chestPainType = request.form['chest_pain_type']
-    #     resting_bp_s = request.form['resting_bp_s']
-    #     cholesterol = request.form['cholesterol']
-    #     fasting_blood_sugar = request.form['fasting_blood_sugar']
-    #     resting_ecg = request.form['resting_ecg']
-    #     max_heart_rate = request.form['max_heart_rate']
-    #     exercise_angina = request.form['exercise_angina']
-    #     old_peak = request.form['old_peak']
-    #     st_slope = request.form['st_slope']
-    #
-    #     print("----debugging2----")
-    #     patient_fact1 = Fact(age=age,
-    #                          sex=sex,
-    #                          chestPainType=chestPainType,
-    #                          resting_bp_s=resting_bp_s,
-    #                          cholesterol=cholesterol,
-    #                          fasting_blood_sugar=fasting_blood_sugar,
-    #                          resting_ecg=resting_ecg,
-    #                          max_heart_rate=max_heart_rate,
-    #                          exercise_angina=exercise_angina,
-    #                          old_peak=old_peak,
-    #                          st_slope=st_slope)
-    #
-    #     # patient_fact1 = Fact(age=1,sex=2,chest_pain_type=3,resting_bp_s=4,cholesterol=5,fasting_blood_sugar=6,resting_ecg=7,max_heart_rate=8,exercise_angina=9,old_peak=10,st_slope=11)
-    #
-    #     try:
-    #         app.app_context().push()
-    #         db.session.add(patient_fact1)
-    #         db.session.commit()
-    #         return redirect('/')
-    #     except:
-    #         return "there is an issue bro"
-    #
-    #
-    # else:
-    #     patient_fact = Fact.query.order_by(Fact.date_created).all()
-    #     return render_template("index.html", patient_fact=patient_fact)
+    if request.method == 'POST':
+        # get data from form
+        age = request.form['age']
+        sex = request.form['sex']
+        chestPainType = request.form['chest_pain_type']
+        resting_bp_s = request.form['resting_bp_s']
+        cholesterol = request.form['cholesterol']
+        fasting_blood_sugar = request.form['fasting_blood_sugar']
+        resting_ecg = request.form['resting_ecg']
+        max_heart_rate = request.form['max_heart_rate']
+        exercise_angina = request.form['exercise_angina']
+        old_peak = request.form['old_peak']
+        st_slope = request.form['st_slope']
 
-    return "hai"
+        print("----debugging2----")
+        patient_fact1 = Fact(age=age,
+                             sex=sex,
+                             chestPainType=chestPainType,
+                             resting_bp_s=resting_bp_s,
+                             cholesterol=cholesterol,
+                             fasting_blood_sugar=fasting_blood_sugar,
+                             resting_ecg=resting_ecg,
+                             max_heart_rate=max_heart_rate,
+                             exercise_angina=exercise_angina,
+                             old_peak=old_peak,
+                             st_slope=st_slope)
+
+        # patient_fact1 = Fact(age=1,sex=2,chest_pain_type=3,resting_bp_s=4,cholesterol=5,fasting_blood_sugar=6,resting_ecg=7,max_heart_rate=8,exercise_angina=9,old_peak=10,st_slope=11)
+
+        try:
+            app.app_context().push()
+            db.session.add(patient_fact1)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "there is an issue bro"
+
+
+    else:
+        patient_fact = Fact.query.order_by(Fact.date_created).all()
+        return render_template("index.html", patient_fact=patient_fact)
+
+
+@app.route('/expert_system')
+def expert_system():
+    return redirect('/expert_system.html')
+
+
+@app.route('/heart_deases_prediction')
+def heart_deases_prediction():
+    return redirect('/heart_diseases_prediction.html')
 
 
 # @app.route('/delete/<int:id>')

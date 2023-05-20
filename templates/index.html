@@ -7,63 +7,66 @@
 {% block body %}
     <h1>backend go brrrrrrrrr</h1>
     <div class="content">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">age</th>
-                    <th scope="col">sex</th>
-                    <th scope="col">chest pain type</th>
-                    <th scope="col">resting bp s</th>
-                    <th scope="col">cholesterol</th>
-                    <th scope="col">fasting blood sugar</th>
-                    <th scope="col">resting ecg</th>
-                    <th scope="col">max heart rate</th>
-                    <th scope="col">exercise angina</th>
-                    <th scope="col">old peak</th>
-                    <th scope="col">ST slope</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                {% for current_patient_fact in patient_fact %}
-                <tr>
-                    <td>{{ current_patient_fact.age }}</td>
-                    <td>{{ current_patient_fact.chest_pain_type }}</td>
-                    <td>{{ current_patient_fact.resting_bp_s }}</td>
-                    <td>{{ current_patient_fact.cholesterol }}</td>
-                    <td>{{ current_patient_fact.fasting_blood_sugar }}</td>
-                    <td>{{ current_patient_fact.resting_ecg }}</td>
-                    <td>{{ current_patient_fact.max_heart_rate }}</td>
-                    <td>{{ current_patient_fact.exercise_angina }}</td>
-                    <td>{{ current_patient_fact.old_peak }}</td>
-                    <td>{{ current_patient_fact.st_slope }}</td>
-                    <td>
-                        <a class="btn btn-primary" href="/delete/{{ current_patient_fact.id }}">delete</a>
-                        <a class="btn btn-primary" href="/update/{{ current_patient_fact.id }}">update</a>
-                    </td>
-                </tr>
+    <h2><a href="/expert_system">expert system page</a></h2>
+        <h2><a href="/heart_diseases_prediction"></a>heart diseases prediction page</h2>
+{#        <table class="table table-striped">#}
+{#            <thead>#}
+{#                <tr>#}
+{#                    <th scope="col">age</th>#}
+{#                    <th scope="col">sex</th>#}
+{#                    <th scope="col">chest pain type</th>#}
+{#                    <th scope="col">resting bp s</th>#}
+{#                    <th scope="col">cholesterol</th>#}
+{#                    <th scope="col">fasting blood sugar</th>#}
+{#                    <th scope="col">resting ecg</th>#}
+{#                    <th scope="col">max heart rate</th>#}
+{#                    <th scope="col">exercise angina</th>#}
+{#                    <th scope="col">old peak</th>#}
+{#                    <th scope="col">ST slope</th>#}
+{##}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#                {% for current_patient_fact in patient_fact %}#}
+{#                <tr>#}
+{#                    <td>{{ current_patient_fact.age }}</td>#}
+{#                    <td>{{ current_patient_fact.chest_pain_type }}</td>#}
+{#                    <td>{{ current_patient_fact.resting_bp_s }}</td>#}
+{#                    <td>{{ current_patient_fact.cholesterol }}</td>#}
+{#                    <td>{{ current_patient_fact.fasting_blood_sugar }}</td>#}
+{#                    <td>{{ current_patient_fact.resting_ecg }}</td>#}
+{#                    <td>{{ current_patient_fact.max_heart_rate }}</td>#}
+{#                    <td>{{ current_patient_fact.exercise_angina }}</td>#}
+{#                    <td>{{ current_patient_fact.old_peak }}</td>#}
+{#                    <td>{{ current_patient_fact.st_slope }}</td>#}
+{#                    <td>#}
+{#                        <a class="btn btn-primary" href="/delete/{{ current_patient_fact.id }}">delete</a>#}
+{#                        <a class="btn btn-primary" href="/update/{{ current_patient_fact.id }}">update</a>#}
+{#                    </td>#}
+{#                </tr>#}
+{##}
+{#                {% endfor %}#}
+{#            </tbody>#}
+{##}
+{##}
+{#        </table>#}
 
-                {% endfor %}
-            </tbody>
-
-
-        </table>
-
-        <form action="/" method="POST">
-            <input type="text" name="age">
-            <input type="text" name="sex">
-            <input type="text" name="chest_pain_type">
-            <input type="text" name="resting_bp_s">
-            <input type="text" name="cholesterol">
-            <input type="text" name="fasting_blood_sugar">
-            <input type="text" name="resting_ecg">
-            <input type="text" name="max_heart_rate">
-            <input type="text" name="exercise_angina">
-            <input type="text" name="old_peak">
-            <input type="text" name="st_slope">
-
-            <input type="submit" value="add information">
-        </form>
+{#        <form action="/" method="POST">#}
+{#            <input type="text" name="age">#}
+{#            <input type="text" name="sex">#}
+{#            <input type="text" name="chest_pain_type">#}
+{#            <input type="text" name="resting_bp_s">#}
+{#            <input type="text" name="cholesterol">#}
+{#            <input type="text" name="fasting_blood_sugar">#}
+{#            <input type="text" name="resting_ecg">#}
+{#            <input type="text" name="max_heart_rate">#}
+{#            <input type="text" name="exercise_angina">#}
+{#            <input type="text" name="old_peak">#}
+{#            <input type="text" name="st_slope">#}
+{##}
+{#            <input type="submit" value="add information">#}
+{#        </form>#}
 
     </div>
 
