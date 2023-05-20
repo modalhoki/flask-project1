@@ -6,6 +6,22 @@
 
 {% block body %}
 
-<h1>heart diseases prediction<</h1>
+<h1>heart diseases prediction</h1>
+
+    <form action="/heart_diseases_prediction" method="POST">
+            {% for input in inputs %}
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{ input }}</th>
+                      <td><input type="text" name="{{ input }}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+            {% endfor %}
+            <input type="submit" value="submit">
+    </form>
+
+
 
 {% endblock %}

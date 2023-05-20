@@ -12,20 +12,17 @@ db = SQLAlchemy(app)
 
 
 class Fact(db.Model):
-    # id = db.Column(db.Integer, primary_key=True)
-    # age = db.Column(db.Integer, nullable=False)
-    # sex = db.Column(db.Integer, nullable=False)
-    # sex2 = db.Column(db.Integer, nullable=False)
-    # chestPainType2 = db.Column(db.Integer, nullable=False)
-    #
-    # # resting_bp = db.Column(db.Integer, nullable=False)
-    # # cholesterol = db.Column(db.Integer, nullable=False)
-    # # fasting_blood_sugar = db.Column(db.Integer, nullable=False)
-    # # resting_ecg = db.Column(db.Integer, nullable=False)
-    # # max_heart_rate = db.Column(db.Integer, nullable=False)
-    # # exercise_angina = db.Column(db.Integer, nullable=False)
-    # # old_peak = db.Column(db.Float, nullable=False)
-    # # st_slope = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    age = db.Column(db.Integer, nullable=False)
+    sex = db.Column(db.Integer, nullable=False)
+    resting_bp = db.Column(db.Integer, nullable=False)
+    cholesterol = db.Column(db.Integer, nullable=False)
+    fasting_blood_sugar = db.Column(db.Integer, nullable=False)
+    resting_ecg = db.Column(db.Integer, nullable=False)
+    max_heart_rate = db.Column(db.Integer, nullable=False)
+    exercise_angina = db.Column(db.Integer, nullable=False)
+    old_peak = db.Column(db.Float, nullable=False)
+    st_slope = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return f'<data on {self.id}>'
@@ -73,18 +70,45 @@ def index():
 
 
     else:
-        patient_fact = Fact.query.order_by(Fact.date_created).all()
+        patient_fact = Fact.query.all()
         return render_template("index.html", patient_fact=patient_fact)
 
 
 @app.route('/expert_system')
 def expert_system():
-    return redirect('/expert_system.html')
+    return render_template('/expert_system.html', task=[])
 
 
-@app.route('/heart_deases_prediction')
-def heart_deases_prediction():
-    return redirect('/heart_diseases_prediction.html')
+# input predisksi
+heart_diseases_input = ["age",
+                        "sex",
+                        "chest_pain_type",
+                        "resting_bp_s",
+                        "cholesterol",
+                        "fasting_blood_sugar",
+                        "resting_ecg",
+                        "max_heart_rate",
+                        "exercise_angina",
+                        "old_peak",
+                        "st_slope"]
+
+
+@app.route('/heart_diseases_prediction', methods=['POST', 'GET'])
+def heart_diseases_prediction():
+    if request.method == 'POST':
+        hasil_hitungan = 0
+        data_form = request.form
+        for tipe_input in heart_diseases_input:
+            if request.form[tipe_input] == '':
+                continue
+
+            nilai = int(request.form[tipe_input])
+            hasil_hitungan = hasil_hitungan + nilai
+
+        return hasil_hitungan
+
+    else:
+        return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
 
 
 # @app.route('/delete/<int:id>')
