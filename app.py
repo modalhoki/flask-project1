@@ -92,24 +92,41 @@ heart_diseases_input = ["age",
                         "old_peak",
                         "st_slope"]
 
+heart_diseases_input3 = [["age", 58],
+                         ["sex", 0],
+                         ["chest_pain_type", 3],
+                         ["resting_bp_s", 150],
+                         ["cholesterol", 219],
+                         ["fasting_blood_sugar", 0],
+                         ["resting_ecg", 1],
+                         ["max_heart_rate", 118],
+                         ["exercise_angina", 0],
+                         ["old_peak", 0],
+                         ["st_slope", 2]]
+
 
 @app.route('/heart_diseases_prediction', methods=['POST', 'GET'])
 def heart_diseases_prediction():
     if request.method == 'POST':
         hasil_hitungan = 0
-        data_form = request.form
+
         for tipe_input in heart_diseases_input:
-            if request.form[tipe_input] == '':
+            current_data = request.form[tipe_input]
+            # handle null value
+            if current_data == '':
+                print("null value on " + tipe_input)
                 continue
 
-            nilai = int(request.form[tipe_input])
+            nilai = int(current_data)
             hasil_hitungan = hasil_hitungan + nilai
 
-        return hasil_hitungan
+        return "total data adalah " + str(hasil_hitungan)
 
     else:
-        return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
-
+        # return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
+        return render_template('/heart_diseases_prediction.html',
+                               total_data=len(heart_diseases_input3),
+                               input=heart_diseases_input3)
 
 # @app.route('/delete/<int:id>')
 # def delete(id):
