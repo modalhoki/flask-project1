@@ -34,6 +34,7 @@ class Fact(db.Model):
 def index():
     if request.method == 'POST':
         # get data from form
+
         age = request.form['age']
         sex = request.form['sex']
         chestPainType = request.form['chest_pain_type']
