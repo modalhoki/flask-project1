@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import deepLearning
 import vector
 import expertSystem
+import heart_prediction_default_input
 
 from datetime import datetime
 
@@ -79,30 +80,8 @@ def expert_system():
     return render_template('/expert_system.html', task=[])
 
 
-# input predisksi
-heart_diseases_input = ["age",
-                        "sex",
-                        "chest_pain_type",
-                        "resting_bp_s",
-                        "cholesterol",
-                        "fasting_blood_sugar",
-                        "resting_ecg",
-                        "max_heart_rate",
-                        "exercise_angina",
-                        "old_peak",
-                        "st_slope"]
-
-heart_diseases_input3 = [["age", 58],
-                         ["sex", 0],
-                         ["chest_pain_type", 3],
-                         ["resting_bp_s", 150],
-                         ["cholesterol", 219],
-                         ["fasting_blood_sugar", 0],
-                         ["resting_ecg", 1],
-                         ["max_heart_rate", 118],
-                         ["exercise_angina", 0],
-                         ["old_peak", 0],
-                         ["st_slope", 2]]
+# input data
+heart_diseases_input = heart_prediction_default_input.heart_diseases_input
 
 
 @app.route('/heart_diseases_prediction', methods=['POST', 'GET'])
@@ -125,8 +104,8 @@ def heart_diseases_prediction():
     else:
         # return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
         return render_template('/heart_diseases_prediction.html',
-                               total_data=len(heart_diseases_input3),
-                               input=heart_diseases_input3)
+                               total_data=len(heart_diseases_input),
+                               input=heart_diseases_input)
 
 # @app.route('/delete/<int:id>')
 # def delete(id):
