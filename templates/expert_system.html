@@ -7,6 +7,7 @@
 {% block body %}
     
 <h1>expert system</h1>
+<h1>on testing</h1>
 
     <div class="container ">
     <div>
@@ -16,19 +17,28 @@
 
 
 
+        <div class="input-group mb-3 ">
+testttt
+    </div>
 
-        <div class="input-group mb-3">
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Fakta Pasien
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+    <h1>Evidents</h1>
+    <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Tambahkan</button>
             </div>
+        </div>
 
+        <div class="container bgku">
+            {% for i in eveident_selection %}
+    {{ i }} <br>
+{% endfor %}
+            data evident testing
+        </div>
+
+
+        <h1>Diagnoses</h1>
+    <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
             <div class="input-group-append">
@@ -36,37 +46,48 @@
             </div>
         </div>
 
-        <div class="input-group mb-3 ">
-testttt
-    </div>
-
-    <h1>Evidents</h1>
         <div class="container bgku">
-            data evident testing
-        </div>
-    <h1>Diagnoses</h1>
-        <div class="container bgku">
+            {% for i in diagonse_selection %}
+    {{ i }} <br>
+{% endfor %}
         data diagnose testing
         </div>
 
     <h1>History</h1>
+
+    <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Tambahkan</button>
+            </div>
+        </div>
         <div class="container bgku">
+            {% for i in history_selection %}
+    {{ i }} <br>
+{% endfor %}
             data diagnose testing
         </div>
     <h1>Intolerant</h1>
+    <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Tambahkan</button>
+            </div>
+        </div>
         <div class="container bgku">
+            {% for i in intolearant_selection %}
+    {{ i }} <br>
+{% endfor %}
             data intolerant testing
         </div>
 
 
-    <div class="container">
-    <datalist id="brow">
-  <option value="Internet Explorer">
-  <option value="Firefox">
-  <option value="Chrome">
-  <option value="Opera">
-  <option value="Safari">
-</datalist>
-    </div>
+        <div class="container">
+            <form action="/expert_system" method="POST">
+                <input type="submit" value="submit">
+            </form>
+        </div>
 
 {% endblock %}

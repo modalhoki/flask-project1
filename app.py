@@ -76,9 +76,27 @@ def index():
         return render_template("index.html", patient_fact=patient_fact)
 
 
-@app.route('/expert_system')
+# data input ev
+data_ev = ["evident1", "evident2", "evident3"]
+# data input his
+data_his = ["history1", "history2", "history3"]
+# data input di
+data_di = ["diagnose1", "diagnose2", "diagnose3"]
+# data input int
+data_int = ["intolerant1", "intolerant2", "intolerant3"]
+
+
+@app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
-    return render_template('/expert_system.html', task=[])
+    if request.method == 'POST':
+        return "expert system post testing"
+    else:
+        return render_template('/expert_system.html', 
+                               task=[], 
+                               eveident_selection=expertSystem.data_testing,
+                               diagonse_selection=data_di,
+                               history_selection=expertSystem.his_data,
+                               intolearant_selection=data_int)
 
 
 # input data
