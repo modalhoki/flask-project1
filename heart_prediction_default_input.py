@@ -1,4 +1,4 @@
-heart_diseases_input = [
+value = [
     ["age", 58],
     ["sex", 0],
     ["chest_pain_type", 3],

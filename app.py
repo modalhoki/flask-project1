@@ -82,21 +82,23 @@ def expert_system():
 
 
 # input data
-heart_diseases_input = heart_prediction_default_input.heart_diseases_input
+heart_diseases_input = heart_prediction_default_input.value
 
 
 @app.route('/heart_diseases_prediction', methods=['POST', 'GET'])
 def heart_diseases_prediction():
+    # passing patient value
     if request.method == 'POST':
         hasil_hitungan = 0
 
         for tipe_input in heart_diseases_input:
-            current_data = request.form[tipe_input]
+            current_data = request.form[tipe_input[0]]
             # handle null value
             if current_data == '':
                 print("null value on " + tipe_input)
                 continue
 
+            # apply the model here
             nilai = int(current_data)
             hasil_hitungan = hasil_hitungan + nilai
 
@@ -107,6 +109,7 @@ def heart_diseases_prediction():
         return render_template('/heart_diseases_prediction.html',
                                total_data=len(heart_diseases_input),
                                input=heart_diseases_input)
+
 
 # @app.route('/delete/<int:id>')
 # def delete(id):

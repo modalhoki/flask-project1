@@ -1,4 +1,27 @@
 body {
-    margin: 10em;
+    /*margin: 10em;*/
     font-family: sans-serif;
+}
+
+.bgku {
+    background-color: #f0f0f0;
+    border: aliceblue;
+}
+
+.clicker {
+width:100px;
+height:100px;
+background-color:blue;
+outline:none;
+cursor:pointer;
+}
+
+.hiddendiv{
+display:none;
+height:200px;
+background-color:green;
+}
+
+.clicker:focus + .hiddendiv{
+display:block;
 }
