@@ -81,7 +81,7 @@ data_ev = ["evident1", "evident2", "evident3"]
 # data input his
 data_his = ["history1", "history2", "history3"]
 # data input di
-data_di = ["diagnose1", "diagnose2", "diagnose3"]
+edata_di = ["diagnose1", "diagnose2", "diagnose3"]
 # data input int
 data_int = ["intolerant1", "intolerant2", "intolerant3"]
 
@@ -91,12 +91,14 @@ def expert_system():
     if request.method == 'POST':
         return "expert system post testing"
     else:
-        return render_template('/expert_system.html', 
-                               task=[], 
-                               eveident_selection=expertSystem.data_testing,
-                               diagonse_selection=data_di,
-                               history_selection=expertSystem.his_data,
-                               intolearant_selection=data_int)
+        # render page and assign data for selection
+        return render_template('/expert_system.html',
+                               all_selection_option=expertSystem.data_testing,
+                               eveident_selection=expertSystem.evident_data,
+                               diagonse_selection=expertSystem.diagnose_data,
+                               history_selection=expertSystem.history_data,
+                               intolearant_selection=expertSystem.intolerant_data,
+                               unmarked_selection=expertSystem.unmarked_data)
 
 
 # input data

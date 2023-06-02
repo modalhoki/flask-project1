@@ -1,11 +1,31 @@
+{#{% extends 'selection.html' %}#}
+{##}
+{##}
+{#{% block selection_title %}terserah{% endblock %}#}
+{#{% block selection_data %}terserah juga#}
+{#    {% for i in unmarked_selection %}#}
+{#        {{ i }} <br>#}
+{#    {% endfor %}#}
+{#{% endblock %}#}
+
+{#{% block selection_title %}terserah{% endblock %}#}
+{#{% block selection_data %}terserah juga#}
+{#    {% for i in unmarked_selection %}#}
+{#        {{ i }} <br>#}
+{#    {% endfor %}#}
+{#{% endblock %}#}
+
+
+
 {% extends 'base.html' %}
+
 
 {% block head %}
     <title>expert system</title>
 {% endblock %}
 
 {% block body %}
-    
+
 <h1>expert system</h1>
 <h1>on testing</h1>
 
@@ -20,6 +40,31 @@
         <div class="input-group mb-3 ">
 testttt
     </div>
+
+    {% block selection_title %}
+     just testing
+    {% endblock %}
+
+    {% block selection_data %}
+        just testing
+    {% endblock %}
+
+
+
+    <h1></h1>
+    <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Tambahkan</button>
+            </div>
+        </div>
+
+        <div class="container bgku">
+            {% for i in all_selection_option %}
+    {{ i }} <br>
+{% endfor %}
+            data evident testing
+        </div>
 
     <h1>Evidents</h1>
     <div class="input-group mb-3">
@@ -78,6 +123,22 @@ testttt
         </div>
         <div class="container bgku">
             {% for i in intolearant_selection %}
+    {{ i }} <br>
+{% endfor %}
+            data intolerant testing
+        </div>
+
+
+    <h1>unmarked data</h1>
+    <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Tambahkan</button>
+            </div>
+        </div>
+        <div class="container bgku">
+            {% for i in unmarked_selection %}
     {{ i }} <br>
 {% endfor %}
             data intolerant testing
