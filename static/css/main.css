@@ -25,3 +25,7 @@ background-color:green;
 .clicker:focus + .hiddendiv{
 display:block;
 }
+
+select{
+    width:1000px;
+}
