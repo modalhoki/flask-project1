@@ -89,21 +89,17 @@ data_int = ["intolerant1", "intolerant2", "intolerant3"]
 @app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
     if request.method == 'POST':
-        # -----data testing ------
-        # current_data_on_testing = request.form['expert_system_data_testing[]']
-        data_on_testing = request.form.getlist('expert_system_data_testing')
-        data_on_testing2 = request.form.getlist('expert_system_data_testing2')
+        # ------ selected data ------
+        selected_evident = request.form.getlist('selected_evident')
+        selected_diagnose = request.form.getlist('selected_diagnose')
+        selected_history = request.form.getlist('selected_history')
+        selected_intolerant = request.form.getlist('selected_intolerant')
+        # ------- selected data ------
 
-        # -----data testing ------
-        for i in data_on_testing:
-            print(i)
-
-        for i in data_on_testing2:
-            print(i)
-        # print(request.form['expert_system_data_testing[]'])
-        return data_on_testing + data_on_testing2
+        return selected_evident + selected_history + selected_diagnose + selected_intolerant
     else:
         # render page and assign data for selection
+        # --> please do another check
         return render_template('/expert_system.html',
                                all_selection_option=expertSystem.data_testing,
                                eveident_selection=expertSystem.evident_data,

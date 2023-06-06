@@ -13,6 +13,7 @@ intolerant_data = []
 unmarked_data = []
 
 # raw data sorting into temp memory
+# --> please do another check
 for i in range(len(data_testing)):
     current_type = data_type[i]
     if current_type == "History":

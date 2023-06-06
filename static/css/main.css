@@ -1,11 +1,15 @@
 body {
     /*margin: 10em;*/
-    font-family: sans-serif;
+    font-family: arial, serif;
 }
 
-.bgku {
+.bgku, .container-md {
     background-color: #f0f0f0;
     border: aliceblue;
+}
+
+.bg-input{
+    background-color: red;
 }
 
 .clicker {
@@ -27,5 +31,13 @@ display:block;
 }
 
 select{
-    width:1000px;
+    width:50em;
+}
+
+h1{
+    font-weight: bold;
+}
+
+h2{
+    font-weight: normal;
 }
