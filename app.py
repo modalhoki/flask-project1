@@ -89,7 +89,19 @@ data_int = ["intolerant1", "intolerant2", "intolerant3"]
 @app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
     if request.method == 'POST':
-        return "expert system post testing"
+        # -----data testing ------
+        # current_data_on_testing = request.form['expert_system_data_testing[]']
+        data_on_testing = request.form.getlist('expert_system_data_testing')
+        data_on_testing2 = request.form.getlist('expert_system_data_testing2')
+
+        # -----data testing ------
+        for i in data_on_testing:
+            print(i)
+
+        for i in data_on_testing2:
+            print(i)
+        # print(request.form['expert_system_data_testing[]'])
+        return data_on_testing + data_on_testing2
     else:
         # render page and assign data for selection
         return render_template('/expert_system.html',
@@ -112,15 +124,17 @@ def heart_diseases_prediction():
         hasil_hitungan = 0
 
         for tipe_input in heart_diseases_input:
-            current_data = request.form[tipe_input[0]]
+            current_form_name = tipe_input[0]
+            current_form_value = request.form[current_form_name]
             # handle null value
-            if current_data == '':
+            if current_form_value == '':
                 print("null value on " + tipe_input)
                 continue
 
-            # apply the model here
-            nilai = int(current_data)
+            # -------apply the model here---------
+            nilai = int(current_form_value)
             hasil_hitungan = hasil_hitungan + nilai
+            # -------apply the model here---------
 
         return "total data adalah " + str(hasil_hitungan)
 

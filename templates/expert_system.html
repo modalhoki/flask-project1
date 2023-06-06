@@ -28,16 +28,24 @@
     <h1>------------------------------</h1>
 
     <div class="container">
-        <form action="/heart_diseases_prediction" method="POST">
-            <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+        <form action="/expert_system" method="POST" enctype="multipart/form-data">
+            <select class="js-example-basic-multiple" name="expert_system_data_testing" multiple="multiple" >
                  {% for i in history_selection %}
-                    <option value="AL">{{ i }}</option>
+                    <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}
-                <option value="AL">Broo</option>
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
             </select>
-            <input type="submit" value="submit">
+
+
+            <select class="js-example-basic-multiple" name="expert_system_data_testing2" multiple="multiple" >
+                 {% for i in unmarked_selection %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+
+
+        <input type="submit" value="submit">
+
+
         </form>
 
     </div>
