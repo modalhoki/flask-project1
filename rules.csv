@@ -1,0 +1,470 @@
+No,Recommendations,COR,LOE,Stage,Rules,
+1,"In patients with hypertension, blood pressure should be controlled in accordance with GDMT for hypertension to prevent symptomatic HF.",1,A,A,"recommendation(blood_pressure_control, 1):-
+        evidence(accf_stage_a),
+        diagnosis(hypertension).",
+2,"In patients with type 2 diabetes and either established CVD or at high cardiovascular risk, SGLT2i should be used to prevent hospitalizations for HF.",1,A,A,"recommendation(sglt2i, 2):-
+        evidence(accf_stage_a),
+        diagnosis(type_2_diabetes),
+        (evidence(cvd); evidence(high_risk_cvd)).",
+3,"In the general population, healthy lifestyle habits such as regular physical activity, maintaining normal weight, healthy dietary patterns, and avoiding smoking are helpful to reduce future risk of HF.",1,B-NR,A,"recommendation(regular_physical_activity, 3):- evidence(accf_stage_a).
+recommendation(normal_weight_control, 3):- evidence(accf_stage_a).
+recommendation(healthy_diet, 3):- evidence(accf_stage_a).
+recommendation(avoid_smoking, 3):- evidence(accf_stage_a).",
+4,"For patients at risk of developing HF, natriuretic peptide biomarker–based screening followed by team-based care, including a cardiovascular specialist optimizing GDMT, can be useful to prevent the development of LV dysfunction (systolic or diastolic) or new-onset HF",2a,B-R,A,"recommendation(natriuretic_peptide_biomarker_screening, 4):- evidence(accf_stage_a).
+recommendation(validated_multivariable_risk_score, 4):- evidence(accf_stage_a).
+",
+5,"In the general population, validated multivariable risk scores can be useful to estimate subsequent risk of incident HF.",2a,B-NR,A,"recommendation(validated_multivariable_risk_score, 5):- evidence(accf_stage_a).",
+6,"In patients with LVEF ≤40%, ACEi should be used to prevent symptomatic HF and reduce mortality.",1,A,B,"recommendation(acei, 6):-
+        evidence(accf_stage_b),
+        measurement(lvef, X), X =< 0.4,
+        \+ intolerant(acei).",
+7,"In patients with a recent or remote history of MI or ACS, statins should be used to prevent symptomatic HF and adverse cardiovascular events.",1,A,B,"recommendation(statins, 7):- 
+        evidence(accf_stage_b),
+        (evidence(myocardial_infarction); evidence(acute_coronary_syndrome)).",
+8,"In patients with a recent MI and LVEF ≤40% who are intolerant to ACEi, ARB should be used to prevent symptomatic HF and reduce mortality.",1,B-R,B,"recommendation(arb, 8):-
+        evidence(accf_stage_b),
+        evidence(myocardial_infarction), 
+        measurement(lvef, X), X =< 0.4,
+        intolerant(acei).",
+9,"In patients with a recent or remote history of MI or acute coronary syndrome (ACS) and LVEF ≤40%, evidence-based beta blockers should be used to reduce mortality.",1,B-R,B,"recommendation(beta_blockers, 9):-
+        evidence(accf_stage_b),
+        measurement(lvef, X), X =< 0.4,
+        (evidence(myocardial_infarction); evidence(acute_coronary_sindrome)).",
+10,"In patients who are at least 40 days post-MI with LVEF ≤30% and NYHA class I symptoms while receiving GDMT and have reasonable expectation of meaningful survival for >1 year, an ICD is recommended for primary prevention of sudden cardiac death (SCD) to reduce total mortality.",1,B-R,B,"recommendation(icd_therapy, 10):-
+        evidence(accf_stage_b),
+        evidence(mi_post_40_days),
+        measurement(lvef, X), X =< 0.3,
+        evidence(nyha_class_1),
+        evidence(survival_year_greater_than_1).",
+11,"In patients with LVEF ≤40%, beta blockers should be used to prevent symptomatic HF.",1,C-LD,B,"recommendation(beta_blockers, 11):-
+        evidence(accf_stage_b),
+        measurement(lvef, X), X =< 0.4.",
+12,"In patients with LVEF <50%, thiazolidinediones should not be used because they increase the risk of HF, including hospitalizations.",3: Harm,B-R,B,"contraindication(thiazolidinediones, 12):-
+        evidence(accf_stage_b),
+        measurement(lvef, X), X =< 0.5.
+",
+13,"In patients with LVEF <50%, nondihydropyridine calcium channel blockers with negative inotropic effects may be harmful.",3: Harm,C-LD,B,"contraindication(nondihydropyridine_ccb, 13):-
+        evidence(accf_stage_b),
+        measurement(lvef, X), X =< 0.5.
+",
+14,"Patients with HF should receive care from multidisciplinary teams to facilitate the implementation of GDMT, address potential barriers to self-care, reduce the risk of subsequent rehospitalization for HF, and improve survival.",1,A,C,"recommendation(multidisciplinary_teams_care, 14):- evidence(accf_stage_c).",Self-Care
+15,Patients with HF should receive specific education and support to facilitate HF self-care in a multidisciplinary manner.,1,B-R,C,"recommendation(patient_education_and_support, 15):- evidence(accf_stage_c).",Self-Care
+16,"In patients with HF, vaccinating against respiratory illnesses is reasonable to reduce mortality",2a,B-NR,C,"recommendation(respiratory_illnesses_vactination, 16):- evidence(accf_stage_c).",Self-Care
+17,"In adults with HF, screening for depression,social isolation, frailty, and low health literacy as risk factors for poor self-care is reasonable to improve management.",2a,B-NR,C,"recommendation(depression_screening, 17):- evidence(accf_stage_c).",Self-Care
+18,"For patients with stage C HF, avoiding excessive sodium intake is reasonable to reduce congestive symptoms",2a,C-LD,C,"recommendation(sodium_restriction, 18):- evidence(accf_stage_c).",Dietary Sodium Restriction
+19,"For patients with HF who are able to participate, exercise training (or regular physical activity) is recommended to improve functional status, exercise performance, and QOL.",1,A,C,"recommendation(regular_pysical_activity, 19):- evidence(accf_stage_c).","Activity, Exercise Prescription, and Cardiac Rehabilitation"
+20,"In patients with HF, a cardiac rehabilitation
+program can be useful to improve functional
+capacity, exercise tolerance, and health-related QOL.",2a,B-NR,C,"recommendation(cardiac_rehabilitation, 20):- evidence(accf_stage_c).","Activity, Exercise Prescription, and Cardiac Rehabilitation"
+21,"In patients with HF who have fluid retention, diuretics are recommended to relieve congestion, improve symptoms, and prevent worsening HF.",1,B-NR,C,"recommendation(diuretics, 21):- 
+        evidence(accf_stage_c),
+        evidence(fluid_retention).
+",Diuretics & Decongestion
+22,"For patients with HF and congestive symptoms, addition of a thiazide (eg, metolazone) to treat- ment with a loop diuretic should be reserved for patients who do not respond to moderate- or high-dose loop diuretics to minimize electro- lyte abnormalities.",1,B-NR,C,"recommendation(thiazide, 22):-
+        evidence(accf_stage_c),
+        evidence(congestive_symptomps),
+        evidence(does_not_respond_to_loop_diuretics).",Diuretics & Decongestion
+23,"In patients with HFrEF and NYHA class II to III symptoms, the use of ARNi is recommended to reduce morbidity and mortality.",1,A,C,"recommendation(arni, 23):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        (evidence(nyha_class_2);evidence(nyha_class_3)),
+        \+ infeasible(arni).",Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+24,"In patients with previous or current symptoms of chronic HFrEF, the use of ACEi is beneficial to reduce morbidity and mortality when the use of ARNi is not feasible.",1,A,C,"recommendation(acei, 24):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        (evidence(nyha_class_2);evidence(nyha_class_3)),
+        infeasible(arni),
+        \+ intolerant(acei).",Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+25,"In patients with previous or current symptoms
+of chronic HFrEF who are intolerant to ACEi because of cough or angioedema and when the use of ARNi is not feasible, the use of ARB is rec- ommended to reduce morbidity and mortality",1,A,C,"recommendation(arb, 25):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        (evidence(nyha_class_2);evidence(nyha_class_3)),
+        intolerant(acei),
+        infeasible(arni).",Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+26,"In patients with previous or current symptoms of chronic HFrEF, in whom ARNi is not feasible, treatment with an ACEi or ARB provides high economic value.",Value Statement: High Value,A,C,-,Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+27,"In patients with chronic symptomatic HFrEF NYHA class II or III who tolerate an ACEi or ARB, replacement by an ARNi is recommended to further reduce morbidity and mortality.",1,B-R,C,"recommendation(arni, 27):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        (evidence(nyha_class_2);evidence(nyha_class_3)),
+        \+ infeasible(arni),
+        \+ intolerant(acei),
+        \+ intolerant(arb).",Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+28,"In patients with chronic symptomatic HFrEF, treatment with an ARNi instead of an ACEi provides high economic value.",Value Statement: High Value,A,C,-,Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+29,ARNi should not be administered concomitantly with ACEi or within 36 hours of the last dose of an ACEi.,3: Harm,B-R,C,"contraindication(acei, 29):- 
+        evidence(accf_stage_c),
+        (recommendation(arni, 10); recommendation(arni, 14)).",Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+30,ARNi should not be administered to patients with any history of angioedema.,3: Harm,C-LD,C,"contraindication(arni, 30):- 
+        evidence(accf_stage_c),
+        evidence(angioderma).
+",Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+31,ACEi should not be administered to patients with any history of angioedema.,3: Harm,C-LD,C,"contraindication(acei, 31):- 
+        evidence(accf_stage_c),
+        evidence(angioderma).
+",Renin-Angiotensin System Inhibition With ACEi or ARB or ARNi
+32,"In patients with HFrEF, with current or previous symptoms, use of 1 of the 3 beta blockers proven to reduce mortality (eg, bisoprolol, carvedilol, sustained-release metoprolol succinate) is recommended to reduce mortality and hospitalizations.",1,A,C,"recommendation(beta_blockers, 32):- 
+        evidence(accf_stage_c), 
+        evidence(hf_with_reduced_ef),
+        (evidence(nyha_class_2);evidence(nyha_class_3)).
+",Beta Blockers
+33,"In patients with HFrEF, with current or previous symptoms, beta-blocker therapy provides high economic value.",Value Statement: High Value,A,C,-,Beta Blockers
+34,"In patients with HFrEF and NYHA class II to IV symptoms, an MRA (spironolactone or eplerenone) is recommended to reduce morbidity and mortality, if eGFR is >30 mL/min/1.73 m2 and serum potassium is <5.0 mEq/L. Careful monitoring of potassium, renal function, and diuretic dosing should be performed at initiation and closely monitored thereafter to minimize risk of hyperkalemia and renal insufficiency.",1,A,C,"recommendation(mra, 34):-
+        evidence(accf_stage_c),
+        (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
+        measurement(gfr, X), X > 30,
+        measurement(potassium, Y), Y < 5.",Mineralocorticoid Receptor Antagonists (MRAs)
+35,"In patients with HFrEF and NYHA class II to IV symptoms, MRA therapy provides high economic value.",Value Statement: High Value,A,C,-,Mineralocorticoid Receptor Antagonists (MRAs)
+36,"In patients taking MRA whose serum potassium cannot be maintained at <5.5 mEq/L, MRA should be discontinued to avoid life- threatening hyperkalemia.",3: Harm,B-NR,C,"contraindication(mra_precaution, 36):-
+        evidence(accf_stage_c),
+        (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
+        measurement(gfr, X), X > 30,
+        measurement(potassium, Y), Y < 5.",Mineralocorticoid Receptor Antagonists (MRAs)
+37,"In patients with symptomatic chronic HFrEF, SGLT2i are recommended to reduce hospital- ization for HF and cardiovascular mortality, irre- spective of the presence of type 2 diabetes.",1,A,C,"recommendation(sglt2i, 37):- 
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        (evidence(nyha_class_2);evidence(nyha_class_3)).",Sodium-Glucose Cotransporter 2 Inhibitors
+38,"In patients with symptomatic chronic HFrEF, SGLT2i therapy provides intermediate eco- nomic value.",Value Statement: Intermediate Value,A,C,-,Sodium-Glucose Cotransporter 2 Inhibitors
+39,"For patients self-identified as African American with NYHA class III-IV HFrEF who are receiving optimal medical therapy, the combination of hydralazine and isosorbide dinitrate is recommended to improve symptoms and reduce morbidity and mortality.",1,A,C,Kurang relevan untuk kasus Indonesia,Hydralazine and Isosorbide Dinitrate
+40,"For patients self-identified as African American with NYHA class III to IV HFrEF who are receiving optimal medical therapy with ACEi or ARB, beta blockers, and MRA, the combination of hydralazine and isosorbide dinitrate provides high economic value.",Value Statement: High Value,B-NR,C,Kurang relevan untuk kasus Indonesia,Hydralazine and Isosorbide Dinitrate
+41,"In patients with current or previous symptomatic HFrEF who cannot be given first-line agents, such as ARNi, ACEi, or ARB, because of drug intolerance or renal insufficiency, a combination of hydralazine and isosorbide dinitrate might be considered to reduce morbidity and mortality.",2b,C-LD,C,Kurang relevan untuk kasus Indonesia,Hydralazine and Isosorbide Dinitrate
+42,"In patients with HF class II to IV symptoms, omega-3 polyunsaturated fatty acid (PUFA) supplementation may be reasonable to use as adjunctive therapy to reduce mortality and cardiovascular hospitalizations.",2b,B-R,C,"recommendation(pufa, 42):-
+        evidence(accf_stage_c),
+        (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)).
+",Other Drug Treatment
+43,"In patients with HF who experience hyperkalemia (serum potassium level ≥5.5 mEq/L) while taking a renin-angiotensin-aldosterone system inhibitor (RAASi), the effectiveness of potassium binders (patiromer, sodium zirconium cyclosilicate) to improve outcomes by facilitating continuation of RAASi therapy is uncertain.",2b,B-R,C,"recommendation(potassium_binder, 43):-
+        evidence(accf_stage_c),
+        (evidence(hyperkalemia);measurement(potassium, X), X >= 5.5).",Other Drug Treatment
+44,"In patients with chronic HFrEF without a specific indication (eg, venous thromboembolism [VTE], AF, a previous thromboembolic event, or a cardioembolic source), anticoagulation is not recommended.",3: No Benefit,B-R,C,"no_benefit(anticoagulant, 44):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        \+ (evidence(vte);evidence(atrial_fibrillation)).",Other Drug Treatment
+45,"In patients with HFrEF, dihydropyridine calcium channel-blocking drugs are not recommended treatment for HF.",3: No Benefit,A,C,"no_benefit(dihydropyrinde_ccb, 45):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).",Drugs of Unproven Value or That May Worsen HF
+46,"In patients with HFrEF, vitamins, nutritional supplements, and hormonal therapy are not recommended other than to correct specific deficiencies.",3: No Benefit,B-R,C,"no_benefit(vitamins, 46):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).
+
+no_benefit(nutritional_suplements, 46) :-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).
+
+no_benefit(hormonal_therapy, 46) :-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).
+",Drugs of Unproven Value or That May Worsen HF
+47,"In patients with HFrEF, nondihydropyridine calcium channel-blocking drugs are not recommended.",3: Harm,A,C,"contraindication(nondihydropyrinde_ccb, 47):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).",Drugs of Unproven Value or That May Worsen HF
+48,"In patients with HFrEF, class IC antiarrhythmic medications and dronedarone may increase the risk of mortality.",3: Harm,A,C,"contraindication(class_ic_antiarrhythmic, 48):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).
+
+contraindication(dronedarone, 48):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).",Drugs of Unproven Value or That May Worsen HF
+49,"In patients with HFrEF, thiazolidinediones increase the risk of worsening HF symptoms and hospitalizations.",3: Harm,A,C,"contraindication(thiazolidinediones, 49):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).",Drugs of Unproven Value or That May Worsen HF
+50,"In patients with type 2 diabetes and high cardiovascular risk, the dipeptidyl peptidase-4 (DPP-4) inhibitors saxagliptin and alogliptin increase the risk of HF hospitalization and should be avoided in patients with HF.",3: Harm,B-R,C,"contraindication(saxagliptin, 50):-
+        evidence(accf_stage_c),
+        evidence(type_2_diabetes),
+        evidence(high_risk_cvd).
+
+contraindication(alogliptin, 50):-
+        evidence(accf_stage_c),
+        evidence(type_2_diabetes),
+        evidence(high_risk_cvd).
+",Drugs of Unproven Value or That May Worsen HF
+51,"In patients with HFrEF, NSAIDs worsen HF symptoms and should be avoided or withdrawn whenever possible.",3: Harm,B-NR,C,"contraindication(nsaids, 51):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).",Drugs of Unproven Value or That May Worsen HF
+52,"In patients with HFrEF, titration of guideline-directed medication dosing to achieve target doses showed to be efficacious in RCTs is recommended, to reduce cardiovascular mortality and HF hospitalizations, unless not well tolerated.",1,A,C,"recommendation(medication_titration, 52):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).
+",Sequencing and Uptitration
+53,"In patients with HFrEF, titration and optimization of guideline-directed medications as frequently as every 1 to 2 weeks depending on the patient’s symptoms, vital signs, and laboratory findings can be useful to optimize management.",2a,C-EO,C,"recommendation(weekly_titration, 53):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef)
+",Sequencing and Uptitration
+54,"For patients with symptomatic (NYHA class II to III) stable chronic HFrEF (LVEF ≤35%) who are receiving GDMT, including a beta blocker at maximum tolerated dose, and who are in sinus rhythm with a heart rate of ≥70 bpm at rest, ivabradine can be beneficial to reduce HF hospitalizations and cardiovascular death",2a,B-R,C,"recommendation(ivabradine, 54):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        (evidence(nyha_class_2);evidence(nyha_class_3)),
+        measurement(lvef, X), X =< 35,
+        measurement(resting_heart_rate, Y), Y >= 70,
+        evidence(sinus_rhythm).",Additional Medical Therapies
+55,"In patients with symptomatic HFrEF despite GDMT (or who are unable to tolerate GDMT), digoxin might be considered to decrease hospitalizations for HF.",2b,B-R,C,"recommendation(digoxin, 55):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef).
+",Additional Medical Therapies
+56,"In selected high-risk patients with HFrEF and recent worsening of HF already on GDMT, an oral soluble guanylate cyclase stimulator (vericiguat) may be considered to reduce HF hospitalization and cardiovascular death",2b,B-R,C,"recommendation(vericiguat, 56):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        evidence(worsen_hf).
+",Additional Medical Therapies
+57,"In patients with nonischemic DCM or ischemic heart disease at least 40 days post-MI with LVEF ≤35% and NYHA class II or III symptoms on chronic GDMT, who have reasonable expectation of meaningful survival for >1 year, ICD therapy is recommended for primary prevention of SCD to reduce total mortality.",1,A,C,"recommendation(icd_therapy, 57):-
+        evidence(accf_stage_c),
+        (evidence(nyha_class_2);evidence(nyha_class_3)),
+        measurement(lvef, X), X =< 35,
+        (evidence(nonschemic_dcm) ;evidence(ichemic_heart_disease)),
+        evidence(survival_year_greater_than_1),
+        evidence(mi_post_40_day).",ICDs and CRTs
+58,A transvenous ICD provides high economic value in the primary prevention of SCD particularly when the patient’s risk of death caused by ventricular arrythmia is deemed high and the risk of nonarrhythmic death (either cardiac or noncardiac) is deemed low based on the patient’s burden of comorbidities and functional status.,Value Statement: High Value,A,C,-,ICDs and CRTs
+59,"In patients at least 40 days post-MI with LVEF ≤30% and NYHA class I symptoms while receiving GDMT, who have reasonable expectation of meaningful survival for >1 year, ICD therapy is recommended for primary prevention of SCD to reduce total mortality.",1,B-R,C,"recommendation(icd_therapy, 59):-
+        evidence(accf_stage_c),
+        evidence(nyha_class_1),
+        measurement(lvef, X), X =< 30,
+        evidence(survival_year_greater_than_1),
+        evidence(mi_post_40_day).",ICDs and CRTs
+60,"For patients who have LVEF ≤35%, sinus rhythm, left bundle branch block (LBBB) with a QRS duration ≥150 ms, and NYHA class II, III, or ambulatory IV symptoms on GDMT, CRT is indicated to reduce total mortality, reduce hospitalizations, and improve symptoms and QOL.",1,B-R,C,"recommendation(crt, 60):-
+        evidence(accf_stage_c),
+        evidence(sinus_rhythm),
+        (evidence(nyha_class_2);evidence(nyha_class_3); evidence(nyha_class_4)),
+        measurement(lvef, X), X =< 35,
+        evidence(lbbb),
+        measurement(qrs, Y), Y >= 150.",ICDs and CRTs
+61,"For patients who have LVEF ≤35%, sinus rhythm, LBBB with a QRS duration of ≥150 ms, and NYHA class II, III, or ambulatory IV symptoms on GDMT, CRT implantation pro- vides high economic value.",Value Statement: High Value,B-NR,C,-,ICDs and CRTs
+62,"For patients who have LVEF ≤35%, sinus rhythm, a non-LBBB pattern with a QRS duration ≥150 ms, and NYHA class II, III, or ambulatory class IV symptoms on GDMT, CRT can be useful to reduce total mortality, reduce hospitalizations, and improve symptoms and QOL",2a,B-R,C,"recommendation(crt, 62):-
+        evidence(accf_stage_c),
+        evidence(sinus_rhythm),
+        (evidence(nyha_class_2);evidence(nyha_class_3), evidence(nyha_class_4)),
+        measurement(lvef, X), X =< 35,
+        evidence(non_lbbb),
+        measurement(qrs, Y), Y >= 150.
+",ICDs and CRTs
+63,"In patients with high-degree or complete heart block and LVEF of 36% to 50%, CRT is reasonable to reduce total mortality, reduce
+hospitalizations, and improve symptoms and QOL.",2a,B-R,C,"recommendation(crt, 63):-
+        evidence(accf_stage_c),
+        measurement(lvef, X), X >= 36, X =< 50,
+        (evidence(second_degree_av_block); evidence(third_degree_av_block)).",ICDs and CRTs
+64,"For patients who have LVEF ≤35%, sinus rhythm, LBBB with a QRS duration of 120 to 149 ms, and NYHA class II, III, or ambulatory IV symptoms on GDMT, CRT can be useful to reduce total mortality, reduce hospitalizations, and improve symptoms and QOL",2a,B-NR,C,"recommendation(crt, 64):-
+        evidence(accf_stage_c),
+        evidence(sinus_rhythm),
+        (evidence(nyha_class_2);evidence(nyha_class_3), evidence(nyha_class_4)),
+        measurement(lvef, X), X =< 35,
+        evidence(lbbb),
+        measurement(qrs, Y), Y > 120, Y =< 149.",ICDs and CRTs
+65,"In patients with AF and LVEF ≤35% on GDMT, CRT can be useful to reduce total mortality, improve symptoms and QOL, and increase LVEF, if: a) the patient requires ventricular pacing or otherwise meets CRT criteria and b) atrioventricular nodal ablation or pharmacological rate control will allow near 100% ventricular pacing with CRT.",2a,B-NR,C,"recommendation(crt, 65):-
+        evidence(accf_stage_c),
+        evidence(atrial_fibrillation),
+        measurement(lvef, X), X =< 35,
+        evidence(requires_ventricular_pacing).
+",ICDs and CRTs
+66,"For patients on GDMT who have LVEF ≤35% and are undergoing placement of a new or replacement device implantation with anticipated requirement for significant (>40%) ventricular pacing, CRT can be useful to reduce total mortality, reduce hospitalizations, and improve symptoms and QOL.",2a,B-NR,C,"recommendation(crt, 66):-
+        evidence(accf_stage_c),
+        measurement(lvef, X), X =< 35,
+        evidence(requires_ventricular_pacing).
+",ICDs and CRTs
+67,"In patients with genetic arrhythmogenic cardiomyopathy with high-risk features of sudden death, with EF ≤45%, implantation of ICD is reasonable to decrease sudden death.",2a,B-NR,C,"recommendation(icd_therapy, 67):-
+        evidence(accf_stage_c),
+        evidence(arrhythmogenic_cardiomyopathy), 
+        measurement(lvef, X), X =< 45.",ICDs and CRTs
+68,"For patients who have LVEF ≤35%, sinus rhythm, a non-LBBB pattern with QRS dura- tion of 120 to 149 ms, and NYHA class III or ambulatory class IV on GDMT, CRT may be considered to reduce total mortality, reduce hospitalizations, and improve symptoms and QOL.",2b,B-NR,C,"recommendation(crt, 68):-
+        evidence(accf_stage_c),
+        evidence(sinus_rhythm),
+        (evidence(nyha_class_3), evidence(nyha_class_4)),
+        measurement(lvef, X), X =< 35,
+        evidence(non_lbbb),
+        measurement(qrs, Y), Y > 120, Y =< 149.",ICDs and CRTs
+69,"For patients who have LVEF ≤30%, ischemic cause of HF, sinus rhythm, LBBB with a QRS duration ≥150 ms, and NYHA class I symptoms on GDMT, CRT may be considered to reduce hospitalizations and improve symptoms and QOL.",2b,B-NR,C,"recommendation(crt, 69):-
+        evidence(accf_stage_c),
+        measurement(lvef, X), X =< 30,
+        evidence(ischemic_hf),
+        evidence(sinus_rhythm),
+        evidence(lbbb),
+        measurement(qrs, Y), Y >= 150,
+        evidence(nyha_class_1).",ICDs and CRTs
+70,"In patients with QRS duration <120 ms, CRT is not recommended.",3: No Benefit,B-R,C,"no_benefit(crt, 70):-
+        measurement(qrs, X), X < 120.",ICDs and CRTs
+71,"For patients with NYHA class I or II symptoms and non-LBBB pattern with QRS duration <150 ms, CRT is not recommended.",3: No Benefit,B-NR,C,"no_benefit(crt, 71):-
+        (evidence(nyha_class_1);evidence(nyha_class_2)),
+        evidence(non_lbbb),
+        measurement(qrs, X), X < 150.",ICDs and CRTs
+72,"For patients whose comorbidities or frailty limit survival with good functional capacity to <1 year, ICD and cardiac resynchronization
+therapy with defibrillation (CRT-D) are not indicated.",3: No Benefit,C-LD,C,,ICDs and CRTs
+73,"In selected patients with HF, reduced EF (EF ≤35%), and suitable coronary anatomy, surgical revascularization plus GDMT is beneficial to improve symptoms, cardiovascular hospitalizations, and long-term all-cause mortality",1,B-R,C,"recommendation(surgical_revascularization, 73):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 35.",Revascularization for CAD
+74,"In patients with HF, VHD should be managed in a multidisciplinary manner in accordance with clinical practice guidelines for VHD to prevent worsening of HF and adverse clinical outcomes",1,B-R,C,"recommendation(manage_vhd, 74):-
+        evidence(accf_stage_c),
+        evidence(valvular_hd).",Valvular Heart Disease
+75,"In patients with chronic severe secondary MR and HFrEF, optimization of GDMT is recommended before any intervention for secondary MR related to LV dysfunction",1,C-LD,C,"recommendation(gmdt_optimization, 75):-
+        evidence(accf_stage_c),
+        evidence(secondary_mr),
+        evidence(hf_with_reduced_ef).",Valvular Heart Disease
+76,"In patients with HFmrEF, SGLT2i can be beneficial in decreasing HF hospitalizations and cardiovascular mortality.",2a,B-R,C,"recommendation(sglt2i, 76):-
+        evidence(accf_stage_c),
+        evidence(hf_with_mildly_reduced_ef).
+",HF With Mildly Reduced Ejection Fraction
+77,"Among patients with current or previous symptomatic HFmrEF (LVEF, 41%–49%), use of evidence-based beta blockers for HFrEF, ARNi, ACEi, or ARB, and MRAs may be considered to reduce the risk of HF hospitalization and cardiovascular mortality, particularly among patients with LVEF on the lower end of this spectrum",2b,B-NR,C,"recommendation(beta_blockers, 77):-
+        evidence(accf_stage_c),
+        (evidence(nyha_class_2);evidence(nyha_class_3)),
+        evidence(hf_with_mildly_reduced_ef).
+(Kurang untuk ARNi, ACEi, ARB, dan MRA).",HF With Mildly Reduced Ejection Fraction
+78,"In patients with HFimpEF after treatment, GDMT should be continued to prevent relapse of HF and LV dysfunction, even in patients who may become asymptomatic",1,B-R,C,"recommendation(continue_gdmt, 78):-
+        evidence(accf_stage_c),
+        evidence((hf_with_improved_ef).",HF With Improved Ejection Fraction
+79,Patients with HFpEF and hypertension should have medication titrated to attain blood pressure targets in accordance with published clinical practice guidelines to prevent morbidity.,1,C-LD,C,"recommendation(medication_titrated, 79):-
+        evidence(accf_stage_c),
+        evidence(hf_with_preserved_ef),
+        evidence(hypertension).",HF With Preserved Ejection Fraction
+80,"In patients with HFpEF, SGLT2i can be beneficial in decreasing HF hospitalizations and cardiovascular mortality.",2a,B-R,C,"recommendation(sglt2i, 80):-
+        evidence(accf_stage_c),
+        evidence(hf_with_preserved_ef).",HF With Preserved Ejection Fraction
+81,"In patients with HFpEF, management of AF can be useful to improve symptoms.",2a,C-EO,C,"recommendation(af_management, 81):-
+        evidence(accf_stage_c),
+        evidence(hf_with_preserved_ef).",HF With Preserved Ejection Fraction
+82,"In selected patients with HFpEF, MRAs may be considered to decrease hospitalizations, particularly among patients with LVEF on the lower end of this spectrum.",2b,B-R,C,"recommendation(mra, 82):-
+        evidence(accf_stage_c),
+        evidence(hf_with_preserved_ef).",HF With Preserved Ejection Fraction
+83,"In selected patients with HFpEF, the use of ARB may be considered to decrease hospitalizations, particularly among patients with LVEF on the lower end of this spectrum.",2b,B-R,C,"recommendation(arb, 83):-
+        evidence(accf_stage_c),
+        evidence(hf_with_preserved_ef),
+        \+ intolerant(arb),
+        \+ recommendation(acei),
+        \+ recommendation(arni).",HF With Preserved Ejection Fraction
+84,"In selected patients with HFpEF, ARNi may be considered to decrease hospitalizations, particularly among patients with LVEF on the lower end of this spectrum",2b,B-R,C,"recommendation(arni, 84):-
+        evidence(accf_stage_c),
+        evidence(hf_with_preserved_ef),
+        \+ infeasible(arni),
+        \+ recommendation(arb),
+        \+ recommendation(acei).",HF With Preserved Ejection Fraction
+85,"In patients with HFpEF, routine use of nitrates or phosphodiesterase-5 inhibitors to increase activity or QOL is ineffective.",3: No Benefit,B-R,C,"no_benefit(nitrates_or_pde_5, 85):-
+        evidence(accf_stage_c),
+        evidence(hf_with_preserved_ef).",HF With Preserved Ejection Fraction
+86,Patients for whom there is a clinical suspicion for cardiac amyloidosis should have screening for serum and urine monoclonal light chains with serum and urine immunofixation electrophoresis and serum free light chains.,1,B-NR,C,- (Diagnosis),Diagnosis of Cardiac Amyloidosis
+87,"In patients with high clinical suspicion for cardiac amyloidosis, without evidence of serum or urine monoclonal light chains, bone scintigraphy should be performed to confirm the presence of transthyretin cardiac amyloidosis.",1,B-NR,C,- (Diagnosis),Diagnosis of Cardiac Amyloidosis
+88,"In patients for whom a diagnosis of transthyretin cardiac amyloidosis is made, genetic testing with TTR gene sequencing is recommended to differentiate hereditary variant from wild-type transthyretin cardiac amyloidosis.",1,B-NR,C,- (Diagnosis),Diagnosis of Cardiac Amyloidosis
+89,"In select patients with wild-type or variant transthyretin cardiac amyloidosis and NYHA class I to III HF symptoms, transthyretin tetramer stabilizer therapy (tafamidis) is indicated to reduce cardiovascular morbidity and mortality.",1,B-R,C,"recommendation(tafamidis, 89):-
+        evidence(accf_stage_c),
+        (evidence(attr_wt);evidence(attr_v)),
+        (evidence(nyha_class_1);evidence(nyha_class_2);evidence(nyha_class_3)).",Treatment of Cardiac Amyloidosis
+90,"At 2020 list prices, tafamidis provides low economic value (>$180 000 per QALY gained) in patients with HF with wild-type or variant transthyretin cardiac amyloidosis.",Value Statement: Low Value,B-NR,C,-,Treatment of Cardiac Amyloidosis
+91,"In patients with cardiac amyloidosis and AF, anticoagulation is reasonable to reduce the risk of stroke regardless of the CHA2DS2-VASc (congestive heart failure, hypertension, age ≥75 years, diabetes mellitus, stroke or transient ischemic attack [TIA], vascular disease, age 65 to 74 years, sex category) score.",2a,C-LD,C,"recommendation(anticoagulant, 91):-
+        evidence(accf_stage_c),
+        (evidence(attr_wt);evidence(attr_v)).",Treatment of Cardiac Amyloidosis
+92,"In patients with advanced HF, when consistent with the patient’s goals of care, timely referral for HF specialty care is recommended to review HF management and assess suitability for advanced HF therapies (eg, LVAD, cardiac transplantation, palliative care, and palliative inotropes)",1,C-LD,D,- (No Rules),Specialty Referral for Advanced HF
+93,"For patients with advanced HF and hyponatremia, the benefit of fluid restriction to reduce congestive symptoms is uncertain.",2b,C-LD,D,"recommendation(fluid_restriction, 93):-
+        evidence(accf_stage_d),
+        evidence(hyponatremia).
+",Nonpharmacological Management
+94,"In patients with advanced (stage D) HF refractory to GDMT and device therapy who are eligible for and awaiting MCS or cardiac transplantation, continuous intravenous inotropic support is reasonable as “bridge therapy.”",2a,B-NR,D,,Inotropic Support
+95,"In select patients with stage D HF, despite optimal GDMT and device therapy who are ineligible for either MCS or cardiac transplantation, continuous intravenous inotropic support may be considered as palliative therapy for symptom control and improvement in functional status.",2b,B-NR,D,,Inotropic Support
+96,"In patients with HF, long-term use of either continuous or intermittent intravenous inotropic agents, for reasons other than palliative care or as a bridge to advanced therapies, is potentially harmful.",3: Harm,B-R,D,,Inotropic Support
+97,"In select patients with advanced HFrEF with NYHA class IV symptoms who are deemed to be dependent on continuous intravenous inotropes or temporary MCS, durable LVAD implantation is effective to improve functional status, QOL, and survival.",1,A,D,"recommendation(durable_lvad_implantation, 97):-
+        evidence(accf_stage_c),
+        evidence(hf_with_reduced_ef),
+        evidence(nyha_class_4),
+        (evidence(dependence_of_continuous_iv_inotropes);evidence(dependence_of_temporary_mcs)).",Mechanical Circulatory Support
+98,"In select patients with advanced HFrEF who have NYHA class IV symptoms despite GDMT, durable MCS can be beneficial to improve symptoms, improve functional class, and reduce mortality.",2a,B-NR,D,"recommendation(durable_mcs, 98):-
+        evidence(accf_stage_d),
+        evidence(hf_with_reduced_ef),
+        evidence(nyha_class_4).",Mechanical Circulatory Support
+99,"In patients with advanced HFrEF who have NYHA class IV symptoms despite GDMT, durable MCS devices provide low to intermediate economic value based on current costs and outcomes.",Value Statement: Uncertaion Value,B-NR,D,-,Mechanical Circulatory Support
+100,"In patients with advanced HFrEF and hemodynamic compromise and shock, temporary MCS, including percutaneous and extracorporeal ventricular assist devices, are reasonable as a “bridge to recovery” or “bridge to decision.”",2a,B-NR,D,"recommendation(temporary_mcs, 100):-
+        evidence(accf_stage_d),
+        evidence(hemodynamic_compromise_and_shock).",Mechanical Circulatory Support
+101,"For selected patients with advanced HF despite GDMT, cardiac transplantation is indicated to improve survival and QOL",1,C-LD,D,- (doctor's judgement),Cardiac Transplantation
+102,"In patients with stage D (advanced) HF despite GDMT, cardiac transplantation provides intermediate economic value.",Value Statement: Intermediate Value,C-LD,D,-,Cardiac Transplantation
+103,"In patients hospitalized with HF, severity of congestion and adequacy of perfusion should be assessed to guide triage and initial therapy.",1,C-LD,"C, D",-,Assessment of Patients Hospitalized
+104,"In patients hospitalized with HF, the common precipitating factors and the overall patient trajectory should be assessed to guide appropriate therapy",1,C-LD,"C, D",-,Assessment of Patients Hospitalized
+105,"For patients admitted with HF, treatment should address reversible factors, establish optimal volume status, and advance GDMT toward targets for outpatient therapy.",1,C-LD,"C, D",-,Assessment of Patients Hospitalized
+106,"In patients with HFrEF requiring hospitalization, preexisting GDMT should be continued and optimized to improve outcomes, unless contraindicated.",1,B-NR,"C, D",-,Maintenance or Optimization of GDMT During Hospitalization
+107,"In patients experiencing mild decrease of renal function or asymptomatic reduction of blood pressure during HF hospitalization, diuresis and other GDMT should not routinely be discontinued.",1,B-NR,"C, D",-,Maintenance or Optimization of GDMT During Hospitalization
+108,"In patients with HFrEF, GDMT should be initiated during hospitalization after clinical stability is achieved.",1,B-NR,"C, D",-,Maintenance or Optimization of GDMT During Hospitalization
+109,"In patients with HFrEF, if discontinuation of GDMT is necessary during hospitalization, it should be reinitiated and further optimized as soon as possible.",1,B-NR,"C, D",-,Maintenance or Optimization of GDMT During Hospitalization
+110,Patients with HF admitted with evidence of significant fluid overload should be promptly treated with intravenous loop diuretics to improve symptoms and reduce morbidity.,1,B-NR,"C, D","recommendation(iv_loop_diuretics, 110):-
+        evidence(hospitalized),
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(fluid_overload).",Decongestion Strategy
+111,"For patients hospitalized with HF, therapy with diuretics and other guideline-directed medications should be titrated with a goal to resolve clinical evidence of congestion to reduce symptoms and rehospitalizations.",1,B-NR,"C, D","recommendation(diuretics_titration, 111):-
+        evidence(hospitalized),
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(congestion).",Decongestion Strategy
+112,"For patients requiring diuretic treatment during hospitalization for HF, the discharge regimen should include a plan for adjustment of diuretics to decrease rehospitalizations.",1,B-NR,"C, D",-,Decongestion Strategy
+113,"In patients hospitalized with HF when diuresis is inadequate to relieve symptoms and signs
+of congestion, it is reasonable to intensify the diuretic regimen using either: a. higher doses of intravenous loop diuretics.); or b. addition of a second diuretic.",2a,B-NR,"C, D",-,Decongestion Strategy
+114,"In patients who are admitted with decompensated HF, in the absence of systemic hypotension, intravenous nitroglycerin or nitroprusside may be considered as an adjuvant to diuretic therapy for relief of dyspnea.",2b,B-NR,"C, D","recommendation(iv_nitroglycerin_or_nitroprusside, 114):-
+        evidence(hospitalized),
+        evidence(decompensated_hf),
+        \+ evidence(hypotension).",Parenteral Vasodilation Therapy in Patients Hospitalized With HF
+115,"In patients hospitalized with HF, prophylaxis for VTE is recommended to prevent venous thromboembolic disease.",1,B-R,"C, D","recommendation(prophylaxis, 115):-
+        evidence(hospitalized),
+        (evidence(accf_stage_c);evidence(accf_stage_d)).",VTE Prophylaxis in Hospitalized Patient
+116,"In patients with cardiogenic shock, intravenous inotropic support should be used to maintain systemic perfusion and preserve end-organ performance.",1,B-NR,D,"recommendation(iv_inotropic_support, 116):-
+        evidence(accf_stage_d),
+        evidence(cardiogenic_shock).",Cardiogenic Shock
+117,"In patients with cardiogenic shock, temporary MCS is reasonable when end-organ function cannot be maintained by pharmacologic means to support cardiac function.",2a,B-NR,D,"recommendation(temporary_mcs, 117):-
+        evidence(accf_stage_d),
+        evidence(cardiogenic_shock),
+        evidence(threatend_end_organ_function).",Cardiogenic Shock
+118,"In patients with cardiogenic shock, management by a multidisciplinary team experienced in shock is reasonable.",2a,B-NR,D,"recommendation(multidisciplinary_management, 118):-
+        evidence(accf_stage_d),
+        evidence(cardiogenic_shock).
+",Cardiogenic Shock
+119,"In patients presenting with cardiogenic shock, placement of a PA line may be considered to define hemodynamic subsets and appropriate management strategies.",2b,B-NR,D,"recommendation(pulmonary_artery_line, 119):-
+        evidence(accf_stage_d),
+        evidence(cardiogenic_shock).",Cardiogenic Shock
+120,"For patients who are not rapidly responding to initial shock measures, triage to centers that can provide temporary MCS may be considered to optimize management.",2b,C-LD,D,-,Cardiogenic Shock
+121,"In patients with high-risk HF, particularly those with recurrent hospitalizations for HFrEF, referral to multidisciplinary HF disease management programs is recommended to reduce the risk of hospitalization",1,B-R,"C, D",-,Transitions and Team-Based Approaches
+122,"In patients hospitalized with worsening HF, patient-centered discharge instructions with a clear plan for transitional care should be provided before hospital discharge.",1,B-NR,"C, D",-,Transitions and Team-Based Approaches
+123,"In patients hospitalized with worsening HF, participation in systems that allow benchmarking to performance measures is reasonable to increase use of evidence-based therapy, and to improve quality of care.",2a,B-NR,"C, D",-,Transitions and Team-Based Approaches
+124,"In patients being discharged after hospitalization for worsening HF, an early follow-up, generally within 7 days of hospital discharge, is reasonable to optimize care and reduce rehospitalization.",2a,B-NR,"C, D",-,Transitions and Team-Based Approaches
+125,"In patients with HFrEF and iron deficiency with or without anemia, intravenous iron replacement is reasonable to improve functional status and QOL.",2a,B-R,"C, D","recommendation(iv_iron_replacement, 125):-
+        evidence(hf_with_reduced_ef),
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(iron_deficiency).",Comorbidities
+126,"In patients with HF and anemia, erythropoietin-stimulating agents should not be used to improve morbidity and mortality.",3: Harm,B-R,"C, D","contraindication(erythropoietin_stimulating_agents, 126):-
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(anemia).",Comorbidities
+127,"In patients with HFrEF and hypertension, uptitration of GDMT to the maximally tolerated target dose is recommended.",1,C-LD,"C, D","recommendation(uptitration, 127):-
+        evidence(hf_with_reduced_ef),
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(hypertension).",Comorbidities
+128,"In patients with HF and suspicion of sleep-disordered breathing, a formal sleep assessment is reasonable to confirm the diagnosis and differentiate between obstructive and central sleep apnea.",2a,C-LD,"C, D","recommendation(sleep_assesment, 128):-
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(sleep_disorder_breathing).",Comorbidities
+129,"In patients with HF and obstructive sleep apnea, continuous positive airway pressure may be reasonable to improve sleep quality and decrease daytime sleepiness.",2a,B-R,"C, D","recommendation(continuous_positive_airways_pressure, 129):-
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(obstructive_sleep_apnea).",Comorbidities
+130,"In patients with NYHA class II to IV HFrEF and central sleep apnea, adaptive servo-ventilation causes harm.",3: Harm,B-R,"C, D","contraindication(adaptive_servo_ventilation, 130):-
+        evidence(hf_with_reduced_ef),
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
+        evidence(central_sleep_apnea).",Comorbidities
+131,"In patients with HF and type 2 diabetes, the use of SGLT2i is recommended for the management of hyperglycemia and to reduce HF- related morbidity and mortality.",1,A,"C, D","recommendation(sglt2i, 131):-
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(type_2_diabetes).",Comorbidities
+132,Patients with chronic HF with permanent-persistent-paroxysmal AF and a CHA2DS2-VASc score of ≥2 (for men) and ≥3 (for women) should receive chronic anticoagulant therapy.,1,A,D,"recommendation(chronic_anticoagulant_therapy, 132):-
+        sex(male),
+        evidence(accf_stage_d),
+        evidence(permanent_persistent_paroxysmal_af),
+        measurement(cha2ds2_vasc, X), X >= 2.
+
+recommendation(chronic_anticoagulant_therapy, 132):-
+        sex(female),
+        evidence(accf_stage_d),
+        evidence(permanent_persistent_paroxysmal_af),
+        measurement(cha2ds2_vasc, X), X >= 3.",Management of AF
+133,"For patients with chronic HF with permanent-persistent-paroxysmal AF, DOAC is recommended over warfarin in eligible patients.",1,A,D,"recommendation(direct_acting_oral_anticoagulants, 133):-
+        evidence(accf_stage_d),
+        evidence(permanent_persistent_paroxysmal_af).",Management of AF
+134,"For patients with HF and symptoms caused by AF, AF ablation is reasonable to improve symptoms and QOL.",2a,B-NR,"C, D","recommendation(af_ablation, 134):-
+        (evidence(accf_stage_c),evidence(accf_stage_d)),
+        evidence(atrial_fibrillation).",Management of AF
+135,"For patients with AF and LVEF ≤50%, if a rhythm control strategy fails or is not desired, and ventricular rates remain rapid despite medical therapy, atrioventricular nodal ablation with implantation of a CRT device is reasonable.",2a,B-R,"C, D","recommendation(av_node_ablation, 135):-
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(atrial_fibrillation),
+        measurement(lvef, X), X =< 50.
+
+recommendation(crt, 135):-
+        (evidence(accf_stage_c);evidence(accf_stage_d)),
+        evidence(atrial_fibrillation),
+        measurement(lvef, X), X =< 50.
+
+",Management of AF
+136,"For patients with chronic HF and permanent-persistent-paroxysmal AF, chronic anticoagulant therapy is reasonable for men and women without additional risk factors.",2a,B-NR,D,"recommendation(chronic_anticoagulant_therapy, 136):-
+        evidence(accf_stage_d),
+        evidence(permanent_persistent_paroxysmal_af).",Management of AF
