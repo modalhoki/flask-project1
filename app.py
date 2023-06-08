@@ -4,6 +4,9 @@ import deepLearning
 import vector
 import expertSystem
 import heart_prediction_default_input
+import pandas as pd
+from pyswip import Prolog
+import copy
 
 from datetime import datetime
 
@@ -86,27 +89,6 @@ edata_di = ["diagnose1", "diagnose2", "diagnose3"]
 data_int = ["intolerant1", "intolerant2", "intolerant3"]
 
 
-@app.route('/expert_system', methods=['POST', 'GET'])
-def expert_system():
-    if request.method == 'POST':
-        # ------ selected data ------
-        selected_evident = request.form.getlist('selected_evident')
-        selected_diagnose = request.form.getlist('selected_diagnose')
-        selected_history = request.form.getlist('selected_history')
-        selected_intolerant = request.form.getlist('selected_intolerant')
-        # ------- selected data ------
-
-        return selected_evident + selected_history + selected_diagnose + selected_intolerant
-    else:
-        # render page and assign data for selection
-        # --> please do another check
-        return render_template('/expert_system.html',
-                               all_selection_option=expertSystem.data_testing,
-                               eveident_selection=expertSystem.evident_data,
-                               diagonse_selection=expertSystem.diagnose_data,
-                               history_selection=expertSystem.history_data,
-                               intolearant_selection=expertSystem.intolerant_data,
-                               unmarked_selection=expertSystem.unmarked_data)
 
 
 # input data
@@ -175,6 +157,160 @@ def heart_diseases_prediction():
 #
 #     else:
 #         return render_template('update.html', task=information_to_update)
+
+
+# on testing
+# expert system bellow
+def output_and_rule_num(outputs, rule_nums):
+    temp_outputs = []
+
+    for output, num in zip(outputs, rule_nums):
+        temp_outputs.append({output['X']: [num['X']]})
+
+    outputs = []
+    key_values = {}
+
+    for item in temp_outputs:
+        for key, value in item.items():
+            if key in key_values:
+                key_values[key].update(value)
+            else:
+                key_values[key] = set(value)
+
+    for key, value in key_values.items():
+        outputs.append({key: list(value)})
+
+    return outputs
+
+
+prolog = Prolog()
+prolog.consult('stage_a_and_b.pl')
+
+# input
+evidences = ['accf_stage_b']
+measurements = [{'lvef': 35}]
+intolerants = ['.']
+
+# Assert facts
+for evidence in evidences:
+    prolog.assertz(f"evidence({evidence})")
+
+for measurement in measurements:
+    for key, value in measurement.items():
+        prolog.assertz(f"measurement({key}, {value})")
+
+for intolerant in intolerants:
+    prolog.assertz(f"intolerant({intolerant})")
+
+# --- Recommendation ----
+print('Recommendation')
+
+recommendation_query = "recommendation(X, _)"
+recommendations = list(prolog.query(recommendation_query))
+
+rules_num_query = "recommendation(_, X)"
+rules_nums = list(prolog.query(rules_num_query))
+
+recommendation_outputs = output_and_rule_num(recommendations, rules_nums)
+print(recommendation_outputs)
+
+# --- Contraindication ---
+print('\nContraindication')
+contraindication_query = "contraindication(X, _)"
+contraindications = list(prolog.query(contraindication_query))
+
+contra_rules_num_query = "contraindication(_, X)"
+contra_rules_nums = list(prolog.query(contra_rules_num_query))
+
+contradiction_outputs = output_and_rule_num(contraindications, contra_rules_nums)
+print(contradiction_outputs)
+
+
+# Remove asserted facts
+prolog.retractall("evidence(_)")
+prolog.retractall("measurement(_, _)")
+prolog.retractall("intolerant(_)")
+
+# Read file.csv terlebih dahulu
+rules_df = pd.read_csv('stage_a_and_b.csv')
+output_df = pd.read_csv('output.csv')
+
+
+def append_text(output_list):
+    output_with_text = copy.deepcopy(output_list)
+
+    for data in output_with_text:
+        for key, values in data.items():
+            temp_list = []
+            for value in values:
+                # ganti nama file
+                temp_list.append({'text': rules_df.iloc[value - 1].Recommendations,
+                                  'COR': rules_df.iloc[value - 1].COR,
+                                  'LOE': rules_df.iloc[value - 1].LOE,
+                                  'Type': output_df[output_df['output'] == key]['type'].item()})
+            data[key] = temp_list
+
+    return output_with_text
+
+
+final_recommendations = append_text(recommendation_outputs)
+final_contraindications = append_text(contradiction_outputs)
+# final_no_benefits = append_text(no_benefit_outputs)
+
+print(final_recommendations)
+print(final_contraindications)
+# print(final_no_benefits)
+
+# cara akses
+for item in final_recommendations:
+    for key, values in item.items():
+        print(key)
+        for value in values:
+            print(value['text'])
+            print('COR: ' + value['COR'])
+            print('LOE: ' + value['LOE'])
+            print('Type: ' + value['Type'])
+            print("\n")
+
+
+# cara akses
+for item in final_contraindications:
+    for key, values in item.items():
+        print(key)
+        for value in values:
+            print(value['text'])
+            print('COR: ' + value['COR'])
+            print('LOE: ' + value['LOE'])
+            print('Type: ' + value['Type'])
+            print("\n")
+
+
+# on testing
+
+@app.route('/expert_system', methods=['POST', 'GET'])
+def expert_system():
+    if request.method == 'POST':
+        # ------ selected data ------
+        selected_evident = request.form.getlist('selected_evident')
+        selected_diagnose = request.form.getlist('selected_diagnose')
+        selected_history = request.form.getlist('selected_history')
+        selected_intolerant = request.form.getlist('selected_intolerant')
+        selected_intolerant = request.form.getlist('selected_intolerant')
+        # ------- selected data ------
+
+        return selected_evident + selected_history + selected_diagnose + selected_intolerant
+    else:
+        # render page and assign data for selection
+        # --> please do another check
+        return render_template('/expert_system.html',
+                               all_selection_option=expertSystem.data_testing,
+                               eveident_selection=expertSystem.evident_data,
+                               diagonse_selection=expertSystem.diagnose_data,
+                               history_selection=expertSystem.history_data,
+                               intolearant_selection=expertSystem.intolerant_data,
+                               final_on_testing= final_recommendations)
+
+
 
 
 if __name__ == '__main__':

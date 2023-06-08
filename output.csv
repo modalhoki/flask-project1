@@ -1,0 +1,72 @@
+output,desc,type
+blood_pressure_control,Blood pressure should be controlled,Lifestyle & Management Objectives
+sglt2i,SGLT2i,Pharmacological Treatmeant
+regular_physical_activity,Regular physical activity,Lifestyle & Management Objectives
+normal_weight_control,Maintain normal weight,Lifestyle & Management Objectives
+healthy_diet,Healthy dieatary patterns,Lifestyle & Management Objectives
+avoid_smoking,Avoid smoking,Lifestyle & Management Objectives
+natriuretic_peptide_biomarker_screening,Natriuretic peptide biomarker–based screening,Screening
+validated_multivariable_risk_score,Validated multivariable risk scores,Screening
+acei,ACEi,Pharmacological Treatmeant
+statins,Statins,Pharmacological Treatmeant
+arb,ARB,Pharmacological Treatmeant
+beta_blockers,Beta Blockers,Pharmacological Treatmeant
+icd_therapy,ICD Therapy,Device / Surgical Therapy
+thiazolidinediones,Thiazolidinediones,Pharmacological Treatmeant
+nondihydropyridine_ccb,Nondihydropyridine Calcium Channel Blockers,Pharmacological Treatmeant
+multidisciplinary_teams_care,Multidisciplinary teams care to facilitate GDMT implementation,Lifestyle & Management Objectives
+patient_education_and_support,Education & support to facilitate HF self-care,Lifestyle & Management Objectives
+respiratory_illnesses_vactination,Respiratory illnesses vaccination,Pharmacological Treatmeant
+depression_screening,Screening for depression,Screening
+sodium_restriction,Restrict sodium intake,Lifestyle & Management Objectives
+cardiac_rehabilitation,Cardiac Rehabilitation,Lifestyle & Management Objectives
+diuretics,Diuretics,Pharmacological Treatmeant
+thiazide,Thiazide,Pharmacological Treatmeant
+arni,ARNi,Pharmacological Treatmeant
+mra,MRAs,Pharmacological Treatmeant
+mra_precaution,MRA should be discontinued if potassium cannot be maintained at <5.5 mEq/L,Pharmacological Treatmeant
+pufa,Omega-3 polyunsaturated fatty acid (PUFA),Pharmacological Treatmeant
+potassium_binder,Potassium Binder,Pharmacological Treatmeant
+anticoagulant,Anticoagulant,Pharmacological Treatmeant
+dihydropyrinde_ccb,Dihydropyridine calcium channel-blocking,Pharmacological Treatmeant
+vitamins,Vitamins,Pharmacological Treatmeant
+nutritional_supplements,Nutritional Supplements,Pharmacological Treatmeant
+hormonal_therapy,Hormonal Therapy,Pharmacological Treatmeant
+class_ic_antiarrhythmic,Class IC antiarrhythmic,Pharmacological Treatmeant
+dronedarone,Dronedarone,Pharmacological Treatmeant
+saxagliptin,Saxagliptin,Pharmacological Treatmeant
+alogliptin,Alogliptin,Pharmacological Treatmeant
+nsaids,Nonsteroidal anti-inflammatory drugs (NSAIDs),Pharmacological Treatmeant
+medication_titration,Titration of guideline-directed medication dosing to achieve target doses,Lifestyle & Management Objectives
+weekly_titration,Titration and optimization of guideline-directed medications as frequently as every 1 to 2 weeks,Lifestyle & Management Objectives
+digoxin,Digoxin,Pharmacological Treatmeant
+vetriciguat,Vetriciguat,Pharmacological Treatmeant
+crt,CRT,Device / Surgical Therapy
+manage_vhd,VHD should be managed in a multidisciplinary manner,Lifestyle & Management Objectives
+gmdt_optimization,optimization of GDMT,Lifestyle & Management Objectives
+continue_gdmt,GDMT should be continued,Lifestyle & Management Objectives
+medication_titrated,Should have medication titrated to attain blood pressure targets,Lifestyle & Management Objectives
+af_management,Atrial Fibrillation management,Lifestyle & Management Objectives
+nitrates_or_pde_5,Nitrates or phosphodiesterase-5 inhibitors,Pharmacological Treatmeant
+tafamidis,Transthyretin tetramer stabilizer therapy (tafamidis),Pharmacological Treatmeant
+lvad_implantation,Durable LVAD implantation,Device / Surgical Therapy
+durable_mcs,Durable MCS,Device / Surgical Therapy
+temporary_mcs,Temporary MCS,Device / Surgical Therapy
+fluid_restriction,Fluid Restriction,Lifestyle & Management Objectives
+iv_loop_diuretics,Intravenous loop diuretics,Pharmacological Treatmeant
+diuretics_titration,Diuretics and other guideline-directed medications should be titrated,Pharmacological Treatmeant
+iv_nitroglycerin_or_nitroprusside,Intravenous nitroglycerin or nitroprusside,Pharmacological Treatmeant
+prophylaxis,Prophylaxis,Pharmacological Treatmeant
+iv_inotropic_support,Intravenous inotropic support,Pharmacological Treatmeant
+multidisciplinary_management,Management by a multidisciplinary team,Lifestyle & Management Objectives
+pulmonary_artery_line,PA line placement,Device / Surgical Therapy
+iv_iron_replacement,Intravenous iron replacement,Pharmacological Treatmeant
+erythropoietin_stimulating_agents,erythropoietin-stimulating agents,Pharmacological Treatmeant
+uptitration,Uptitration of GDMT to the maximally tolerated target dose,LIfestyle & Management Objectives
+sleep_assesment,Sleep assessment,Screening
+continuous_positive_airways_pressure,Continuous Positive Airway Pressure,Device / Surgical Therapy
+adaptive_servo_ventilation,adaptive servo-ventilation,Device / Surgical Therapy
+chronic_anticoagulant_therapy,Chronic anticoagulant therapy,Pharmacological Treatmeant
+direct_acting_oral_anticoagulants,Direct oral anticoagulants (DOACs),Pharmacological Treatmeant
+af_ablation,AF ablation,Device / Surgical Therapy
+av_node_ablation,AV Node Ablation,Device / Surgical Therapy
