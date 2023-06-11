@@ -9,7 +9,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model.db'
 db = SQLAlchemy(app)
 
-
 class Fact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     age = db.Column(db.Integer, nullable=False)
@@ -180,21 +179,13 @@ def expert_system():
         infeasible = ''
         sex = ''
 
-        # for item in expertSystem.final_recommendations:
-        #     for key, values in item.items():
-        #         print(key)
-        #         for value in values:
-        #             print(value['text'])
-        #             print('COR: ' + value['COR'])
-        #             print('LOE: ' + value['LOE'])
-        #             print('Type: ' + value['Type'])
-        #         print("\n")
-
         # final_temp = expertSystem.final_recommendations + expertSystem.final_contraindications + expertSystem.final_no_benefits
+
         testing_data = expertSystem.final_recommendations
         heh_data = testing_data[0]
         heh_data2 = testing_data[1]
 
+#
         result_title = []
         result_text = []
         cor_level = []
