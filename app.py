@@ -156,7 +156,7 @@ def heart_diseases_prediction():
 
 evidences = ['accf_stage_d', 'permanent_persistent_paroxysmal_af']
 measurements = []
-intolerants = ['']
+intolerance = ['']
 infeasible = ''
 sex = ''
 
