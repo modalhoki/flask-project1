@@ -58,7 +58,6 @@ for i in range(len(data_input)):
         evident_data_value.append(data_input[i])
         evident_data_desc.append(data_description[i])
 
-
 # getting selected input from user on FE
 evidences = app.evidences
 measurements = app.measurements
@@ -109,40 +108,53 @@ def append_text(output_list):
 
 
 # initiate prolog
-def generate_recommendation():
+def generate_recommendation(evidences_prolog_input,
+                            measurements_prolog_input,
+                            intolerance_prolog_input,
+                            infeasible_prolog_input,
+                            sex_prolog_input):
     from pyswip import Prolog
     prolog = Prolog()
     prolog.consult('rules.pl')
 
+    # getting selected input from user on FE
+    # evidences_prolog_input = app.evidences
+    # measurements_prolog_input = app.measurements
+    # intolerance_prolog_input = app.intolerance
+    # infeasible_prolog_input = app.infeasible
+    # sex_prolog_input = app.sex
+
+    # return evidences_prolog_input
+
     # Assert facts on prolog and set default fact if input is null
-    if evidences:
-        for evidence in evidences:
+    if evidences_prolog_input:
+        for evidence in evidences_prolog_input:
             prolog.assertz(f"evidence({evidence})")
     else:
         prolog.assertz("evidence(.)")
 
-    if measurements:
-        for measurement in measurements:
+    if measurements_prolog_input:
+        for measurement in measurements_prolog_input:
             for key, value in measurement.items():
                 prolog.assertz(f"measurement({key}, {value})")
     else:
         prolog.assertz("measurement(., .)")
 
-    if intolerance:
-        for intolerant in intolerance:
+    if intolerance_prolog_input:
+        for intolerant in intolerance_prolog_input:
             prolog.assertz(f"intolerant({intolerant})")
     else:
         prolog.assertz("intolerant(.)")
 
-    if infeasible == '':
-        prolog.assertz("infeasible(.)")
+    if infeasible_prolog_input == '':
+        prolog.assertz("infeasible_prolog_input(.)")
     else:
-        prolog.assertz(f"infeasible({infeasible})")
+        prolog.assertz(f"infeasible_prolog_input({infeasible_prolog_input})")
 
-    if sex == '':
+    if sex_prolog_input == '':
         prolog.assertz("sex(.)")
     else:
-        prolog.assertz(f"sex({sex})")
+        prolog.assertz(f"sex({sex_prolog_input})")
 
     # initiate getting recommendation from prolog
     print('-----Recommendation------')
@@ -166,8 +178,6 @@ def generate_recommendation():
     contradiction_outputs = output_and_rule_num(contraindications, contra_rules_nums)
     print(contradiction_outputs)
 
-
-
     # initiate getting No Benefit  from prolog
     print('\n-------No Benefit-------')
     no_benefit_query = "no_benefit(X, _)"
@@ -182,11 +192,13 @@ def generate_recommendation():
     # resting all input for next run
     prolog.retractall("evidence(_)")
     prolog.retractall("measurement(_, _)")
-    prolog.retractall("infeasible(_)")
+    prolog.retractall("infeasible_prolog_input(_)")
     prolog.retractall("intolerant(_)")
     prolog.retractall("sex(_)")
 
     # temp var for all recommendations, contraindications, no_benefits result
+    # return recommendation_outputs
+
     final_recommendations = append_text(recommendation_outputs)
     final_contraindications = append_text(contradiction_outputs)
     final_no_benefits = append_text(no_benefit_outputs)

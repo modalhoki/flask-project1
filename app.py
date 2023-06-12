@@ -155,7 +155,7 @@ def heart_diseases_prediction():
 # expert system bellow
 # on testing
 
-evidences = ['accf_stage_d', 'permanent_persistent_paroxysmal_af']
+evidences = ['']
 measurements = []
 intolerance = ['']
 infeasible = ''
@@ -165,6 +165,7 @@ sex = ''
 @app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
     if request.method == 'POST':
+
         # # ------ selected data ------
         # selected_evident = request.form.getlist('selected_evident')
         # selected_diagnose = request.form.getlist('selected_diagnose')
@@ -173,13 +174,24 @@ def expert_system():
         # selected_intolerant = request.form.getlist('selected_intolerant')
         # # ------- selected data ------
 
-        # data gateway
+        print("----- it works ------")
 
-        evidences = request.form.getlist('selected_evident') + request.form.getlist('selected_history')
-        measurements = []
-        intolerants = request.form.getlist('selected_history')
-        infeasible = ''
-        sex = ''
+        # data gateway
+        global evidences
+        global measurements
+        global intolerance
+        global infeasible
+        global sex
+
+        evidences = request.form.getlist('selected_evident')
+        # return expertSystem.generate_recommendation(evidences, measurements, intolerance, infeasible, sex)
+
+        history = request.form.getlist('selected_history')
+
+        for i in range(len(history)):
+            evidences.append(history[i])
+
+        print(evidences)
 
         # testing_data = expertSystem.final_recommendations
         # heh_data = testing_data[0]
@@ -187,13 +199,16 @@ def expert_system():
 
         print("---test--")
 
-        recommendation_result = expertSystem.generate_recommendation()[0]
-        contraindications_result = expertSystem.generate_recommendation()[1]
-        no_benefits_result = expertSystem.generate_recommendation()[2]
+        prolog_final_result = expertSystem.generate_recommendation(evidences, measurements, intolerance, infeasible, sex)
+        return prolog_final_result
+        recommendation_result = prolog_final_result[0]
+        contraindications_result = prolog_final_result[1]
+        no_benefits_result = prolog_final_result[2]
 
         # return [recommendation_result, contraindications_result, no_benefits_result]
 
         results_arr = [recommendation_result, contraindications_result, no_benefits_result]
+
         result_title = []
         result_text = []
         cor_level = []
