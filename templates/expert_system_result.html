@@ -9,13 +9,17 @@
         <h1>Hasil Rekomendasi</h1>
         <div class="container">
             <div class="bgku">
-                {% for i in range(0, total_recommedation) %}
+                {% for i in range(0, total_recommedation+total_contraindication+total_no_benefit) %}
                     <h3>{{ result_title[i] }}</h3>
                      {{ result_text[i] }} <br>
                     COR : {{ cor_level[i] }} <br>
                     LOE : {{ loe_level[i] }} <br>
                     Type : {{ treatment_type[i] }} <br> <br> <br>
                 {% endfor %}
+            </div>
+            <br>
+            <hr>
+            <div class="bgku">
             </div>
         </div>
     </div>

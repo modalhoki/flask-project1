@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model.db'
 db = SQLAlchemy(app)
 
+
 class Fact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     age = db.Column(db.Integer, nullable=False)
@@ -173,46 +174,41 @@ def expert_system():
         # # ------- selected data ------
 
         # data gateway
+
         evidences = request.form.getlist('selected_evident') + request.form.getlist('selected_history')
         measurements = []
         intolerants = request.form.getlist('selected_history')
         infeasible = ''
         sex = ''
 
-        # final_temp = expertSystem.final_recommendations + expertSystem.final_contraindications + expertSystem.final_no_benefits
+        # testing_data = expertSystem.final_recommendations
+        # heh_data = testing_data[0]
+        # heh_data2 = testing_data[1]
 
-        testing_data = expertSystem.final_recommendations
-        heh_data = testing_data[0]
-        heh_data2 = testing_data[1]
+        print("---test--")
 
-#
+        recommendation_result = expertSystem.generate_recommendation()[0]
+        contraindications_result = expertSystem.generate_recommendation()[1]
+        no_benefits_result = expertSystem.generate_recommendation()[2]
+
+        # return [recommendation_result, contraindications_result, no_benefits_result]
+
+        results_arr = [recommendation_result, contraindications_result, no_benefits_result]
         result_title = []
         result_text = []
         cor_level = []
         loe_level = []
         treatment_type = []
-        final_result =[]
 
-
-
-        for item in testing_data:
-            for key, values in item.items():
-                print(key)
-                for value in values:
-                    print(value['text'])
-                    print('COR: ' + value['COR'])
-                    print('LOE: ' + value['LOE'])
-                    print('Type: ' + value['Type'])
-                print("\n")
-
-        for item in testing_data:
-            for key, values in item.items():
-                result_title.append(key)
-                for value in values:
-                    result_text.append(value['text'])
-                    cor_level.append(value['COR'])
-                    loe_level.append(value['LOE'])
-                    treatment_type.append(value['Type'])
+        for result in results_arr:
+            for item in result:
+                for key, values in item.items():
+                    result_title.append(key)
+                    for value in values:
+                        result_text.append(value['text'])
+                        cor_level.append(value['COR'])
+                        loe_level.append(value['LOE'])
+                        treatment_type.append(value['Type'])
 
         return render_template('/expert_system_result.html',
                                result_title=result_title,
@@ -220,7 +216,10 @@ def expert_system():
                                cor_level=cor_level,
                                loe_level=loe_level,
                                treatment_type=treatment_type,
-                               total_recommedation=len(result_title))
+                               total_recommedation=len(recommendation_result),
+                               total_contraindication=len(contraindications_result),
+                               total_no_benefit=len(no_benefits_result))
+
         # return final_temp
     else:
         # render page and assign data for selection

@@ -1,6 +1,5 @@
 # import
 import pandas as pd
-from pyswip import Prolog
 import copy
 import app
 
@@ -8,6 +7,10 @@ import app
 df = pd.read_csv("db.csv", header=0)
 data_testing = df["input"]
 data_type = df["type"]
+
+# getting rules and user output to send on FE
+rules = pd.read_csv('rules.csv')
+output = pd.read_csv('output.csv')
 
 # temp memory for input
 history_data = []
@@ -29,6 +32,14 @@ for i in range(len(data_testing)):
         intolerant_data.append(data_testing[i])
     else:
         unmarked_data.append(data_testing[i])
+
+
+# getting selected input from user on FE
+evidences = app.evidences
+measurements = app.measurements
+intolerance = app.intolerance
+infeasible = app.infeasible
+sex = app.sex
 
 
 # adding index from cvs rules
@@ -73,106 +84,94 @@ def append_text(output_list):
 
 
 # initiate prolog
-prolog = Prolog()
-prolog.consult('rules.pl')
+def generate_recommendation():
+    from pyswip import Prolog
+    prolog = Prolog()
+    prolog.consult('rules.pl')
 
-# input
-# evidences = ['accf_stage_d', 'permanent_persistent_paroxysmal_af']
-# measurements = []
-# intolerants = ['']
-# infeasible = ''
-# sex = ''
+    # Assert facts on prolog and set default fact if input is null
+    if evidences:
+        for evidence in evidences:
+            prolog.assertz(f"evidence({evidence})")
+    else:
+        prolog.assertz("evidence(.)")
 
-# getting selected input from user on FE
-evidences = app.evidences
-measurements = app.measurements
-intolerance = app.intolerance
-infeasible = app.infeasible
-sex = app.sex
+    if measurements:
+        for measurement in measurements:
+            for key, value in measurement.items():
+                prolog.assertz(f"measurement({key}, {value})")
+    else:
+        prolog.assertz("measurement(., .)")
 
-# Assert facts on prolog and set default fact if input is null
-if evidences:
-    for evidence in evidences:
-        prolog.assertz(f"evidence({evidence})")
-else:
-    prolog.assertz("evidence(.)")
+    if intolerance:
+        for intolerant in intolerance:
+            prolog.assertz(f"intolerant({intolerant})")
+    else:
+        prolog.assertz("intolerant(.)")
 
-if measurements:
-    for measurement in measurements:
-        for key, value in measurement.items():
-            prolog.assertz(f"measurement({key}, {value})")
-else:
-    prolog.assertz("measurement(., .)")
+    if infeasible == '':
+        prolog.assertz("infeasible(.)")
+    else:
+        prolog.assertz(f"infeasible({infeasible})")
 
-if intolerance:
-    for intolerant in intolerance:
-        prolog.assertz(f"intolerant({intolerant})")
-else:
-    prolog.assertz("intolerant(.)")
+    if sex == '':
+        prolog.assertz("sex(.)")
+    else:
+        prolog.assertz(f"sex({sex})")
 
-if infeasible == '':
-    prolog.assertz("infeasible(.)")
-else:
-    prolog.assertz(f"infeasible({infeasible})")
+    # initiate getting recommendation from prolog
+    print('-----Recommendation------')
+    recommendation_query = "recommendation(X, _)"
+    recommendations = list(prolog.query(recommendation_query))
 
-if sex == '':
-    prolog.assertz("sex(.)")
-else:
-    prolog.assertz(f"sex({sex})")
+    rules_num_query = "recommendation(_, X)"
+    rules_nums = list(prolog.query(rules_num_query))
 
-# initiate getting recommendation from prolog
-print('-----Recommendation------')
-recommendation_query = "recommendation(X, _)"
-recommendations = list(prolog.query(recommendation_query))
+    recommendation_outputs = output_and_rule_num(recommendations, rules_nums)
+    print(recommendation_outputs)
 
-rules_num_query = "recommendation(_, X)"
-rules_nums = list(prolog.query(rules_num_query))
+    # initiate getting contraindication from prolog
+    print('\n------Contraindication------')
+    contraindication_query = "contraindication(X, _)"
+    contraindications = list(prolog.query(contraindication_query))
 
-recommendation_outputs = output_and_rule_num(recommendations, rules_nums)
-print(recommendation_outputs)
+    contra_rules_num_query = "contraindication(_, X)"
+    contra_rules_nums = list(prolog.query(contra_rules_num_query))
 
-# initiate getting contraindication from prolog
-print('\n------Contraindication------')
-contraindication_query = "contraindication(X, _)"
-contraindications = list(prolog.query(contraindication_query))
+    contradiction_outputs = output_and_rule_num(contraindications, contra_rules_nums)
+    print(contradiction_outputs)
 
-contra_rules_num_query = "contraindication(_, X)"
-contra_rules_nums = list(prolog.query(contra_rules_num_query))
 
-contradiction_outputs = output_and_rule_num(contraindications, contra_rules_nums)
-print(contradiction_outputs)
 
-# initiate getting No Benefit  from prolog
-print('\n-------No Benefit-------')
-no_benefit_query = "no_benefit(X, _)"
-no_benefits = list(prolog.query(no_benefit_query))
+    # initiate getting No Benefit  from prolog
+    print('\n-------No Benefit-------')
+    no_benefit_query = "no_benefit(X, _)"
+    no_benefits = list(prolog.query(no_benefit_query))
 
-no_benefit_rules_num_query = "no_benefit(_, X)"
-no_benefit_rules_nums = list(prolog.query(no_benefit_rules_num_query))
+    no_benefit_rules_num_query = "no_benefit(_, X)"
+    no_benefit_rules_nums = list(prolog.query(no_benefit_rules_num_query))
 
-no_benefit_outputs = output_and_rule_num(no_benefits, no_benefit_rules_nums)
-print(no_benefit_outputs)
+    no_benefit_outputs = output_and_rule_num(no_benefits, no_benefit_rules_nums)
+    print(no_benefit_outputs)
 
-# resting all input for next run
-prolog.retractall("evidence(_)")
-prolog.retractall("measurement(_, _)")
-prolog.retractall("infeasible(_)")
-prolog.retractall("intolerant(_)")
-prolog.retractall("sex(_)")
+    # resting all input for next run
+    prolog.retractall("evidence(_)")
+    prolog.retractall("measurement(_, _)")
+    prolog.retractall("infeasible(_)")
+    prolog.retractall("intolerant(_)")
+    prolog.retractall("sex(_)")
 
-# getting rules and user output to send on FE
-rules = pd.read_csv('rules.csv')
-output = pd.read_csv('output.csv')
+    # temp var for all recommendations, contraindications, no_benefits result
+    final_recommendations = append_text(recommendation_outputs)
+    final_contraindications = append_text(contradiction_outputs)
+    final_no_benefits = append_text(no_benefit_outputs)
 
-# temp var for all recommendations, contraindications, no_benefits result
-final_recommendations = append_text(recommendation_outputs)
-final_contraindications = append_text(contradiction_outputs)
-final_no_benefits = append_text(no_benefit_outputs)
+    # log
+    print(final_recommendations)
+    print(final_contraindications)
+    print(final_no_benefits)
 
-# log
-print(final_recommendations)
-print(final_contraindications)
-print(final_no_benefits)
+    return [final_recommendations, final_recommendations, final_recommendations]
 
 # how to access each data
 # for item in final_recommendations:
