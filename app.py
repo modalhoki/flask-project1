@@ -225,12 +225,25 @@ def expert_system():
         # render page and assign data for selection
         # --> please do another check
         return render_template('/expert_system.html',
-                               all_selection_option=expertSystem.data_testing,
-                               # eveident_selection=expertSystem.evident_data,
-                               eveident_selection=['accf_stage_d', 'permanent_persistent_paroxysmal_af'],
-                               diagonse_selection=expertSystem.diagnose_data,
-                               history_selection=expertSystem.history_data,
-                               intolearant_selection=expertSystem.intolerant_data)
+                               eveident_selection_value=expertSystem.evident_data_value,
+                               eveident_selection_desc=expertSystem.evident_data_desc,
+                               total_eveident_selection=len(expertSystem.evident_data_value),
+
+                               diagonse_selection_value=expertSystem.diagnose_data_value,
+                               diagonse_selection_desc=expertSystem.diagnose_data_desc,
+                               total_diagonse_selection=len(expertSystem.diagnose_data_value),
+
+                               history_selection_value=expertSystem.history_data_value,
+                               history_selection_desc=expertSystem.history_data_desc,
+                               total_history_selection=len(expertSystem.history_data_value),
+
+                               intolearant_selection_value=expertSystem.intolerant_data_value,
+                               intolearant_selection_desc=expertSystem.intolerant_data_desc,
+                               total_intolearant_selection=len(expertSystem.intolerant_data_value),
+
+                               unmark_selection_value=expertSystem.unmarked_data_value,
+                               unmark_selection_desc=expertSystem.unmarked_data_desc,
+                               )
 
 
 if __name__ == '__main__':

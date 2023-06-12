@@ -12,8 +12,8 @@
                 <h2>Evident</h2>
                 <div class="container-md">
                     <select class="js-example-basic-multiple" name="selected_evident" multiple="multiple" >
-                        {% for i in eveident_selection %}
-                            <option value="{{ i }}">{{ i }}</option>
+                        {% for i in range(total_eveident_selection) %}
+                            <option value="{{ eveident_selection_value[i] }}">{{ eveident_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -21,8 +21,8 @@
                 <h2>Diagnose</h2>
                 <div class="container-md">
                     <select class="js-example-basic-multiple" name="selected_diagnose" multiple="multiple" >
-                         {% for i in diagonse_selection %}
-                            <option value="{{ i }}">{{ i }}</option>
+                         {% for i in range(total_diagonse_selection) %}
+                            <option value="{{ diagnose_data_value[i] }}">{{ diagonse_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -30,8 +30,8 @@
                 <h2>History</h2>
                 <div class="container-md">
                     <select class="js-example-basic-multiple" name="selected_history" multiple="multiple" >
-                         {% for i in history_selection %}
-                            <option value="{{ i }}">{{ i }}</option>
+                         {% for i in range(total_history_selection) %}
+                            <option value="{{ history_selection_value[i] }}">{{ history_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -39,8 +39,8 @@
                 <h2>Selection</h2>
                 <div class="container-md">
                     <select class="js-example-basic-multiple" name="selected_intolerant" multiple="multiple" >
-                         {% for i in intolearant_selection %}
-                            <option value="{{ i }}">{{ i }}</option>
+                         {% for i in range(total_intolearant_selection) %}
+                            <option value="{{ intolearant_selection_value[i] }}">{{ intolearant_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>

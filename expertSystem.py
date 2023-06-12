@@ -4,34 +4,59 @@ import copy
 import app
 
 # get data for input list
-df = pd.read_csv("db.csv", header=0)
-data_testing = df["input"]
-data_type = df["type"]
+# df = pd.read_csv("db.csv", header=0)
+# data_testing = df["input"]
+# data_type = df["type"]
+
+inputs = pd.read_csv("input.csv", header=0)
+data_input = inputs["input"]
+data_description = inputs["desc"]
+data_type = inputs["type"]
 
 # getting rules and user output to send on FE
 rules = pd.read_csv('rules.csv')
 output = pd.read_csv('output.csv')
 
 # temp memory for input
-history_data = []
-diagnose_data = []
-evident_data = []
-intolerant_data = []
-unmarked_data = []
+evident_data_value = []
+evident_data_desc = []
+
+diagnose_data_value = []
+diagnose_data_desc = []
+
+history_data_value = []
+history_data_desc = []
+
+intolerant_data_value = []
+intolerant_data_desc = []
+
+unmarked_data_value = []
+unmarked_data_desc = []
 
 # sorting input into temp memory
-for i in range(len(data_testing)):
+for i in range(len(data_input)):
     current_type = data_type[i]
     if current_type == "History":
-        history_data.append(data_testing[i])
+        history_data_value.append(data_input[i])
+        history_data_desc.append(data_description[i])
+
     elif current_type == "diagnose":
-        diagnose_data.append(data_testing[i])
+        diagnose_data_value.append(data_input[i])
+        diagnose_data_value.append(data_description[i])
+
     elif current_type == "evident":
-        evident_data.append(data_testing[i])
+        evident_data_value.append(data_input[i])
+        evident_data_value.append(data_description[i])
+
     elif current_type == "intolereant":
-        intolerant_data.append(data_testing[i])
+        intolerant_data_value.append(data_input[i])
+        intolerant_data_value.append(data_description[i])
+
     else:
-        unmarked_data.append(data_testing[i])
+        # unmarked_data_value.append(data_input[i])
+        # unmarked_data_desc.append(data_description[i])
+        evident_data_value.append(data_input[i])
+        evident_data_desc.append(data_description[i])
 
 
 # getting selected input from user on FE
