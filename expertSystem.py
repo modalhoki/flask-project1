@@ -117,7 +117,8 @@ def generate_recommendation(evidences_prolog_input,
                             infeasible_prolog_input,
                             sex_prolog_input):
     from pyswip import Prolog
-    prolog = Prolog()
+    import pyswip_alt
+    prolog = pyswip_alt.PrologMT()
     prolog.consult('rules.pl')
 
     # getting selected input from user on FE

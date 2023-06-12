@@ -9,20 +9,11 @@
         <h1>Expert System on Testing</h1>
         <div class="container">
             <form action="/expert_system" method="POST" enctype="multipart/form-data">
-                <h2>Evident</h2>
+                <h2>Evident and Diagnose</h2>
                 <div class="container-md">
                     <select class="js-example-basic-multiple" name="selected_evident" multiple="multiple" >
                         {% for i in range(total_eveident_selection) %}
                             <option value="{{ eveident_selection_value[i] }}">{{ eveident_selection_desc[i] }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <h2>Diagnose</h2>
-                <div class="container-md">
-                    <select class="js-example-basic-multiple" name="selected_diagnose" multiple="multiple" >
-                         {% for i in range(total_diagonse_selection) %}
-                            <option value="{{ diagnose_data_value[i] }}">{{ diagonse_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -36,7 +27,7 @@
                     </select>
                 </div>
 
-                <h2>Selection</h2>
+                <h2>Intolerant</h2>
                 <div class="container-md">
                     <select class="js-example-basic-multiple" name="selected_intolerant" multiple="multiple" >
                          {% for i in range(total_intolearant_selection) %}
