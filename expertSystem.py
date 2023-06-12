@@ -102,7 +102,7 @@ def append_text(output_list):
                 temp_list.append({'text': rules.iloc[value - 1].Recommendations,
                                   'COR': rules.iloc[value - 1].COR,
                                   'LOE': rules.iloc[value - 1].LOE,
-                                  'Type': output[output['output'] == key]['type']})
+                                  'Type': str(output[output['output'] == key]['type'])})
 
             dictionary['detail'] = temp_list
             final_output.append(dictionary)
