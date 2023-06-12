@@ -91,20 +91,23 @@ def output_and_rule_num(outputs, rule_nums):
 
 # join all data for text, COR leve, LOE level and Type of recommendation per recommendation
 def append_text(output_list):
-    output_with_text = copy.deepcopy(output_list)
+    final_output = []
 
-    for item in output_with_text:
+    for item in output_list:
         for key, values in item.items():
+            dictionary = {'output': key}
+
             temp_list = []
             for value in values:
-                # ganti nama file
                 temp_list.append({'text': rules.iloc[value - 1].Recommendations,
                                   'COR': rules.iloc[value - 1].COR,
                                   'LOE': rules.iloc[value - 1].LOE,
-                                  'Type': output[output['output'] == key]['type'].item()})
-            item[key] = temp_list
+                                  'Type': output[output['output'] == key]['type']})
 
-    return output_with_text
+            dictionary['detail'] = temp_list
+            final_output.append(dictionary)
+
+    return final_output
 
 
 # initiate prolog
@@ -199,7 +202,9 @@ def generate_recommendation(evidences_prolog_input,
     # temp var for all recommendations, contraindications, no_benefits result
     # return recommendation_outputs
 
+    # return recommendation_outputs
     final_recommendations = append_text(recommendation_outputs)
+    return final_recommendations
     final_contraindications = append_text(contradiction_outputs)
     final_no_benefits = append_text(no_benefit_outputs)
 
