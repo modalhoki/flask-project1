@@ -1,0 +1,7 @@
+measurement,desc
+lvef,Left Ventricle Ejection Fraction
+gfr,eGFR
+potassium,Potassium
+resting_heart_rate,Heart Rate at Rest
+qrs,QRS Duration
+cha2ds2_vasc,CHA2DS2-VASc score

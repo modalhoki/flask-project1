@@ -6,48 +6,84 @@
 
 {% block body %}
     <div class="container">
-        <h1>Expert System on Testing</h1>
+        <h1>Expert System</h1>
+        <hr>
+
+        <h2>Patient Data</h2>
+        <hr>
+
         <div class="container">
             <form action="/expert_system" method="POST" enctype="multipart/form-data">
-                <h2>Evident and Diagnose</h2>
+                <span>Evident and Diagnose</span>
                 <div class="container-md">
-                    <select class="js-example-basic-multiple" name="selected_evident" multiple="multiple" >
+                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_evident" multiple="multiple" >
                         {% for i in range(total_eveident_selection) %}
                             <option value="{{ eveident_selection_value[i] }}">{{ eveident_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>
 
-                <h2>History</h2>
+                <span>History</span>
                 <div class="container-md">
-                    <select class="js-example-basic-multiple" name="selected_history" multiple="multiple" >
+                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_history" multiple="multiple" >
                          {% for i in range(total_history_selection) %}
                             <option value="{{ history_selection_value[i] }}">{{ history_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>
 
-                <h2>Intolerant</h2>
+                <span>Intolerant</span>
                 <div class="container-md">
-                    <select class="js-example-basic-multiple" name="selected_intolerant" multiple="multiple" >
+                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_intolerance" multiple="multiple" >
                          {% for i in range(total_intolearant_selection) %}
                             <option value="{{ intolearant_selection_value[i] }}">{{ intolearant_selection_desc[i] }}</option>
                         {% endfor %}
                     </select>
                 </div>
 
+
+                <span>Infeasible</span>
+                <div class="container-md">
+                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_infeasible" multiple="multiple" >
+                         {% for i in range(total_infeasible_selection) %}
+                            <option value="{{ infeasible_selection_value[i] }}">{{ infeasible_selection_desc[i] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <span>Sex ini apa cuy datanya tolong lah, gip tolong lah, jawab telfon ituuu</span>
+                <div class="container-md">
+                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_infeasible" multiple="multiple" >
+                        <option value="1">female</option>
+                             <option value="0">male</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <h2>Measurement</h2>
+                <hr>
+                <div class="container-md">
+                    {% for i in range(total_measurement) %}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="{{ measurement_value[i] }}">{{ measurement_desc[i] }}</label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control form-control-md" type="text" placeholder="" name="{{ measurement_value[i] }}">
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
                 <br>
-                <input type="submit" value="submit">
+                <input type="submit" value="submit" class="btn btn-primary">
+                <hr>
+                <br>
+                <br>
             </form>
         </div>
-    </div>
-
-
-
-    <h1>testttttttt asu
-    </h1>
-    <div class="bgku">
-        {{ final_on_testing }}
     </div>
 
 {% endblock %}

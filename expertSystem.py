@@ -3,26 +3,31 @@ import pandas as pd
 import copy
 import app
 
-# get data for input list
-# df = pd.read_csv("db.csv", header=0)
-# data_testing = df["input"]
-# data_type = df["type"]
-
-inputs = pd.read_csv("input.csv", header=0)
+inputs = pd.read_csv("csv/input.csv", header=0)
 data_input = inputs["input"]
 data_description = inputs["desc"]
 data_type = inputs["type"]
 
+measurements = pd.read_csv("csv/measurement.csv", header=0)
+measurement_input = measurements["measurement"]
+measurement_desc = measurements["desc"]
+
+print("----measure on testing----")
+print(measurement_input)
+print(type(measurement_input))
+print(measurement_desc)
+print(len(measurement_input))
+
 # getting rules and user output to send on FE
-rules = pd.read_csv('rules.csv')
-output = pd.read_csv('output.csv')
+rules = pd.read_csv('csv/rules.csv')
+output = pd.read_csv('csv/output.csv')
 
 # temp memory for input
 evident_data_value = []
 evident_data_desc = []
 
-diagnose_data_value = []
-diagnose_data_desc = []
+infeasible_data_value = []
+infeasible_data_desc = []
 
 history_data_value = []
 history_data_desc = []
@@ -40,21 +45,19 @@ for i in range(len(data_input)):
         history_data_value.append(data_input[i])
         history_data_desc.append(data_description[i])
 
-    elif current_type == "diagnose":
-        diagnose_data_value.append(data_input[i])
-        diagnose_data_value.append(data_description[i])
-
     elif current_type == "evident":
         evident_data_value.append(data_input[i])
         evident_data_value.append(data_description[i])
 
-    elif current_type == "intolereant":
+    elif current_type == "intolerant":
         intolerant_data_value.append(data_input[i])
-        intolerant_data_value.append(data_description[i])
+        intolerant_data_desc.append(data_description[i])
+
+    elif current_type == "infeasible":
+        infeasible_data_value.append(data_input[i])
+        infeasible_data_desc.append(data_description[i])
 
     else:
-        # unmarked_data_value.append(data_input[i])
-        # unmarked_data_desc.append(data_description[i])
         evident_data_value.append(data_input[i])
         evident_data_desc.append(data_description[i])
 
@@ -89,7 +92,7 @@ def output_and_rule_num(outputs, rule_nums):
     return outputs
 
 
-# join all data for text, COR leve, LOE level and Type of recommendation per recommendation
+# join all csv for text, COR leve, LOE level and Type of recommendation per recommendation
 def append_text(output_list):
     final_output = []
 
@@ -121,14 +124,14 @@ def generate_recommendation(evidences_prolog_input,
     prolog = pyswip_alt.PrologMT()
     prolog.consult('rules.pl')
 
-    # getting selected input from user on FE
-    # evidences_prolog_input = app.evidences
-    # measurements_prolog_input = app.measurements
-    # intolerance_prolog_input = app.intolerance
-    # infeasible_prolog_input = app.infeasible
-    # sex_prolog_input = app.sex
 
-    # return evidences_prolog_input
+    # return infeasible_prolog_input
+    #
+    # return [evidences_prolog_input,
+    #         intolerance_prolog_input,
+    #         infeasible_prolog_input,
+    #         # sex_prolog_input,
+    #         measurements_prolog_input]
 
     # Assert facts on prolog and set default fact if input is null
     if evidences_prolog_input:
@@ -205,7 +208,8 @@ def generate_recommendation(evidences_prolog_input,
 
     # return recommendation_outputs
     final_recommendations = append_text(recommendation_outputs)
-    return final_recommendations
+    # return final_recommendations
+
     final_contraindications = append_text(contradiction_outputs)
     final_no_benefits = append_text(no_benefit_outputs)
 
@@ -214,9 +218,9 @@ def generate_recommendation(evidences_prolog_input,
     print(final_contraindications)
     print(final_no_benefits)
 
-    return [final_recommendations, final_recommendations, final_recommendations]
+    return [final_recommendations, final_contraindications, final_no_benefits]
 
-# how to access each data
+# how to access each csv
 # for item in final_recommendations:
 #   for key, values in item.items():
 #     print(key)

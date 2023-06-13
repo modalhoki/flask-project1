@@ -24,14 +24,14 @@ class Fact(db.Model):
     st_slope = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f'<data on {self.id}>'
+        return f'<csv on {self.id}>'
 
 
-# post data ke database
+# post csv ke database
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        # get data from form
+        # get csv from form
 
         age = request.form['age']
         sex = request.form['sex']
@@ -74,16 +74,7 @@ def index():
         return render_template("index.html", patient_fact=patient_fact)
 
 
-# data input ev
-data_ev = ["evident1", "evident2", "evident3"]
-# data input his
-data_his = ["history1", "history2", "history3"]
-# data input di
-edata_di = ["diagnose1", "diagnose2", "diagnose3"]
-# data input int
-data_int = ["intolerant1", "intolerant2", "intolerant3"]
-
-# input data
+# input csv
 heart_diseases_input = heart_prediction_default_input.value
 
 
@@ -106,7 +97,7 @@ def heart_diseases_prediction():
             hasil_hitungan = hasil_hitungan + nilai
             # -------apply the model here---------
 
-        return "total data adalah " + str(hasil_hitungan)
+        return "total csv adalah " + str(hasil_hitungan)
 
     else:
         # return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
@@ -115,91 +106,65 @@ def heart_diseases_prediction():
                                input=heart_diseases_input)
 
 
-# @app.route('/delete/<int:id>')
-# def delete(id):
-#     # get current data
-#     information_to_delete = Fact.query.get_or_404(id)
-#     print(information_to_delete)
-#
-#     # delete data
-#     try:
-#         db.session.delete(information_to_delete)
-#         print("is deleted")
-#         db.session.commit()
-#         print("is committed")
-#         return redirect('/')
-#     except:
-#         return "there is an issue while deleting the information"
-
-
-# @app.route('/update/<int:id>', methods=['POST', 'GET'])
-# def update(id):
-#     # get data
-#     information_to_update = Fact.query.get_or_404(id)
-#
-#     if request.method == 'POST':
-#         information_to_update.information = request.form['information_input_updated']
-#         information_to_update.value = request.form['value_input_updated']
-#
-#         try:
-#             db.session.commit()
-#             return redirect('/')
-#         except:
-#             return 'there is an issue ma man'
-#
-#     else:
-#         return render_template('update.html', task=information_to_update)
-
-
-# on testing
-# expert system bellow
-# on testing
-
+# --set global variable for expert system
 evidences = ['']
 measurements = []
 intolerance = ['']
-infeasible = ''
+infeasible = ['']
 sex = ''
+history = ''
 
 
 @app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
     if request.method == 'POST':
-
-        # # ------ selected data ------
-        # selected_evident = request.form.getlist('selected_evident')
-        # selected_diagnose = request.form.getlist('selected_diagnose')
-        # selected_history = request.form.getlist('selected_history')
-        # selected_intolerant = request.form.getlist('selected_intolerant')
-        # selected_intolerant = request.form.getlist('selected_intolerant')
-        # # ------- selected data ------
-
-        print("----- it works ------")
-
-        # data gateway
+        # --getting global variable
         global evidences
+        global history
         global measurements
         global intolerance
         global infeasible
         global sex
 
+        # --resting measurement value
+        measurements = []
+
+        # --getting value
         evidences = request.form.getlist('selected_evident')
-        # return expertSystem.generate_recommendation(evidences, measurements, intolerance, infeasible, sex)
-
         history = request.form.getlist('selected_history')
+        intolerance = request.form.getlist('selected_intolerance')
+        infeasible = request.form.getlist('selected_infeasible')
 
-        for i in range(len(history)):
-            evidences.append(history[i])
+        # --infeasible data fix
+        if not infeasible:
+            infeasible = ''
 
-        print(evidences)
+        # --getting measurement
+        for i in range(6):
+            current_measurement_value = request.form.get(expertSystem.measurement_input[i])
+            if current_measurement_value == '':
+                break
+
+            measurements.append(
+                {expertSystem.measurement_input[i]: int(current_measurement_value)}
+            )
+
+        # --merging history into evidence
+        for current_history in history:
+            evidences.append(current_history)
+
+        # return [evidences,
+        #         intolerance,
+        #         infeasible,
+        #         measurements]
 
         # testing_data = expertSystem.final_recommendations
-        # heh_data = testing_data[0]
-        # heh_data2 = testing_data[1]
 
-        print("---test--")
-
-        prolog_final_result = expertSystem.generate_recommendation(evidences, measurements, intolerance, infeasible, sex)
+        prolog_final_result = expertSystem.generate_recommendation(evidences,
+                                                                   measurements,
+                                                                   intolerance,
+                                                                   infeasible,
+                                                                   sex)
         return prolog_final_result
         recommendation_result = prolog_final_result[0]
         contraindications_result = prolog_final_result[1]
@@ -237,16 +202,38 @@ def expert_system():
 
         # return final_temp
     else:
-        # render page and assign data for selection
+        # render page and assign csv for selection
+        # return [expertSystem.evident_data_value,
+        #         expertSystem.evident_data_desc,
+        #         # len(expertSystem.evident_data_value),
+        #
+        #         expertSystem.infeasible_data_value,
+        #         expertSystem.infeasible_data_desc,
+        #         # len(expertSystem.infeasible_data_value),
+        #
+        #         expertSystem.history_data_value,
+        #         expertSystem.history_data_desc,
+        #         # len(expertSystem.history_data_value),
+        #
+        #         expertSystem.intolerant_data_value,
+        #         expertSystem.intolerant_data_desc]
+        #         # len(expertSystem.intolerant_data_value),
+        #
+        #         # expertSystem.unmarked_data_value,
+        #         # expertSystem.unmarked_data_desc]
+
         # --> please do another check
+
+        # return type(expertSystem.measurement_input)
+
         return render_template('/expert_system.html',
                                eveident_selection_value=expertSystem.evident_data_value,
                                eveident_selection_desc=expertSystem.evident_data_desc,
                                total_eveident_selection=len(expertSystem.evident_data_value),
 
-                               diagonse_selection_value=expertSystem.diagnose_data_value,
-                               diagonse_selection_desc=expertSystem.diagnose_data_desc,
-                               total_diagonse_selection=len(expertSystem.diagnose_data_value),
+                               infeasible_selection_value=expertSystem.infeasible_data_value,
+                               infeasible_selection_desc=expertSystem.infeasible_data_desc,
+                               total_infeasible_selection=len(expertSystem.infeasible_data_value),
 
                                history_selection_value=expertSystem.history_data_value,
                                history_selection_desc=expertSystem.history_data_desc,
@@ -255,6 +242,10 @@ def expert_system():
                                intolearant_selection_value=expertSystem.intolerant_data_value,
                                intolearant_selection_desc=expertSystem.intolerant_data_desc,
                                total_intolearant_selection=len(expertSystem.intolerant_data_value),
+
+                               measurement_value=expertSystem.measurement_input,
+                               measurement_desc=expertSystem.measurement_desc,
+                               total_measurement=len(expertSystem.measurement_input),
 
                                unmark_selection_value=expertSystem.unmarked_data_value,
                                unmark_selection_desc=expertSystem.unmarked_data_desc,
