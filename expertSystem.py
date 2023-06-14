@@ -98,14 +98,14 @@ def append_text(output_list):
 
     for item in output_list:
         for key, values in item.items():
-            dictionary = {'output': key}
+            dictionary = {'output': output[output['output'] == key]['desc'].to_string(index=False)}
 
             temp_list = []
             for value in values:
                 temp_list.append({'text': rules.iloc[value - 1].Recommendations,
                                   'COR': rules.iloc[value - 1].COR,
                                   'LOE': rules.iloc[value - 1].LOE,
-                                  'Type': str(output[output['output'] == key]['type'])})
+                                  'Type': output[output['output'] == key]['type'].to_string(index=False)})
 
             dictionary['detail'] = temp_list
             final_output.append(dictionary)
@@ -122,8 +122,7 @@ def generate_recommendation(evidences_prolog_input,
     from pyswip import Prolog
     import pyswip_alt
     prolog = pyswip_alt.PrologMT()
-    prolog.consult('rules.pl')
-
+    prolog.consult('rules1.pl')
 
     # return infeasible_prolog_input
     #
@@ -219,14 +218,3 @@ def generate_recommendation(evidences_prolog_input,
     print(final_no_benefits)
 
     return [final_recommendations, final_contraindications, final_no_benefits]
-
-# how to access each csv
-# for item in final_recommendations:
-#   for key, values in item.items():
-#     print(key)
-#     for value in values:
-#       print(value['text'])
-#       print('COR: ' + value['COR'])
-#       print('LOE: ' + value['LOE'])
-#       print('Type: ' + value['Type'])
-#     print("\n")

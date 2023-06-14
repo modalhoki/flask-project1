@@ -3,6 +3,15 @@ body {
     font-family: Open Sans, serif;
 }
 
+.result {
+    background-color: #eeee;
+    min-height: 30px;
+    border-radius: 25px;
+    min-width: auto;
+    padding: 2em;
+    margin-bottom: 3em;
+}
+
 .bgku{
     background-color: #f0f0f0;
     border: aliceblue;
@@ -51,8 +60,9 @@ h2{
     border: none;
 }
 
-span{
+span, .measurement_input{
     margin-bottom: 1em;
+    font-weight: 600;
 }
 
 h1{

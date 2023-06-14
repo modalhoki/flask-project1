@@ -7,16 +7,53 @@
 {% block body %}
     <div class="container">
         <h1>Hasil Rekomendasi</h1>
+        <hr>
         <div class="container">
-            <div class="bgku">
-                {% for i in range(0, total_recommedation+total_contraindication+total_no_benefit) %}
-                    <h3>{{ result_title[i] }}</h3>
-                     {{ result_text[i] }} <br>
-                    COR : {{ cor_level[i] }} <br>
-                    LOE : {{ loe_level[i] }} <br>
-                    Type : {{ treatment_type[i] }} <br> <br> <br>
+
+            <div class="container result">
+                <h2>Recommendation</h2>
+                {% for result in recommendation_result %}
+                    <h3>{{ result['output'] }}</h3>
+                    <hr>
+                    {% for text in result['detail'] %}
+                        <span>Type : {{ text['Type'] }}</span> <br>
+                        COR : {{ text['COR'] }} <br>
+                        LOE : {{ text['LOE'] }} <br>
+                        Text : {{ text['text']}} <br>
+                         <br> <br> <br>
+                    {% endfor %}
                 {% endfor %}
             </div>
+
+            <div class="container result">
+                <h2>Contraindications</h2>
+                {% for result in contraindications_result %}
+                    <h3>{{ result['output'] }}</h3>
+                    {% for text in result['detail'] %}
+                        <span>Type : {{ text['Type'] }}</span> <br>
+                        Text : {{ text['text']}} <br>
+                        COR : {{ text['COR'] }} <br>
+                        LOE : {{ text['LOE'] }} <br>
+                         <br> <br> <br>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+            <div class="container result">
+                <h2>No Benefits</h2>
+                {% for result in no_benefits_result %}
+                    <h3>{{ result['output'] }}</h3>
+                    {% for text in result['detail'] %}
+                        <span>Type : {{ text['Type'] }}</span> <br>
+                        Text : {{ text['text']}} <br>
+                        COR : {{ text['COR'] }} <br>
+                        LOE : {{ text['LOE'] }} <br>
+                         <br> <br> <br>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+
             <br>
             <hr>
             <div class="bgku">

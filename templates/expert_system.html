@@ -51,12 +51,21 @@
                     </select>
                 </div>
 
-                <span>Sex ini apa cuy datanya tolong lah, gip tolong lah, jawab telfon ituuu</span>
+
+
+
+
+                <span>Sex</span>
                 <div class="container-md">
-                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_infeasible" multiple="multiple" >
-                        <option value="1">female</option>
-                             <option value="0">male</option>
-                    </select>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio1" value="male">
+                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio2" value="female">
+                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                    </div>
                 </div>
                 <br><br>
 
@@ -67,7 +76,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-3">
-                                    <label for="{{ measurement_value[i] }}">{{ measurement_desc[i] }}</label>
+                                    <label class="measurement_input" for="{{ measurement_value[i] }}">{{ measurement_desc[i] }}</label>
                                 </div>
                                 <div class="col-9">
                                     <input class="form-control form-control-md" type="text" placeholder="" name="{{ measurement_value[i] }}">

@@ -134,6 +134,7 @@ def expert_system():
         history = request.form.getlist('selected_history')
         intolerance = request.form.getlist('selected_intolerance')
         infeasible = request.form.getlist('selected_infeasible')
+        sex = request.form.get('selected_sex')
 
         # --infeasible data fix
         if not infeasible:
@@ -160,45 +161,52 @@ def expert_system():
 
         # testing_data = expertSystem.final_recommendations
 
+        # initiate prolog
         prolog_final_result = expertSystem.generate_recommendation(evidences,
                                                                    measurements,
                                                                    intolerance,
                                                                    infeasible,
                                                                    sex)
-        return prolog_final_result
+        # return prolog_final_result
+        # -- passing each type of recommendation
         recommendation_result = prolog_final_result[0]
         contraindications_result = prolog_final_result[1]
         no_benefits_result = prolog_final_result[2]
 
-        # return [recommendation_result, contraindications_result, no_benefits_result]
-
-        results_arr = [recommendation_result, contraindications_result, no_benefits_result]
-
-        result_title = []
-        result_text = []
-        cor_level = []
-        loe_level = []
-        treatment_type = []
-
-        for result in results_arr:
-            for item in result:
-                for key, values in item.items():
-                    result_title.append(key)
-                    for value in values:
-                        result_text.append(value['text'])
-                        cor_level.append(value['COR'])
-                        loe_level.append(value['LOE'])
-                        treatment_type.append(value['Type'])
-
         return render_template('/expert_system_result.html',
-                               result_title=result_title,
-                               result_text=result_text,
-                               cor_level=cor_level,
-                               loe_level=loe_level,
-                               treatment_type=treatment_type,
-                               total_recommedation=len(recommendation_result),
-                               total_contraindication=len(contraindications_result),
-                               total_no_benefit=len(no_benefits_result))
+                               recommendation_result=recommendation_result,
+                               contraindications_result=contraindications_result,
+                               no_benefits_result=no_benefits_result)
+
+        # # return [recommendation_result, contraindications_result, no_benefits_result]
+        #
+        # results_arr = [recommendation_result, contraindications_result, no_benefits_result]
+
+        # result_title = []
+        # result_text = []
+        # cor_level = []
+        # loe_level = []
+        # treatment_type = []
+        #
+        # for result in results_arr:
+        #     for item in result:
+        #         for key, values in item.items():
+        #             result_title.append(key)
+        #             for value in values:
+        #                 result_text.append(value['text'])
+        #                 cor_level.append(value['COR'])
+        #                 loe_level.append(value['LOE'])
+        #                 treatment_type.append(value['Type'])
+
+        # return render_template('/expert_system_result.html',
+        #                        result_title=result_title,
+        #                        result_text=result_text,
+        #                        cor_level=cor_level,
+        #                        loe_level=loe_level,
+        #                        treatment_type=treatment_type,
+        #                        total_recommedation=len(recommendation_result),
+        #                        total_contraindication=len(contraindications_result),
+        #                        total_no_benefit=len(no_benefits_result))
 
         # return final_temp
     else:
