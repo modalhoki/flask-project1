@@ -73,6 +73,17 @@ h2{
     font-weight: bold;
 }
 
+.result-title{
+    text-align: center;
+}
+
+h3{
+    font-size : 1em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
 .select2-container--default .select2-selection--multiple .select2-selection__choice__display{
     padding-left: 1em;
     padding-right: 1em;

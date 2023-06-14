@@ -11,12 +11,12 @@
         <div class="container">
 
             <div class="container result">
-                <h2>Recommendation</h2>
+                <h2 class="result-title">Recommendation</h2>
                 {% for result in recommendation_result %}
                     <h3>{{ result['output'] }}</h3>
                     <hr>
                     {% for text in result['detail'] %}
-                        <span>Type : {{ text['Type'] }}</span> <br>
+                        Type : {{ text['Type'] }} <br>
                         COR : {{ text['COR'] }} <br>
                         LOE : {{ text['LOE'] }} <br>
                         Text : {{ text['text']}} <br>
