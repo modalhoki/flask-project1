@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block head %}
+<title>Prediction Result</title>
+{% endblock %} {% block body %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="card col-6 mx-auto">
+      <div class="card-body">
+        <h5 class="card-title text-center">Heart Disease Prediction Result</h5>
+        {% if prediction == 1 %}
+        <p class="card-text text-center">Status: Heart Disease</p>
+        {% else %}
+        <p class="card-text text-center">Status: Normal</p>
+        {% endif %}
+        <p class="card-text text-center">
+          Probability of Heart Disease: {{ "{:.2f}".format(probability * 100) }}
+          %
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

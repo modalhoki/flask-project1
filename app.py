@@ -3,6 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 import expertSystem
 import heart_prediction_default_input
 
+from flask import Flask, render_template, request
+from flask_cors import CORS, cross_origin
+import joblib
+
 from datetime import datetime
 
 app = Flask(__name__)
@@ -78,32 +82,68 @@ def index():
 heart_diseases_input = heart_prediction_default_input.value
 
 
-@app.route('/heart_diseases_prediction', methods=['POST', 'GET'])
-def heart_diseases_prediction():
-    # passing patient value
-    if request.method == 'POST':
-        hasil_hitungan = 0
+@app.route("/heart_disease_prediction", methods=["POST", "GET"])
+@cross_origin()
+def heart_disease():
+    if request.method == "POST":
+        # Input
+        age = int(request.form['age'])
+        sex = int(request.form['sex'])
+        chest_paint_type = int(request.form['chestPainType'])
+        # resting_bps = int(request.form['restingBloodPressure'])
+        # cholesterol = int(request.form['cholesterol'])
+        fasting_blood_sugar = int(request.form['fastingBloodSugar'])
+        # resting_ecg = int(request.form['restingECG'])
+        max_heart_rate = int(request.form['maxHeartRate'])
+        exercise_angina = int(request.form['exerciseAngina'])
+        oldpeak = float(request.form['oldpeak'])
+        st_slope = int(request.form['stSlope'])
 
-        for tipe_input in heart_diseases_input:
-            current_form_name = tipe_input[0]
-            current_form_value = request.form[current_form_name]
-            # handle null value
-            if current_form_value == '':
-                print("null value on " + tipe_input)
-                continue
+        pred_input = [age, sex, chest_paint_type, fasting_blood_sugar,
+                      max_heart_rate, exercise_angina, oldpeak, st_slope]
 
-            # -------apply the model here---------
-            nilai = int(current_form_value)
-            hasil_hitungan = hasil_hitungan + nilai
-            # -------apply the model here---------
+        # load the model from disk
+        filename = 'model.pkl'
+        load_model = joblib.load(filename)
 
-        return "total csv adalah " + str(hasil_hitungan)
+        # append input here
+        # age, sex, chest pain type, fasting blood sugar, max heart rate, exercise angine, oldpeak, ST slope
+        pred_prob = load_model.predict([pred_input])
+        predict = (pred_prob >= 0.35).astype(int).reshape(-1)
 
+        return render_template("/prediction-result.html", prediction=predict, probability=pred_prob[0][0])
     else:
-        # return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
-        return render_template('/heart_diseases_prediction.html',
-                               total_data=len(heart_diseases_input),
-                               input=heart_diseases_input)
+        return render_template("/heart-disease-prediction.html")
+
+
+#    ------------ testing area ------------
+
+# @app.route('/heart_diseases_prediction', methods=['POST', 'GET'])
+# def heart_diseases_prediction():
+#     # passing patient value
+#     if request.method == 'POST':
+#         hasil_hitungan = 0
+#
+#         for tipe_input in heart_diseases_input:
+#             current_form_name = tipe_input[0]
+#             current_form_value = request.form[current_form_name]
+#             # handle null value
+#             if current_form_value == '':
+#                 print("null value on " + tipe_input)
+#                 continue
+#
+#             # -------apply the model here---------
+#             nilai = int(current_form_value)
+#             hasil_hitungan = hasil_hitungan + nilai
+#             # -------apply the model here---------
+#
+#         return "total csv adalah " + str(hasil_hitungan)
+#
+#     else:
+#         # return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
+#         return render_template('/heart_diseases_prediction.html',
+#                                total_data=len(heart_diseases_input),
+#                                input=heart_diseases_input)
 
 
 # --set global variable for expert system
