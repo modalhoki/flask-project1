@@ -4,8 +4,9 @@ import expertSystem
 import heart_prediction_default_input
 
 from flask import Flask, render_template, request
-from flask_cors import CORS, cross_origin
+# from flask_cors import CORS, cross_origin
 import joblib
+import numpy as np
 
 from datetime import datetime
 
@@ -83,7 +84,7 @@ heart_diseases_input = heart_prediction_default_input.value
 
 
 @app.route("/heart_disease_prediction", methods=["POST", "GET"])
-@cross_origin()
+# @cross_origin()
 def heart_disease():
     if request.method == "POST":
         # Input
@@ -300,5 +301,8 @@ def expert_system():
                                )
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    def reshape(arr):
+        return np.array(arr).reshape(-1, 1, arr.shape[1])
+
+    app.run(debug = True)
