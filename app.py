@@ -65,36 +65,6 @@ def heart_disease():
         return render_template("/heart-disease-prediction.html")
 
 
-#    ------------ testing area ------------
-
-# @app.route('/heart_diseases_prediction', methods=['POST', 'GET'])
-# def heart_diseases_prediction():
-#     # passing patient value
-#     if request.method == 'POST':
-#         hasil_hitungan = 0
-#
-#         for tipe_input in heart_diseases_input:
-#             current_form_name = tipe_input[0]
-#             current_form_value = request.form[current_form_name]
-#             # handle null value
-#             if current_form_value == '':
-#                 print("null value on " + tipe_input)
-#                 continue
-#
-#             # -------apply the model here---------
-#             nilai = int(current_form_value)
-#             hasil_hitungan = hasil_hitungan + nilai
-#             # -------apply the model here---------
-#
-#         return "total csv adalah " + str(hasil_hitungan)
-#
-#     else:
-#         # return render_template('/heart_diseases_prediction.html', inputs=heart_diseases_input)
-#         return render_template('/heart_diseases_prediction.html',
-#                                total_data=len(heart_diseases_input),
-#                                input=heart_diseases_input)
-
-
 # --set global variable for expert system
 evidences = ['']
 measurements = []
@@ -143,21 +113,13 @@ def expert_system():
         for current_history in history:
             evidences.append(current_history)
 
-        # return [evidences,
-        #         intolerance,
-        #         infeasible,
-        #         measurements]
-
-        # testing_data = expertSystem.final_recommendations
-
         # initiate prolog
         prolog_final_result = expertSystem.generate_recommendation(evidences,
                                                                    measurements,
                                                                    intolerance,
                                                                    infeasible,
                                                                    sex)
-        # return prolog_final_result
-        # -- passing each type of recommendation
+
         recommendation_result = prolog_final_result[0]
         contraindications_result = prolog_final_result[1]
         no_benefits_result = prolog_final_result[2]
@@ -167,37 +129,6 @@ def expert_system():
                                contraindications_result=contraindications_result,
                                no_benefits_result=no_benefits_result)
 
-        # # return [recommendation_result, contraindications_result, no_benefits_result]
-        #
-        # results_arr = [recommendation_result, contraindications_result, no_benefits_result]
-
-        # result_title = []
-        # result_text = []
-        # cor_level = []
-        # loe_level = []
-        # treatment_type = []
-        #
-        # for result in results_arr:
-        #     for item in result:
-        #         for key, values in item.items():
-        #             result_title.append(key)
-        #             for value in values:
-        #                 result_text.append(value['text'])
-        #                 cor_level.append(value['COR'])
-        #                 loe_level.append(value['LOE'])
-        #                 treatment_type.append(value['Type'])
-
-        # return render_template('/expert_system_result.html',
-        #                        result_title=result_title,
-        #                        result_text=result_text,
-        #                        cor_level=cor_level,
-        #                        loe_level=loe_level,
-        #                        treatment_type=treatment_type,
-        #                        total_recommedation=len(recommendation_result),
-        #                        total_contraindication=len(contraindications_result),
-        #                        total_no_benefit=len(no_benefits_result))
-
-        # return final_temp
     else:
 
         return render_template('/expert_system.html',
