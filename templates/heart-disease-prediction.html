@@ -1,63 +1,56 @@
 {% extends 'base.html' %} {% block head %}
 <title>Heart Disease Prediction</title>
-{% endblock %} {% block body %}
+{% endblock %}
+{% block body %}
 <div class="container">
+<h1>Heart Disease Prediction</h1>
+        <hr>
   <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-10">
       <form
-        class="border rounded-4 p-5"
+        class="rounded-4 p-5"
         action="/heart_disease_prediction"
         method="POST"
       >
-        <p class="h4 mb-4 text-center">Heart Disease Prediction</p>
 
-        <label for="textInput">Age</label>
+        <label for="textInput" class="bg-input">Age</label>
         <input
           name="age"
           type="text"
           class="form-control mb-4"
-          placeholder="Patient's age. e.g: 55"
+
         />
 
-        <label for="select">Sex</label>
+        <label for="select" class="bg-input">Sex</label>
         <select
           name="sex"
           class="form-select browser-default custom-select mb-4"
         >
-          <option value="" disabled="" selected="">Select</option>
+          <option value="" disabled="" selected="">–</option>
           <option value="0">Female</option>
           <option value="1">Male</option>
         </select>
 
-        <label for="select">Chest Pain Type</label>
+        <label for="select" class="bg-input">Chest Pain Type</label>
         <select
           name="chestPainType"
           class="form-select browser-default custom-select mb-4"
         >
-          <option value="" disabled="" selected="">Select</option>
+          <option value="" disabled="" selected="">-</option>
           <option value="1">Typical Angina</option>
           <option value="2">Atypical Angina</option>
           <option value="3">Non-Anginal Pain</option>
           <option value="4">Asymptomatic</option>
         </select>
 
-        <!-- <label for="textInput">Resting Blood Pressure</label>
+        <label for="textInput" class="bg-input">Resting Blood Pressure</label>
         <input
           name="restingBloodPressure"
           type="text"
           class="form-control mb-4"
-          placeholder="in mm Hg"
-        /> -->
+        />
 
-        <!-- <label for="textInput">Cholesterol</label>
-        <input
-          name="cholesterol"
-          type="text"
-          class="form-control mb-4"
-          placeholder="in mg/dl"
-        /> -->
-
-        <label for="select">Fasting Blood Sugar</label>
+        <label for="select" class="bg-input">Fasting Blood Sugar</label>
         <select
           name="fastingBloodSugar"
           class="form-select browser-default custom-select mb-4"
@@ -67,67 +60,46 @@
           <option value="1">&gE; 120 mg/dl</option>
         </select>
 
-        <!-- <label for="select">Resting ECG</label>
-        <select
-          name="restingECG"
-          class="form-select browser-default custom-select mb-4"
-        >
-          <option value="" disabled="" selected="">Select</option>
-          <option value="0">Normal</option>
-          <option value="1">
-            Having ST-T wave abnormality (T wave inversions and/or ST elevation
-            or depression of > 0.05 mV)
-          </option>
-          <option value="2">
-            Showing probable or definite left ventricular hypertrophy by Estes'
-            criteria
-          </option>
-        </select> -->
-
-        <label for="textInput">Max Heart Rate</label>
+        <label for="textInput" class="bg-input">Max Heart Rate</label>
         <input
           name="maxHeartRate"
           type="text"
           class="form-control mb-4"
-          placeholder="Patient's max heart rate"
         />
 
-        <label for="select">Exercise Angina</label>
+        <label for="select" class="bg-input">Exercise Angina</label>
         <select
           name="exerciseAngina"
           class="form-select browser-default custom-select mb-4"
         >
           <option value="" disabled="" selected="">
-            Exercise-induced angina
+            -
           </option>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>
 
-        <label for="textInput">Oldpeak</label>
+        <label for="textInput"class="bg-input">Oldpeak</label>
         <input
           name="oldpeak"
           type="text"
           class="form-control mb-4"
-          placeholder="depression"
         />
 
-        <label for="select">ST Slope</label>
+        <label for="select" class="bg-input">ST Slope</label>
         <select
           name="stSlope"
           class="form-select browser-default custom-select mb-4"
         >
           <option value="" disabled="" selected="">
-            Slope of the peak exercise ST segment
+            -
           </option>
           <option value="1">Upsloping</option>
           <option value="2">Flat</option>
           <option value="3">Downsloping</option>
         </select>
 
-        <button value="predict" class="btn btn-info btn-block" type="submit">
-          Predict
-        </button>
+        <input type="submit" value="predict" class="btn btn-primary">
       </form>
     </div>
   </div>

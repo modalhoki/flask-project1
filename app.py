@@ -8,75 +8,13 @@ from flask import Flask, render_template, request
 import joblib
 import numpy as np
 
-from datetime import datetime
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model.db'
-db = SQLAlchemy(app)
-
-
-class Fact(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    age = db.Column(db.Integer, nullable=False)
-    sex = db.Column(db.Integer, nullable=False)
-    resting_bp = db.Column(db.Integer, nullable=False)
-    cholesterol = db.Column(db.Integer, nullable=False)
-    fasting_blood_sugar = db.Column(db.Integer, nullable=False)
-    resting_ecg = db.Column(db.Integer, nullable=False)
-    max_heart_rate = db.Column(db.Integer, nullable=False)
-    exercise_angina = db.Column(db.Integer, nullable=False)
-    old_peak = db.Column(db.Float, nullable=False)
-    st_slope = db.Column(db.Integer, nullable=False)
-
-    def __repr__(self):
-        return f'<csv on {self.id}>'
 
 
 # post csv ke database
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    if request.method == 'POST':
-        # get csv from form
-
-        age = request.form['age']
-        sex = request.form['sex']
-        chestPainType = request.form['chest_pain_type']
-        resting_bp_s = request.form['resting_bp_s']
-        cholesterol = request.form['cholesterol']
-        fasting_blood_sugar = request.form['fasting_blood_sugar']
-        resting_ecg = request.form['resting_ecg']
-        max_heart_rate = request.form['max_heart_rate']
-        exercise_angina = request.form['exercise_angina']
-        old_peak = request.form['old_peak']
-        st_slope = request.form['st_slope']
-
-        print("----debugging2----")
-        patient_fact1 = Fact(age=age,
-                             sex=sex,
-                             chestPainType=chestPainType,
-                             resting_bp_s=resting_bp_s,
-                             cholesterol=cholesterol,
-                             fasting_blood_sugar=fasting_blood_sugar,
-                             resting_ecg=resting_ecg,
-                             max_heart_rate=max_heart_rate,
-                             exercise_angina=exercise_angina,
-                             old_peak=old_peak,
-                             st_slope=st_slope)
-
-        # patient_fact1 = Fact(age=1,sex=2,chest_pain_type=3,resting_bp_s=4,cholesterol=5,fasting_blood_sugar=6,resting_ecg=7,max_heart_rate=8,exercise_angina=9,old_peak=10,st_slope=11)
-
-        try:
-            app.app_context().push()
-            db.session.add(patient_fact1)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return "there is an issue bro"
-
-
-    else:
-        patient_fact = Fact.query.all()
-        return render_template("index.html", patient_fact=patient_fact)
+    return render_template("index.html")
 
 
 # input csv
@@ -87,21 +25,31 @@ heart_diseases_input = heart_prediction_default_input.value
 # @cross_origin()
 def heart_disease():
     if request.method == "POST":
-        # Input
-        age = int(request.form['age'])
-        sex = int(request.form['sex'])
-        chest_paint_type = int(request.form['chestPainType'])
-        # resting_bps = int(request.form['restingBloodPressure'])
-        # cholesterol = int(request.form['cholesterol'])
-        fasting_blood_sugar = int(request.form['fastingBloodSugar'])
-        # resting_ecg = int(request.form['restingECG'])
-        max_heart_rate = int(request.form['maxHeartRate'])
-        exercise_angina = int(request.form['exerciseAngina'])
-        oldpeak = float(request.form['oldpeak'])
-        st_slope = int(request.form['stSlope'])
 
-        pred_input = [age, sex, chest_paint_type, fasting_blood_sugar,
-                      max_heart_rate, exercise_angina, oldpeak, st_slope]
+        # get input
+        # age = int(request.form['age'])
+        # sex = int(request.form['sex'])
+        # chest_paint_type = int(request.form['chestPainType'])
+        # resting_bps = int(request.form['restingBloodPressure'])
+        # fasting_blood_sugar = int(request.form['fastingBloodSugar'])
+        # max_heart_rate = int(request.form['maxHeartRate'])
+        # exercise_angina = int(request.form['exerciseAngina'])
+        # old_peak = float(request.form['oldpeak'])
+        # st_slope = int(request.form['stSlope'])
+        #
+        # # prepare input
+        # pred_input = [age,
+        #               sex,
+        #               chest_paint_type,
+        #               resting_bps,
+        #               fasting_blood_sugar,
+        #               max_heart_rate,
+        #               exercise_angina,
+        #               old_peak,
+        #               st_slope]
+
+        # return pred_input
+        return render_template("/prediction_result.html")
 
         # load the model from disk
         filename = 'model.pkl'
@@ -112,7 +60,7 @@ def heart_disease():
         pred_prob = load_model.predict([pred_input])
         predict = (pred_prob >= 0.35).astype(int).reshape(-1)
 
-        return render_template("/prediction-result.html", prediction=predict, probability=pred_prob[0][0])
+        return render_template("/prediction_result.html", prediction=predict, probability=pred_prob[0][0])
     else:
         return render_template("/heart-disease-prediction.html")
 
@@ -251,29 +199,6 @@ def expert_system():
 
         # return final_temp
     else:
-        # render page and assign csv for selection
-        # return [expertSystem.evident_data_value,
-        #         expertSystem.evident_data_desc,
-        #         # len(expertSystem.evident_data_value),
-        #
-        #         expertSystem.infeasible_data_value,
-        #         expertSystem.infeasible_data_desc,
-        #         # len(expertSystem.infeasible_data_value),
-        #
-        #         expertSystem.history_data_value,
-        #         expertSystem.history_data_desc,
-        #         # len(expertSystem.history_data_value),
-        #
-        #         expertSystem.intolerant_data_value,
-        #         expertSystem.intolerant_data_desc]
-        #         # len(expertSystem.intolerant_data_value),
-        #
-        #         # expertSystem.unmarked_data_value,
-        #         # expertSystem.unmarked_data_desc]
-
-        # --> please do another check
-
-        # return type(expertSystem.measurement_input)
 
         return render_template('/expert_system.html',
                                eveident_selection_value=expertSystem.evident_data_value,
@@ -305,4 +230,5 @@ if __name__ == "__main__":
     def reshape(arr):
         return np.array(arr).reshape(-1, 1, arr.shape[1])
 
-    app.run(debug = True)
+
+    app.run(debug=True)

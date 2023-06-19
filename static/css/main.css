@@ -18,7 +18,7 @@ body {
 }
 
 .bg-input{
-    background-color: red;
+    font-weight: 600;
 }
 
 .clicker {
@@ -93,3 +93,33 @@ h3{
 .select2-container--default.select2-container--focus .select2-selection--multiple {
 
 }
+
+.h4{
+    font-weight: bold;
+}
+
+.textInput{
+    font-weight: bold;
+}
+
+.hd_result{
+    font-weight: bold;
+}
+
+.hd_result2{
+    color: black;
+    font-weight: normal;
+    text-align: center;
+}
+
+.hd_result21{
+    color: red;
+    font-weight: normal;
+    text-align: center;
+}
+.hd_result22{
+    color: #3A7734;
+    font-weight: normal;
+    text-align: center;
+}
+
