@@ -52,7 +52,7 @@ def heart_disease():
         return render_template("/prediction_result.html")
 
         # load the model from disk
-        filename = 'model.pkl'
+        filename = 'final_model.pkl'
         load_model = joblib.load(filename)
 
         # append input here
