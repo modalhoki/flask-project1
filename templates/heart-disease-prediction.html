@@ -1,9 +1,47 @@
 {% extends 'base.html' %} {% block head %}
 <title>Heart Disease Prediction</title>
 {% endblock %} {% block body %}
-<div class="container">
   <h1>Heart Disease Prediction</h1>
-  <hr />
+  <hr/>
+
+  <div class="explaination d-flex flex-column">
+    <span class="part">
+        <b>Explaination</b><br>
+        <!-- <hr> -->
+        A prediction model for heart diseases is a tool that uses historical data and patterns to forecast the likelihood of someone developing heart-related health issues. It helps in assessing the risk of heart diseases in individuals based on factors such as age, gender, medical history, lifestyle choices, and other relevant information. By analyzing these factors, the prediction model provides valuable insights to healthcare professionals in identifying individuals who may be at a higher risk for heart diseases and can guide preventive measures and personalized treatment plans.
+        <br>
+        
+    </span>
+
+    <span class="part">
+        <b>Data</b>
+        <br>
+        "Heart Disease Dataset (Comprehensive)" on IEEE data port, Submitted by Manu Siddhartha, Machine Learning expert from John Moores University, Liverpool.
+    </span>
+
+    <span class="part">
+        <b>Accuracy</b>
+        <br>
+        92.6%
+    </span>
+
+    <span class="part">
+      <b>Machine Learning Model</b>
+      <br>
+      Deep Learning
+    </span>
+
+    <span class="part">
+      <b>Output Disclainer</b>
+      <ul class="list-group">
+        <li class="list-group-item">1 means that the patient has a very high chance of having heart disease and needs to carry out further cardiac tests <br></li>
+        <li class="list-group-item">0 means that the patient has a very low chance of having heart disease</li>
+      </ul 
+    </span>
+
+  </div>
+
+
   <div class="row justify-content-center">
     <div class="col-10">
       <form
@@ -84,5 +122,4 @@
       </form>
     </div>
   </div>
-</div>
 {% endblock %}

@@ -18,20 +18,30 @@ body {
 /* main container */
 .main{
     max-width: 90%;
+    padding: 2em;
 }
 
 
 /* text */
 .explaination{
+    margin-top: 2em;
     margin-bottom: 2em;
-    background-color: #47a85f;
-    border-radius: 20px;
-    padding: 1em;
+    /* background-color: #f8f8f8; */
+    border:1px solid #e7e7e7;
+    border-radius: 10px;
+    padding: 2em;
 }
 
 .part{
     margin-bottom: 1em;
-    font-weight: 300;
+    font-weight: 400;
+    text-align: justify;
+    font-size: 0.9em;
+}
+
+b{
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
 /* basic stuff */
@@ -146,7 +156,7 @@ h1{
 
 span, .measurement_input{
     margin-bottom: 1em;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 h1{
@@ -202,3 +212,11 @@ h3{
     text-align: center;
 }
 
+
+.select2-container--default .select2-container--focus .select2-selection--multiple{
+    border:  1px solid #ced4da;
+}
+
+.list-group{
+    padding-top: 0.5em;
+}

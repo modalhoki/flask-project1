@@ -5,109 +5,119 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h2>Expert System</h2>
+<h1>Heart Failure Expert System</h1>
 
-        <div class="explaination d-flex flex-column">
-            <span class="part">
-                Expert system adalah program yang menggunakan teknologi machine learning dan artificial intelligence untuk mensimulasikan penilaian dan perilaku seorang ahli yang memiliki keahlian dan pengalaman di bidang tertentu, expert system meniru perilaku pakar dengan merepresentasikan pengetahuan mereka sebagai data atau aturan untuk memecahkan masalah yang kompleks
-            </span>
+<div class="explaination d-flex flex-column">
+    <span class="part">
+        <b>Explaination</b><br>
+        <!-- <hr> -->
+        Simply put, an expert system is a program built to simulate
+         the judgment and conduct of an expert who has expertise and experience in a particular field.
+         expert systems can mimic the behavior of experts by representing their knowledge as data
+         or a rule that can solve a problem. in this case, the Expert System for the management of heart failure patients.
 
-            <span class="part">
-                berdasrkan referensi
-            </span>
+        <br>
+        
+    </span>
 
-            <span class="part">
-                batasan2 nya, masukin saja tittle2
-            </span>
+    <span class="part">
+        <b>Data</b>
+        <br>
+        2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.
+    </span>
 
+    <span class="part">
+        <b>system limitation</b>
+        <br>
+        currently we believe there this expert system is a god.
+    </span>
+
+</div>
+
+<h2>Patient Data</h2>
+<hr>
+
+<div class="container">
+    <form action="/expert_system" method="POST" enctype="multipart/form-data">
+        <span>Evident and Diagnose</span>
+        <div class="container-md">
+            <select class="js-example-basic-multiple form-control form-control-lg" name="selected_evident" multiple="multiple" >
+                {% for i in range(total_eveident_selection) %}
+                    <option value="{{ eveident_selection_value[i] }}">{{ eveident_selection_desc[i] }}</option>
+                {% endfor %}
+            </select>
         </div>
 
-        <h2>Patient Data</h2>
+        <span>History</span>
+        <div class="container-md">
+            <select class="js-example-basic-multiple form-control form-control-lg" name="selected_history" multiple="multiple" >
+                 {% for i in range(total_history_selection) %}
+                    <option value="{{ history_selection_value[i] }}">{{ history_selection_desc[i] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <span>Intolerant</span>
+        <div class="container-md">
+            <select class="js-example-basic-multiple form-control form-control-lg" name="selected_intolerance" multiple="multiple" >
+                 {% for i in range(total_intolearant_selection) %}
+                    <option value="{{ intolearant_selection_value[i] }}">{{ intolearant_selection_desc[i] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <span>Infeasible</span>
+        <div class="container-md">
+            <select class="js-example-basic-multiple form-control form-control-lg" name="selected_infeasible" multiple="multiple" >
+                 {% for i in range(total_infeasible_selection) %}
+                    <option value="{{ infeasible_selection_value[i] }}">{{ infeasible_selection_desc[i] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+
+
+
+        <span>Sex</span>
+        <div class="container-md">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio1" value="male">
+                <label class="form-check-label" for="inlineRadio1">Male</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio2" value="female">
+                <label class="form-check-label" for="inlineRadio2">Female</label>
+            </div>
+        </div>
+        <br><br>
+
+        <h2>Measurement</h2>
         <hr>
-
-        <div class="container">
-            <form action="/expert_system" method="POST" enctype="multipart/form-data">
-                <span>Evident and Diagnose</span>
-                <div class="container-md">
-                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_evident" multiple="multiple" >
-                        {% for i in range(total_eveident_selection) %}
-                            <option value="{{ eveident_selection_value[i] }}">{{ eveident_selection_desc[i] }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <span>History</span>
-                <div class="container-md">
-                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_history" multiple="multiple" >
-                         {% for i in range(total_history_selection) %}
-                            <option value="{{ history_selection_value[i] }}">{{ history_selection_desc[i] }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <span>Intolerant</span>
-                <div class="container-md">
-                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_intolerance" multiple="multiple" >
-                         {% for i in range(total_intolearant_selection) %}
-                            <option value="{{ intolearant_selection_value[i] }}">{{ intolearant_selection_desc[i] }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-
-                <span>Infeasible</span>
-                <div class="container-md">
-                    <select class="js-example-basic-multiple form-control form-control-lg" name="selected_infeasible" multiple="multiple" >
-                         {% for i in range(total_infeasible_selection) %}
-                            <option value="{{ infeasible_selection_value[i] }}">{{ infeasible_selection_desc[i] }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-
-
-
-
-                <span>Sex</span>
-                <div class="container-md">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio1" value="male">
-                        <label class="form-check-label" for="inlineRadio1">Male</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio2" value="female">
-                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                    </div>
-                </div>
-                <br><br>
-
-                <h2>Measurement</h2>
-                <hr>
-                <div class="container-md">
-                    {% for i in range(total_measurement) %}
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-3">
-                                    <label class="measurement_input" for="{{ measurement_value[i] }}">{{ measurement_desc[i] }}</label>
-                                </div>
-                                <div class="col-9">
-                                    <input class="form-control form-control-md" type="text" placeholder="" name="{{ measurement_value[i] }}">
-                                </div>
-                            </div>
+        <div class="container-md">
+            {% for i in range(total_measurement) %}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="measurement_input" for="{{ measurement_value[i] }}">{{ measurement_desc[i] }}</label>
                         </div>
-                    {% endfor %}
+                        <div class="col-9">
+                            <input class="form-control form-control-md" type="text" placeholder="" name="{{ measurement_value[i] }}">
+                        </div>
+                    </div>
                 </div>
-
-                <br>
-                <input type="submit" value="submit" class="btn btn-primary">
-                <hr>
-                <br>
-                <br>
-            </form>
+            {% endfor %}
         </div>
-    </div>
+
+        <br>
+        <input type="submit" value="submit" class="btn btn-primary">
+        <hr>
+        <br>
+        <br>
+    </form>
+</div>
 
 {% endblock %}
 
