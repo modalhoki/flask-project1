@@ -41,85 +41,87 @@
   </div>
 
 
-  <div class="container-fluid patient-from"></div>
-  <div class="row justify-content-center">
-    <div class="col-10">
-      <form
-        class="rounded-4 p-5"
-        action="/heart_disease_prediction"
-        method="POST"
-      >
-        <label for="textInput" class="bg-input">Age</label>
-        <input name="age" type="text" class="form-control mb-4" />
-
-        <label for="select" class="bg-input">Sex</label>
-        <select
-          name="sex"
-          class="form-select browser-default custom-select mb-4"
+  <div class="container-fluid patient-form">
+    <h2>Patient Form</h2>
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <form
+          class="rounded-4 p-5"
+          action="/heart_disease_prediction"
+          method="POST"
         >
-          <option value="" disabled="" selected="">-</option>
-          <option value="0">Female</option>
-          <option value="1">Male</option>
-        </select>
-
-        <label for="select" class="bg-input">Chest Pain Type</label>
-        <select
-          name="chestPainType"
-          class="form-select browser-default custom-select mb-4"
-        >
-          <option value="" disabled="" selected="">-</option>
-          <option value="1">Typical Angina</option>
-          <option value="2">Atypical Angina</option>
-          <option value="3">Non-Anginal Pain</option>
-          <option value="4">Asymptomatic</option>
-        </select>
-
-        <label for="textInput" class="bg-input">Resting Blood Pressure</label>
-        <input
-          name="restingBloodPressure"
-          type="text"
-          class="form-control mb-4"
-        />
-
-        <label for="select" class="bg-input">Fasting Blood Sugar</label>
-        <select
-          name="fastingBloodSugar"
-          class="form-select browser-default custom-select mb-4"
-        >
-          <option value="" disabled="" selected="">-</option>
-          <option value="0">&lt; 120 mg/dl</option>
-          <option value="1">&gE; 120 mg/dl</option>
-        </select>
-
-        <label for="textInput" class="bg-input">Max Heart Rate</label>
-        <input name="maxHeartRate" type="text" class="form-control mb-4" />
-
-        <label for="select" class="bg-input">Exercise Angina</label>
-        <select
-          name="exerciseAngina"
-          class="form-select browser-default custom-select mb-4"
-        >
-          <option value="" disabled="" selected="">-</option>
-          <option value="0">No</option>
-          <option value="1">Yes</option>
-        </select>
-
-        <label for="textInput" class="bg-input">Oldpeak</label>
-        <input name="oldpeak" type="text" class="form-control mb-4" />
-
-        <label for="select" class="bg-input">ST Slope</label>
-        <select
-          name="stSlope"
-          class="form-select browser-default custom-select mb-4"
-        >
-          <option value="" disabled="" selected="">-</option>
-          <option value="1">Upsloping</option>
-          <option value="2">Flat</option>
-          <option value="3">Downsloping</option>
-        </select>
-
-        <input type="submit" value="predict" class="btn btn-primary" />
-      </form>
+          <label for="textInput" class="bg-input">Age</label>
+          <input name="age" type="text" class="form-control mb-4" />
+  
+          <label for="select" class="bg-input">Sex</label>
+          <select
+            name="sex"
+            class="form-select browser-default custom-select mb-4"
+          >
+            <option value="" disabled="" selected="">-</option>
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+          </select>
+  
+          <label for="select" class="bg-input">Chest Pain Type</label>
+          <select
+            name="chestPainType"
+            class="form-select browser-default custom-select mb-4"
+          >
+            <option value="" disabled="" selected="">-</option>
+            <option value="1">Typical Angina</option>
+            <option value="2">Atypical Angina</option>
+            <option value="3">Non-Anginal Pain</option>
+            <option value="4">Asymptomatic</option>
+          </select>
+  
+          <label for="textInput" class="bg-input">Resting Blood Pressure</label>
+          <input
+            name="restingBloodPressure"
+            type="text"
+            class="form-control mb-4"
+          />
+  
+          <label for="select" class="bg-input">Fasting Blood Sugar</label>
+          <select
+            name="fastingBloodSugar"
+            class="form-select browser-default custom-select mb-4"
+          >
+            <option value="" disabled="" selected="">-</option>
+            <option value="0">&lt; 120 mg/dl</option>
+            <option value="1">&gE; 120 mg/dl</option>
+          </select>
+  
+          <label for="textInput" class="bg-input">Max Heart Rate</label>
+          <input name="maxHeartRate" type="text" class="form-control mb-4" />
+  
+          <label for="select" class="bg-input">Exercise Angina</label>
+          <select
+            name="exerciseAngina"
+            class="form-select browser-default custom-select mb-4"
+          >
+            <option value="" disabled="" selected="">-</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+  
+          <label for="textInput" class="bg-input">Oldpeak</label>
+          <input name="oldpeak" type="text" class="form-control mb-4" />
+  
+          <label for="select" class="bg-input">ST Slope</label>
+          <select
+            name="stSlope"
+            class="form-select browser-default custom-select mb-4"
+          >
+            <option value="" disabled="" selected="">-</option>
+            <option value="1">Upsloping</option>
+            <option value="2">Flat</option>
+            <option value="3">Downsloping</option>
+          </select>
+  
+          <input type="submit" value="predict" class="btn btn-primary" />
+        </form>
+      </div>
     </div>
   </div>
 {% endblock %}
