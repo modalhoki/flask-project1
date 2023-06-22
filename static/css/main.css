@@ -1,6 +1,5 @@
 body {
-    /*margin: 10em;*/
-    font-family: Open Sans, serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .result {
@@ -11,6 +10,75 @@ body {
     padding: 2em;
     margin-bottom: 3em;
 }
+
+.container{
+  
+}
+
+/* basic stuff */
+.custom-line{
+    /* border: 0.8px solid #aeaeae; */
+    max-width: 80%;
+}
+
+h2{
+    font-weight:500;
+    text-align: center;
+}
+
+
+/* content container */
+.main-content{
+    /* background-color: #395674; */
+    height: 30em;
+}
+
+
+/* navigation content */
+.navigation-container{
+    max-width: 60%;
+}
+
+.main-navigation:hover{
+    border: 1px solid #47a85f;
+    transition:0.3s;
+}
+
+.nav-text:hover{
+    color: #47a85f;    
+    
+}
+
+
+.main-navigation{
+    /* background-color: red; */
+    margin: 1em 1em 1em 1em;
+    max-width: 50%;
+    border: 1px solid #cfcfcf;
+    border-radius: 1em;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    
+}
+
+.main-navigation-title{
+    /* background-color: green; */
+}
+
+.main-navigation-description{
+    background-color: blue;
+}
+
+/* footer content */
+.footer-content{
+
+}
+
+.footer-text{
+    font-size: 0.8em;
+    text-align: center;
+}
+
 
 .bgku{
     background-color: #f0f0f0;
@@ -45,10 +113,7 @@ select{
 
 h1{
     font-weight: bold;
-}
-
-h2{
-    font-weight: normal;
+    margin-top: 0.8em;
 }
 
 .select2-container--default .select2-selection--multiple{
@@ -66,11 +131,6 @@ span, .measurement_input{
 }
 
 h1{
-    text-align: center;
-}
-
-h2{
-    font-weight: bold;
     text-align: center;
 }
 
