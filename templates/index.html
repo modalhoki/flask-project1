@@ -7,6 +7,10 @@
     <hr />
   </div>
 
+  {% block head %}
+  <title>My Heart</title>
+  {% endblock %} {% block body %}
+
   <div class="container-fluid main-content">
     <div class="container d-flex flex-row navigation-container">
       <div
@@ -20,21 +24,12 @@
 
       <div class="container-fluid main-navigation d-flex position-relative">
         <div class="container main-navigation-title">
-          <h2>Heart Disease Prediction</h2>
+          <h2>Heart Deases Prediction</h2>
           <a href="/heart_disease_prediction" class="stretched-link"></a>
         </div>
       </div>
     </div>
-
-    <hr class="custom-line" />
-    <div class="d-flex align-items-center flex-column footer-content">
-      <p class="footer-text">
-        This machine learning model and expert system is created by Created by
-        Ahmad G. Omari and Naufal S. A. Sunandar, Students of Insitut Teknologi
-        Sepuluh Nopember, Department of Information System, Lab of RDIB @2023.
-      </p>
-    </div>
   </div>
-</div>
 
-{% endblock %}
+  {% endblock %}
+</div>

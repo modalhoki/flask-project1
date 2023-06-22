@@ -15,6 +15,25 @@ body {
   
 }
 
+/* main container */
+.main{
+    max-width: 90%;
+}
+
+
+/* text */
+.explaination{
+    margin-bottom: 2em;
+    background-color: #47a85f;
+    border-radius: 20px;
+    padding: 1em;
+}
+
+.part{
+    margin-bottom: 1em;
+    font-weight: 300;
+}
+
 /* basic stuff */
 .custom-line{
     /* border: 0.8px solid #aeaeae; */
