@@ -1,5 +1,6 @@
 body {
     font-family: 'Inter', sans-serif;
+    color: #474747;
 }
 
 .result {
@@ -36,12 +37,15 @@ body {
     margin-bottom: 1em;
     font-weight: 400;
     text-align: justify;
-    font-size: 0.9em;
+    font-size: 0.8em;
+    /* color: #454545; */
 }
 
 b{
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 600;
+    /* color: #1e1e1e; */
+    /* color: #3A7734; */
 }
 
 /* basic stuff */
@@ -53,6 +57,7 @@ b{
 h2{
     font-weight:500;
     text-align: center;
+    font-size: 1.8em;
 }
 
 
@@ -73,10 +78,7 @@ h2{
     transition:0.3s;
 }
 
-.nav-text:hover{
-    color: #47a85f;    
-    
-}
+
 
 
 .main-navigation{
@@ -90,8 +92,17 @@ h2{
     
 }
 
+.nava{
+    border: 1px solid #cfcfcf;
+    color: #474747;
+    padding: 1em;
+}
+
+
+
 .main-navigation-title{
     /* background-color: green; */
+
 }
 
 .main-navigation-description{
@@ -115,7 +126,8 @@ h2{
 }
 
 .bg-input{
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 1em;
 }
 
 .clicker {
@@ -141,8 +153,9 @@ select{
 }
 
 h1{
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 0.8em;
+    color: #1e1e1e;
 }
 
 .select2-container--default .select2-selection--multiple{
@@ -157,6 +170,20 @@ h1{
 span, .measurement_input{
     margin-bottom: 1em;
     font-weight: 400;
+}
+
+.nav-text{
+    margin-bottom: 1em;
+    font-weight: 500;
+    font-size: 1.5em;
+    text-align: center;
+
+}
+
+.nav-text:hover{
+    color: #47a85f;
+    
+    
 }
 
 h1{
@@ -219,4 +246,8 @@ h3{
 
 .list-group{
     padding-top: 0.5em;
+}
+
+.patient-from{
+    
 }
