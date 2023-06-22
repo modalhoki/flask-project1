@@ -1,35 +1,25 @@
 {% extends 'base.html' %} {% block head %}
-<title>yoii mannn</title>
+<title>My Heart</title>
 {% endblock %} {% block body %}
-<div class="container-fluid main">
-  <div class="container-fluid main-title">
-    <h1>My Heart</h1>
-    <hr />
-  </div>
 
-  {% block head %}
-  <title>My Heart</title>
-  {% endblock %} {% block body %}
-
-  <div class="container-fluid main-content">
-    <div class="container d-flex flex-row navigation-container">
-      <div
-        class="container-fluid main-navigation d-flex position-relative align-items-center"
-      >
-        <div class="container main-navigation-title">
-          <h2 class="nav-text">Expert System</h2>
-          <a href="/expert_system" class="stretched-link"></a>
-        </div>
+<div class="container-fluid main-content">
+  <div class="container d-flex flex-row navigation-container">
+    <div
+      class="container-fluid main-navigation d-flex position-relative align-items-center"
+    >
+      <div class="container main-navigation-title">
+        <h2 class="nav-text">Expert System</h2>
+        <a href="/expert_system" class="stretched-link"></a>
       </div>
+    </div>
 
-      <div class="container-fluid main-navigation d-flex position-relative">
-        <div class="container main-navigation-title">
-          <h2>Heart Deases Prediction</h2>
-          <a href="/heart_disease_prediction" class="stretched-link"></a>
-        </div>
+    <div class="container-fluid main-navigation d-flex position-relative">
+      <div class="container main-navigation-title">
+        <h2>Heart Disease Prediction</h2>
+        <a href="/heart_disease_prediction" class="stretched-link"></a>
       </div>
     </div>
   </div>
-
-  {% endblock %}
 </div>
+
+{% endblock %}
