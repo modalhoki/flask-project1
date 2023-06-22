@@ -1,50 +1,40 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block head %}
+<title>yoii mannn</title>
+{% endblock %} {% block body %}
+<div class="container-fluid main">
+  <div class="container-fluid main-title">
+    <h1>My Heart</h1>
+    <hr />
+  </div>
 
-{% block head %}
-    <title>yoii mannn</title>
-{% endblock %}
-
-{% block body %}
-    <div class="container-fluid main">
-        <div class="container-fluid main-title">
-            <h1>My Heart</h1>
-            <hr>
+  <div class="container-fluid main-content">
+    <div class="container d-flex flex-row navigation-container">
+      <div
+        class="container-fluid main-navigation d-flex position-relative align-items-center"
+      >
+        <div class="container main-navigation-title">
+          <h2 class="nav-text">Expert System</h2>
+          <a href="/expert_system" class="stretched-link"></a>
         </div>
+      </div>
 
-        <div class="container-fluid main-content">
-
-            <div class="container d-flex flex-row navigation-container">
-                
-                <div class="container-fluid main-navigation d-flex position-relative align-items-center">
-                    <div class="container main-navigation-title">
-                        <h2 class="nav-text">Expert System</h2>
-                        <a href="/expert_system" class="stretched-link"></a>
-                    </div>
-
-                </div>
-
-                <div class="container-fluid main-navigation d-flex position-relative">
-                    <div class="container main-navigation-title">
-                        <h2>Heart Deases Prediction</h2>
-                        <a href="/heart_disease_prediction" class="stretched-link"></a>
-                    </div>
-
-                </div>
-            </div>
-
-            <hr class="custom-line">
-            <div class="d-flex align-items-center flex-column footer-content">
-                <p class="footer-text">
-                    This machine learning model and expert system is created by Created by Ahmad G. Omari and Naufal S. A. Sunandar, Students of Insitut Teknologi Sepuluh Nopember, Department of Information System, Lab of RDIB @2023.
-                </p>
-                
-            </div>
-
-
+      <div class="container-fluid main-navigation d-flex position-relative">
+        <div class="container main-navigation-title">
+          <h2>Heart Disease Prediction</h2>
+          <a href="/heart_disease_prediction" class="stretched-link"></a>
         </div>
-
+      </div>
     </div>
 
-
+    <hr class="custom-line" />
+    <div class="d-flex align-items-center flex-column footer-content">
+      <p class="footer-text">
+        This machine learning model and expert system is created by Created by
+        Ahmad G. Omari and Naufal S. A. Sunandar, Students of Insitut Teknologi
+        Sepuluh Nopember, Department of Information System, Lab of RDIB @2023.
+      </p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

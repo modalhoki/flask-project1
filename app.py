@@ -1,5 +1,4 @@
 from flask import Flask, render_template, url_for, request, redirect
-from flask_sqlalchemy import SQLAlchemy
 import expertSystem
 import heart_prediction_default_input
 
@@ -52,13 +51,13 @@ def heart_disease():
         return render_template("/prediction_result.html")
 
         # load the model from disk
-        filename = 'final_model.pkl'
+        filename = 'model.pkl'
         load_model = joblib.load(filename)
 
         # append input here
         # age, sex, chest pain type, fasting blood sugar, max heart rate, exercise angine, oldpeak, ST slope
         pred_prob = load_model.predict([pred_input])
-        predict = (pred_prob >= 0.35).astype(int).reshape(-1)
+        predict = (pred_prob >= 0.43).astype(int).reshape(-1)
 
         return render_template("/prediction_result.html", prediction=predict, probability=pred_prob[0][0])
     else:

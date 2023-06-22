@@ -1,10 +1,9 @@
 {% extends 'base.html' %} {% block head %}
 <title>Heart Disease Prediction</title>
-{% endblock %}
-{% block body %}
+{% endblock %} {% block body %}
 <div class="container">
-<h1>Heart Disease Prediction</h1>
-        <hr>
+  <h1>Heart Disease Prediction</h1>
+  <hr />
   <div class="row justify-content-center">
     <div class="col-10">
       <form
@@ -12,21 +11,15 @@
         action="/heart_disease_prediction"
         method="POST"
       >
-
         <label for="textInput" class="bg-input">Age</label>
-        <input
-          name="age"
-          type="text"
-          class="form-control mb-4"
-
-        />
+        <input name="age" type="text" class="form-control mb-4" />
 
         <label for="select" class="bg-input">Sex</label>
         <select
           name="sex"
           class="form-select browser-default custom-select mb-4"
         >
-          <option value="" disabled="" selected="">–</option>
+          <option value="" disabled="" selected="">Select</option>
           <option value="0">Female</option>
           <option value="1">Male</option>
         </select>
@@ -36,7 +29,7 @@
           name="chestPainType"
           class="form-select browser-default custom-select mb-4"
         >
-          <option value="" disabled="" selected="">-</option>
+          <option value="" disabled="" selected="">Select</option>
           <option value="1">Typical Angina</option>
           <option value="2">Atypical Angina</option>
           <option value="3">Non-Anginal Pain</option>
@@ -61,45 +54,33 @@
         </select>
 
         <label for="textInput" class="bg-input">Max Heart Rate</label>
-        <input
-          name="maxHeartRate"
-          type="text"
-          class="form-control mb-4"
-        />
+        <input name="maxHeartRate" type="text" class="form-control mb-4" />
 
         <label for="select" class="bg-input">Exercise Angina</label>
         <select
           name="exerciseAngina"
           class="form-select browser-default custom-select mb-4"
         >
-          <option value="" disabled="" selected="">
-            -
-          </option>
+          <option value="" disabled="" selected="">Select</option>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>
 
-        <label for="textInput"class="bg-input">Oldpeak</label>
-        <input
-          name="oldpeak"
-          type="text"
-          class="form-control mb-4"
-        />
+        <label for="textInput" class="bg-input">Oldpeak</label>
+        <input name="oldpeak" type="text" class="form-control mb-4" />
 
         <label for="select" class="bg-input">ST Slope</label>
         <select
           name="stSlope"
           class="form-select browser-default custom-select mb-4"
         >
-          <option value="" disabled="" selected="">
-            -
-          </option>
+          <option value="" disabled="" selected="">Select</option>
           <option value="1">Upsloping</option>
           <option value="2">Flat</option>
           <option value="3">Downsloping</option>
         </select>
 
-        <input type="submit" value="predict" class="btn btn-primary">
+        <input type="submit" value="predict" class="btn btn-primary" />
       </form>
     </div>
   </div>

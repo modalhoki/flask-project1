@@ -94,23 +94,27 @@ def output_and_rule_num(outputs, rule_nums):
 
 # join all csv for text, COR leve, LOE level and Type of recommendation per recommendation
 def append_text(output_list):
-    final_output = []
+  pd.set_option('display.max_colwidth', 100)
+  
+  final_output = []
 
-    for item in output_list:
-        for key, values in item.items():
-            dictionary = {'output': output[output['output'] == key]['desc'].to_string(index=False)}
+  for item in output_list:
+    for key, values in item.items():
+      dictionary = {}
+      dictionary['output'] = output[output['output'] == key]['desc'].to_string(index=False)
 
-            temp_list = []
-            for value in values:
-                temp_list.append({'text': rules.iloc[value - 1].Recommendations,
-                                  'COR': rules.iloc[value - 1].COR,
-                                  'LOE': rules.iloc[value - 1].LOE,
-                                  'Type': output[output['output'] == key]['type'].to_string(index=False)})
+      temp_list = []
+      for value in values:
+        temp_list.append({'text': rules.iloc[value-1].Recommendations,
+                            'COR': rules.iloc[value-1].COR,
+                            'LOE': rules.iloc[value-1].LOE,
+                            'Type': output[output['output'] == key]['type'].to_string(index=False)})
 
-            dictionary['detail'] = temp_list
-            final_output.append(dictionary)
+      dictionary['detail'] = temp_list
 
-    return final_output
+      final_output.append(dictionary)
+
+  return final_output
 
 
 # initiate prolog
@@ -153,9 +157,9 @@ def generate_recommendation(evidences_prolog_input,
         prolog.assertz("intolerant(.)")
 
     if infeasible_prolog_input == '':
-        prolog.assertz("infeasible_prolog_input(.)")
+        prolog.assertz("infeasible(.)")
     else:
-        prolog.assertz(f"infeasible_prolog_input({infeasible_prolog_input})")
+        prolog.assertz(f"infeasible({infeasible_prolog_input})")
 
     if sex_prolog_input == '':
         prolog.assertz("sex(.)")
@@ -198,7 +202,7 @@ def generate_recommendation(evidences_prolog_input,
     # resting all input for next run
     prolog.retractall("evidence(_)")
     prolog.retractall("measurement(_, _)")
-    prolog.retractall("infeasible_prolog_input(_)")
+    prolog.retractall("infeasible(_)")
     prolog.retractall("intolerant(_)")
     prolog.retractall("sex(_)")
 
