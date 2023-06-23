@@ -188,13 +188,24 @@ h3{
 }
 
 .hd_result{
-    font-weight: bold;
+    font-weight: 500;
+    margin-top: 2em;
 }
 
 .hd_result2{
-    color: black;
+    color: white;
     font-weight: normal;
     text-align: center;
+    background-color: #46a73e;
+    padding: 0.4em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-radius: 10em;
+    margin-left: 8em;
+    margin-right: 8em;
+    font-weight: 600;
+    font-size: 0.9em;
+    
 }
 
 .hd_result21{
