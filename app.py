@@ -97,6 +97,10 @@ def expert_system():
         # --infeasible data fix
         if not infeasible:
             infeasible = ''
+        else:
+            infeasible = infeasible[0]
+
+        return [evidences, history, intolerance, infeasible, sex]
 
         # --getting measurement
         for i in range(6):
