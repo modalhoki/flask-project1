@@ -91,7 +91,7 @@ def expert_system():
         evidences = request.form.getlist('selected_evident')
         history = request.form.getlist('selected_history')
         intolerance = request.form.getlist('selected_intolerance')
-        infeasible = request.form.get('selected_infeasible')
+        infeasible = request.form.getlist('selected_infeasible')
         sex = request.form.get('selected_sex')
 
         # --infeasible data fix
