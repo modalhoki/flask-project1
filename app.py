@@ -100,7 +100,7 @@ def expert_system():
         else:
             infeasible = infeasible[0]
 
-        return [evidences, history, intolerance, infeasible, sex]
+        # return [evidences, history, intolerance, infeasible, sex]
 
         # --getting measurement
         for i in range(6):
