@@ -77,6 +77,13 @@ history = ''
 @app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
     if request.method == 'POST':
+        
+        patient_sex = request.form.get('patient_sex')
+        patient_diagnoses = request.form.get('patient_diagonose_result')
+        
+        return [patient_sex, patient_diagnoses]
+        
+        
         # --getting global variable
         global evidences
         global history
