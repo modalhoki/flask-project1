@@ -26,29 +26,30 @@ def heart_disease():
     if request.method == "POST":
 
         # get input
-        # age = int(request.form['age'])
-        # sex = int(request.form['sex'])
-        # chest_paint_type = int(request.form['chestPainType'])
-        # resting_bps = int(request.form['restingBloodPressure'])
-        # fasting_blood_sugar = int(request.form['fastingBloodSugar'])
-        # max_heart_rate = int(request.form['maxHeartRate'])
-        # exercise_angina = int(request.form['exerciseAngina'])
-        # old_peak = float(request.form['oldpeak'])
-        # st_slope = int(request.form['stSlope'])
-        #
-        # # prepare input
-        # pred_input = [age,
-        #               sex,
-        #               chest_paint_type,
-        #               resting_bps,
-        #               fasting_blood_sugar,
-        #               max_heart_rate,
-        #               exercise_angina,
-        #               old_peak,
-        #               st_slope]
+        age = int(request.form['age'])
+        sex = int(request.form['sex'])
+        chest_paint_type = int(request.form['chestPainType'])
+        resting_bps = int(request.form['restingBloodPressure'])
+        fasting_blood_sugar = int(request.form['fastingBloodSugar'])
+        max_heart_rate = int(request.form['maxHeartRate'])
+        exercise_angina = int(request.form['exerciseAngina'])
+        old_peak = float(request.form['oldpeak'])
+        st_slope = int(request.form['stSlope'])
+        
+        # prepare input
+        pred_input = [age,
+                      sex,
+                      chest_paint_type,
+                      resting_bps,
+                      fasting_blood_sugar,
+                      max_heart_rate,
+                      exercise_angina,
+                      old_peak,
+                      st_slope]
+        
 
         # return pred_input
-        return render_template("/prediction_result.html")
+        # return render_template("/prediction_result.html", prediction=1, probability=92.04)
 
         # load the model from disk
         filename = 'model.pkl'
