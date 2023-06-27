@@ -27,7 +27,7 @@ recommendation(acei, 6):-
 
 recommendation(statins, 7):- 
         evidence(accf_stage_b),
-        (evidence(myocardial_infarction); evidence(acute_coronary_syndrome)).
+        evidence(myocardial_infarction).
 
 recommendation(arb, 8):-
         evidence(accf_stage_b),
@@ -38,7 +38,7 @@ recommendation(arb, 8):-
 recommendation(beta_blockers, 9):-
         evidence(accf_stage_b),
         measurement(lvef, X), X =< 40,
-        (evidence(myocardial_infarction); evidence(acute_coronary_sindrome)).
+        evidence(myocardial_infarction).
 
 recommendation(icd_therapy, 10):-
         evidence(accf_stage_b),
@@ -86,27 +86,27 @@ recommendation(thiazide, 22):-
 
 recommendation(arni, 23):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
         \+ infeasible(arni).
 
 recommendation(acei, 24):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
         infeasible(arni),
         \+ intolerant(acei).
 
 recommendation(arb, 25):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
         intolerant(acei),
         infeasible(arni).
 
 recommendation(arni, 27):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
         \+ infeasible(arni),
         \+ intolerant(acei),
@@ -126,7 +126,7 @@ contraindication(acei, 31):-
 
 recommendation(beta_blockers, 32):- 
         evidence(accf_stage_c), 
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)).
 
 recommendation(mra, 34):-
@@ -143,7 +143,7 @@ contraindication(mra_precaution, 36):-
 
 recommendation(sglt2i, 37):- 
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)).
 
 recommendation(pufa, 42):-
@@ -156,40 +156,40 @@ recommendation(potassium_binder, 43):-
 
 no_benefit(anticoagulant, 44):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         \+ (evidence(vte);evidence(atrial_fibrillation)).
 
 no_benefit(dihydropyrinde_ccb, 45):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 no_benefit(vitamins, 46):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 no_benefit(nutritional_supplements, 46):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 no_benefit(hormonal_therapy, 46):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 contraindication(nondihydropyridine_ccb, 47):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 contraindication(class_ic_antiarrhythmic, 48):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 contraindication(dronedarone, 48):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 contraindication(thiazolidinediones, 49):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 contraindication(saxagliptin, 50):-
         evidence(accf_stage_c),
@@ -203,19 +203,19 @@ contraindication(alogliptin, 50):-
 
 contraindication(nsaids, 51):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 recommendation(medication_titration, 52):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 recommendation(weekly_titration, 53):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 recommendation(ivabradine, 54):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
         measurement(lvef, X), X =< 35,
         measurement(resting_heart_rate, Y), Y >= 70,
@@ -223,11 +223,11 @@ recommendation(ivabradine, 54):-
 
 recommendation(digoxin, 55):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 recommendation(vericiguat, 56):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         evidence(worsen_hf).
 
 recommendation(icd_therapy, 57):-
@@ -317,7 +317,7 @@ no_benefit(crt, 71):-
 
 recommendation(surgical_revascularization, 73):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         measurement(lvef, X), X =< 35.
 
 recommendation(manage_vhd, 74):-
@@ -327,16 +327,16 @@ recommendation(manage_vhd, 74):-
 recommendation(gmdt_optimization, 75):-
         evidence(accf_stage_c),
         evidence(secondary_mr),
-        evidence(hf_with_reduced_ef).
+        measurement(lvef, X), X =< 40.
 
 recommendation(sglt2i, 76):-
         evidence(accf_stage_c),
-        evidence(hf_with_mildly_reduced_ef).
+        measurement(lvef, X), X > 40, X < 50.
 
 recommendation(beta_blockers, 77):-
         evidence(accf_stage_c),
         (evidence(nyha_class_2);evidence(nyha_class_3)),
-        evidence(hf_with_mildly_reduced_ef).
+        measurement(lvef, X), X > 40, X < 50.
 
 recommendation(continue_gdmt, 78):-
         evidence(accf_stage_c),
@@ -344,36 +344,36 @@ recommendation(continue_gdmt, 78):-
                  
 recommendation(medication_titrated, 79):-
         evidence(accf_stage_c),
-        evidence(hf_with_preserved_ef),
+        measurement(lvef, X), X >= 50,
         evidence(hypertension).
 
 recommendation(sglt2i, 80):-
         evidence(accf_stage_c),
-        evidence(hf_with_preserved_ef).
+        measurement(lvef, X), X >= 50.
 
 recommendation(af_management, 81):-
         evidence(accf_stage_c),
-        evidence(hf_with_preserved_ef).
+        measurement(lvef, X), X >= 50.
 
 recommendation(mra, 82):-
         evidence(accf_stage_c),
-        evidence(hf_with_preserved_ef).
+        measurement(lvef, X), X >= 50.
                  
 recommendation(arb, 83):-
         evidence(accf_stage_c),
-        evidence(hf_with_preserved_ef),
+        measurement(lvef, X), X >= 50,
         infeasible(arni),
         intolerant(acei),
         \+ intolerant(arb).
 
 recommendation(arni, 84):-
         evidence(accf_stage_c),
-        evidence(hf_with_preserved_ef),
+        measurement(lvef, X), X >= 50,
         \+ infeasible(arni).
 
 no_benefit(nitrates_or_pde_5, 85):-
         evidence(accf_stage_c),
-        evidence(hf_with_preserved_ef).
+        measurement(lvef, X), X >= 50.
 
 recommendation(tafamidis, 89):-
         evidence(accf_stage_c),
@@ -392,13 +392,13 @@ recommendation(fluid_restriction, 93):-
 
 recommendation(durable_lvad_implantation, 97):-
         evidence(accf_stage_c),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         evidence(nyha_class_4),
         (evidence(dependence_of_continuous_iv_inotropes);evidence(dependence_of_temporary_mcs)).
 
 recommendation(durable_mcs, 98):-
         evidence(accf_stage_d),
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         evidence(nyha_class_4).
 
 recommendation(temporary_mcs, 100):-
@@ -444,7 +444,7 @@ recommendation(pulmonary_artery_line, 119):-
         evidence(cardiogenic_shock).
 
 recommendation(iv_iron_replacement, 125):-
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(accf_stage_c);evidence(accf_stage_d)),
         evidence(iron_deficiency).
 
@@ -453,7 +453,7 @@ contraindication(erythropoietin_stimulating_agents, 126):-
         evidence(anemia).
 
 recommendation(uptitration, 127):-
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(accf_stage_c);evidence(accf_stage_d)),
         evidence(hypertension).
 
@@ -466,7 +466,7 @@ recommendation(continuous_positive_airways_pressure, 129):-
         evidence(obstructive_sleep_apnea).
 
 contraindication(adaptive_servo_ventilation, 130):-
-        evidence(hf_with_reduced_ef),
+        measurement(lvef, X), X =< 40,
         (evidence(accf_stage_c);evidence(accf_stage_d)),
         (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
         evidence(central_sleep_apnea).
