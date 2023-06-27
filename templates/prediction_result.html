@@ -3,24 +3,26 @@
 {% endblock %} {% block body %}
 
 <h1>Heart Disease Prediction Result</h1>
-  <hr>
+<hr />
 
-  <div class="row justify-content-center">
-    <div class="col-6 mx-auto">
-      <div class="patient-form">
-          <p class="card-text text-center hd_result">Patient Status :</p>
-          {% if prediction == 1 %}
-            <p class="hd_result21">Is Having high change of <b>Heart Disease</b></p>
-          {% else %}
-            <p class="hd_result22">Normal</p>
-          {% endif %}
-        
-          <p class="card-text text-center hd_result">Probability of Heart Disease :</p>
-          <div class="hd_result2">
-            Probability of Heart Disease: {{ "{:.2f}".format(probability * 100) }}
-        </div>
+<div class="row justify-content-center">
+  <div class="col-6 mx-auto">
+    <div class="patient-form">
+      <p class="card-text text-center hd_result">Patient Status :</p>
+      {% if prediction == 1 %}
+      <p class="hd_result21">
+        Is Having high change of <b>Coronary Heart Disease</b>
+      </p>
+      {% else %}
+      <p class="hd_result22">Normal</p>
+      {% endif %}
 
-        <!-- <p class="card-text text-center hd_result">
+      <p class="card-text text-center hd_result">
+        Probability of Coronary Heart Disease :
+      </p>
+      <div class="hd_result2">{{ "{:.2f}".format(probability * 100) }} %</div>
+
+      <!-- <p class="card-text text-center hd_result">
           
           In Detail :
         </p>
@@ -31,24 +33,23 @@
           lebih lanjutan kepada layanan medis professinal untuk dapat segara dilakukan tidak pencegahan.
         </div> -->
 
-        <p class="card-text text-center hd_result">
-          
-          Uji Coba Rekomendasi Expert System Untuk Penyakit Gagal jantung :
-        </p>
-        
-        <!-- default number on testing -->
-        <form
+      <!-- <p class="card-text text-center hd_result">
+        Uji Coba Rekomendasi Expert System Untuk Penyakit Gagal jantung :
+      </p> -->
+
+      <!-- default number on testing -->
+      <!-- <form
           class="rounded-4 p-5"
           action="/expert_system"
           method="POST"
         >
-          <input name="patient_sex" type="text" class="form-control mb-4" value="{{}}" />
+          <input name="patient_sex" type="text" class="form-control mb-4"/>
           <input name="patient_diagonose_result" type="text" class="form-control mb-4" value="10"/>
   
           <input type="submit" value="predict" class="btn btn-primary" />
-        </form>
-      </div>
+        </form> -->
     </div>
   </div>
+</div>
 
 {% endblock %}

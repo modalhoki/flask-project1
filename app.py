@@ -81,7 +81,7 @@ def expert_system():
         patient_sex = request.form.get('patient_sex')
         patient_diagnoses = request.form.get('patient_diagonose_result')
         
-        return [patient_sex, patient_diagnoses]
+        # return [patient_sex, patient_diagnoses]
         
         
         # --getting global variable
