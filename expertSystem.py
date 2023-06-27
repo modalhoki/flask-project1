@@ -126,7 +126,7 @@ def generate_recommendation(evidences_prolog_input,
     from pyswip import Prolog
     import pyswip_alt
     prolog = pyswip_alt.PrologMT()
-    prolog.consult('rules1.pl')
+    prolog.consult('rules.pl')
 
     # return infeasible_prolog_input
     #
