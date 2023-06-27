@@ -7,12 +7,8 @@ nyha_class_1,NYHA Class I,
 nyha_class_2,NYHA Class II,
 nyha_class_3,NYHA Class III,
 nyha_class_4,NYHA Class IV,
-hf_with_reduced_ef,Heart Failure with reduced EF (HFrEF),
-hf_with_mildly_reduced_ef,Heart Failure with mildly reduce EF (HFmrEF),
 hf_with_improved_ef,Heart Failure with improved EF (HFimpEF),
-hf_with_preserved_ef,Heart Failure with preserved EF (HFpEF),
 mi_post_40_days,40 days post-MI,History
-acute_coronary_syndrome,Acute Coronary Syndrome (ACS),History
 anemia,Anemia,
 angioderma,Angioderma,History
 arrhythmogenic_cardiomyopathy,Arrhythmogenic Cardiomyopathy,
@@ -42,7 +38,7 @@ ischemic_hf,Ischemic cause of Heart Failure,
 ischemic_heart_disease,Ischemic Heart Disease,
 lbbb,Left Bundle Branch Block (LBBB),
 non_lbbb,Non-Left Bundle Branch Block (non-LBBB),
-myocardial_infarction,Myocardial Infarction (MI),History
+myocardial_infarction,Recent Myocardial Infarction (MI),History
 nonischemic_dcm,Non-ischemic Dilated Cardiomyopathy,
 does_not_respond_to_loop_diuretics,Patient doesn't respond to modearate or high-dose loop diuretics,
 permanent_persistent_paroxysmal_af,Permanent-persistent-paroxysmal AF,
@@ -59,5 +55,5 @@ attr_v,Variant transthyretin amyloidosis,
 attr_wt,Wild-type transthyretin amyloidosis,
 worsen_hf,Worsening of HF,
 acei,Intolerant of ACEi,intolerant
-arni,Infeasible of ARNi,infeasible
+arni,Intolerant of ARNi,intolerant
 arb,Intolerant of ARB,intolerant
