@@ -3,7 +3,6 @@ import expertSystem
 import heart_prediction_default_input
 
 from flask import Flask, render_template, request
-# from flask_cors import CORS, cross_origin
 import joblib
 import numpy as np
 
@@ -35,7 +34,7 @@ def heart_disease():
         exercise_angina = int(request.form['exerciseAngina'])
         old_peak = float(request.form['oldpeak'])
         st_slope = int(request.form['stSlope'])
-        
+
         # prepare input
         pred_input = [age,
                       sex,
@@ -46,7 +45,6 @@ def heart_disease():
                       exercise_angina,
                       old_peak,
                       st_slope]
-        
 
         # return pred_input
         # return render_template("/prediction_result.html", prediction=1, probability=92.04)
@@ -56,11 +54,29 @@ def heart_disease():
         load_model = joblib.load(filename)
 
         # append input here
-        # age, sex, chest pain type, fasting blood sugar, max heart rate, exercise angine, oldpeak, ST slope
+        # age, sex, chest pain type, fasting blood sugar, max heart rate, exercise angina, old-peak, ST slope
         pred_prob = load_model.predict([pred_input])
         predict = (pred_prob >= 0.43).astype(int).reshape(-1)
 
-        return render_template("/prediction_result.html", prediction=predict, probability=pred_prob[0][0])
+        # --getting probability number
+        probability_number = pred_prob[0][0]
+
+        # --assign level based on probability number
+        if 0 <= probability_number <= 43:
+            probability_level = 1  # normal
+        elif 44 <= probability_number <= 80:
+            probability_level = 2  # gray area
+        elif 81 <= probability_number <= 100:
+            probability_level = 3  # high chance
+        else:
+            return "probability number '" + probability_number + "' should have been a number or between 0-100 please " \
+                                                                 "check again"
+
+        return render_template("/prediction_result.html",
+                               probability_level=probability_level,
+                               probability_number=probability_number
+                               )
+        # return render_template("/prediction_result.html", prediction=predict, probability=pred_prob[0][0])
     else:
         return render_template("/heart-disease-prediction.html")
 
@@ -77,13 +93,12 @@ history = ''
 @app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
     if request.method == 'POST':
-        
+
         patient_sex = request.form.get('patient_sex')
         patient_diagnoses = request.form.get('patient_diagonose_result')
-        
+
         # return [patient_sex, patient_diagnoses]
-        
-        
+
         # --getting global variable
         global evidences
         global history
