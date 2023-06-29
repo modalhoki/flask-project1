@@ -289,3 +289,7 @@ h3{
     background-color: #2b5827;
     transition: 0.5s;
 }
+
+.custom-hidden{
+    visibility: hidden;
+}
