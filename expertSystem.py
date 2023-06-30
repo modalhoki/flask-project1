@@ -3,20 +3,25 @@ import pandas as pd
 import copy
 import app
 
+# getting expert system 1st patient inputs - evidence, diagnose, history, and intolerant
 inputs = pd.read_csv("csv/input.csv", header=0)
 data_input = inputs["input"]
 data_description = inputs["desc"]
 data_type = inputs["type"]
 
+# getting expert system 2nd patient inputs
 measurements = pd.read_csv("csv/measurement.csv", header=0)
 measurement_input = measurements["measurement"]
 measurement_desc = measurements["desc"]
+measurement_unit = measurements["unit"]
 
 print("----measure on testing----")
 print(measurement_input)
 print(type(measurement_input))
 print(measurement_desc)
 print(len(measurement_input))
+print(measurement_unit)
+print(len(measurement_unit))
 
 # getting rules and user output to send on FE
 rules = pd.read_csv('csv/rules.csv')
@@ -94,27 +99,27 @@ def output_and_rule_num(outputs, rule_nums):
 
 # join all csv for text, COR leve, LOE level and Type of recommendation per recommendation
 def append_text(output_list):
-  pd.set_option('display.max_colwidth', 100)
-  
-  final_output = []
+    pd.set_option('display.max_colwidth', 100)
 
-  for item in output_list:
-    for key, values in item.items():
-      dictionary = {}
-      dictionary['output'] = output[output['output'] == key]['desc'].to_string(index=False)
+    final_output = []
 
-      temp_list = []
-      for value in values:
-        temp_list.append({'text': rules.iloc[value-1].Recommendations,
-                            'COR': rules.iloc[value-1].COR,
-                            'LOE': rules.iloc[value-1].LOE,
-                            'Type': output[output['output'] == key]['type'].to_string(index=False)})
+    for item in output_list:
+        for key, values in item.items():
+            dictionary = {}
+            dictionary['output'] = output[output['output'] == key]['desc'].to_string(index=False)
 
-      dictionary['detail'] = temp_list
+            temp_list = []
+            for value in values:
+                temp_list.append({'text': rules.iloc[value - 1].Recommendations,
+                                  'COR': rules.iloc[value - 1].COR,
+                                  'LOE': rules.iloc[value - 1].LOE,
+                                  'Type': output[output['output'] == key]['type'].to_string(index=False)})
 
-      final_output.append(dictionary)
+            dictionary['detail'] = temp_list
 
-  return final_output
+            final_output.append(dictionary)
+
+    return final_output
 
 
 # initiate prolog
@@ -127,14 +132,6 @@ def generate_recommendation(evidences_prolog_input,
     import pyswip_alt
     prolog = pyswip_alt.PrologMT()
     prolog.consult('rules.pl')
-
-    # return infeasible_prolog_input
-    #
-    # return [evidences_prolog_input,
-    #         intolerance_prolog_input,
-    #         infeasible_prolog_input,
-    #         # sex_prolog_input,
-    #         measurements_prolog_input]
 
     # Assert facts on prolog and set default fact if input is null
     if evidences_prolog_input:

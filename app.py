@@ -176,6 +176,7 @@ def expert_system():
 
                                measurement_value=expertSystem.measurement_input,
                                measurement_desc=expertSystem.measurement_desc,
+                               measurement_unit=expertSystem.measurement_unit,
                                total_measurement=len(expertSystem.measurement_input),
 
                                unmark_selection_value=expertSystem.unmarked_data_value,

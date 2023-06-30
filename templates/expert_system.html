@@ -102,7 +102,14 @@
                             <label class="measurement_input" for="{{ measurement_value[i] }}">{{ measurement_desc[i] }}</label>
                         </div>
                         <div class="col-9">
-                            <input class="form-control form-control-md" type="text" placeholder="" name="{{ measurement_value[i] }}">
+                            <div class="input-group mb-3">
+                                <input class="form-control form-control-md" type="text" placeholder="" name="{{ measurement_value[i] }}">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">{{ measurement_unit[i] }}</span>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
