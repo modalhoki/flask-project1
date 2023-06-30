@@ -1,6 +1,5 @@
 # import
 import pandas as pd
-import copy
 import app
 
 # getting expert system 1st patient inputs - evidence, diagnose, history, and intolerant
@@ -131,7 +130,7 @@ def generate_recommendation(evidences_prolog_input,
     from pyswip import Prolog
     import pyswip_alt
     prolog = pyswip_alt.PrologMT()
-    prolog.consult('rules.pl')
+    prolog.consult('prolog/rules.pl')
 
     # Assert facts on prolog and set default fact if input is null
     if evidences_prolog_input:

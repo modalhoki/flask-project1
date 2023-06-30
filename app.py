@@ -15,10 +15,6 @@ def index():
     return render_template("index.html")
 
 
-# input csv
-heart_diseases_input = heart_prediction_default_input.value
-
-
 @app.route("/heart_disease_prediction", methods=["POST", "GET"])
 # @cross_origin()
 def heart_disease():
@@ -69,7 +65,7 @@ def heart_disease():
             return "probability number '" + probability_number + "' should have been a number or between 0-100 please " \
                                                                  "check again"
 
-        return render_template("/prediction_result.html",
+        return render_template("/prediction-result.html",
                                probability_level=probability_level,
                                probability_number=probability_number,
                                sex=sex)
@@ -139,14 +135,14 @@ def expert_system():
         contraindications_result = prolog_final_result[1]
         no_benefits_result = prolog_final_result[2]
 
-        return render_template('/expert_system_result.html',
+        return render_template('/expert-system-result.html',
                                recommendation_result=recommendation_result,
                                contraindications_result=contraindications_result,
                                no_benefits_result=no_benefits_result)
 
     else:
 
-        return render_template('/expert_system.html',
+        return render_template('/expert-system.html',
                                eveident_selection_value=expertSystem.evident_data_value,
                                eveident_selection_desc=expertSystem.evident_data_desc,
                                total_eveident_selection=len(expertSystem.evident_data_value),
@@ -193,7 +189,7 @@ def bridge():
         except():
             return "patient sex and patient diagnose value didn't pass"
 
-        return render_template('/expert_system.html',
+        return render_template('/expert-system.html',
                                eveident_selection_value=expertSystem.evident_data_value,
                                eveident_selection_desc=expertSystem.evident_data_desc,
                                total_eveident_selection=len(expertSystem.evident_data_value),
