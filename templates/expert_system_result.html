@@ -6,57 +6,24 @@
 
 {% block body %}
     <div class="container">
-        <h1>Hasil Rekomendasi</h1>
-        <hr>
+        <h1>Recommendations</h1>
         <div class="container">
 
             <div class="container result">
-                <h2 class="result-title">Recommendation</h2>
                 {% for result in recommendation_result %}
-                    <h3>{{ result['output'] }}</h3>
-                    <hr>
+                    <h3 class="title-recommendation">{{ result['output'] }}</h3>
+{#                    <hr>#}
                     {% for text in result['detail'] %}
-                        Type : {{ text['Type'] }} <br>
-                        COR : {{ text['COR'] }} <br>
-                        LOE : {{ text['LOE'] }} <br>
-                        Text : {{ text['text']}} <br>
-                         <br> <br> <br>
+                        <div class="explanation-recommendation">
+                            <div class="part">
+                                <b>COR Level - {{ text['COR'] }} <br></b>
+                                {{ text['Type'] }} <br> <br>
+                                {{ text['text']}} <br>
+                            </div>
+
+                        </div>
                     {% endfor %}
                 {% endfor %}
-            </div>
-
-            <div class="container result">
-                <h2>Contraindications</h2>
-                {% for result in contraindications_result %}
-                    <h3>{{ result['output'] }}</h3>
-                    {% for text in result['detail'] %}
-                        <span>Type : {{ text['Type'] }}</span> <br>
-                        Text : {{ text['text']}} <br>
-                        COR : {{ text['COR'] }} <br>
-                        LOE : {{ text['LOE'] }} <br>
-                         <br> <br> <br>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-
-            <div class="container result">
-                <h2>No Benefits</h2>
-                {% for result in no_benefits_result %}
-                    <h3>{{ result['output'] }}</h3>
-                    {% for text in result['detail'] %}
-                        <span>Type : {{ text['Type'] }}</span> <br>
-                        Text : {{ text['text']}} <br>
-                        COR : {{ text['COR'] }} <br>
-                        LOE : {{ text['LOE'] }} <br>
-                         <br> <br> <br>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-
-
-            <br>
-            <hr>
-            <div class="bgku">
             </div>
         </div>
     </div>

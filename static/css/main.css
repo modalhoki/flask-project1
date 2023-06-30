@@ -5,12 +5,12 @@ body {
 }
 
 .result {
-    background-color: #eeee;
     min-height: 30px;
     border-radius: 25px;
     min-width: auto;
-    padding: 2em;
+    padding: 2em 5em 2em 5em;
     margin-bottom: 3em;
+    border:1px solid #e7e7e7;
 }
 
 .container{
@@ -297,4 +297,16 @@ h3{
 .input-group-text{
     min-width: 10em;
     background-color: #ebeef2;
+}
+
+.explanation-recommendation{
+    margin: 0em 0em 4em 0em;
+    /* background-color: #f8f8f8; */
+    border:1px solid #e7e7e7;
+    border-radius: 10px;
+    padding: 1em 2em 1em 2em;
+}
+
+h3 .title-recommendation{
+    margin: 0 0 0 0.5em;
 }
