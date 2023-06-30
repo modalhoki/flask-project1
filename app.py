@@ -24,29 +24,6 @@ heart_diseases_input = heart_prediction_default_input.value
 def heart_disease():
     if request.method == "POST":
 
-        # -----------on testing for bridge [sex, level] -----------
-        sex = int(request.form['sex'])
-        probability_number = 0.8
-
-        if 0 <= probability_number <= 0.43:
-            probability_level = 1  # normal
-        elif 0.44 <= probability_number <= 0.80:
-            probability_level = 2  # gray area
-        elif 0.81 <= probability_number <= 1.0:
-            probability_level = 3  # high chance
-        else:
-            return "probability number '" + str(probability_number) + "' should have been a number or between 0-100 " \
-                                                                      "please check again"
-
-        # return [probability_level, probability_number]
-
-        # the reason sex variable on this case, is required for bridge from prediction to expert system
-        return render_template("/prediction_result.html",
-                               probability_level=probability_level,
-                               probability_number=probability_number,
-                               sex=sex)
-        # -----------on testing for bridge -----------
-
         # get input
         age = int(request.form['age'])
         sex = int(request.form['sex'])
@@ -68,9 +45,6 @@ def heart_disease():
                       exercise_angina,
                       old_peak,
                       st_slope]
-
-        # return pred_input
-        # return render_template("/prediction_result.html", prediction=1, probability=92.04)
 
         # load the model from disk
         filename = 'model.pkl'
@@ -97,8 +71,8 @@ def heart_disease():
 
         return render_template("/prediction_result.html",
                                probability_level=probability_level,
-                               probability_number=probability_number)
-        # return render_template("/prediction_result.html", prediction=predict, probability=pred_prob[0][0])
+                               probability_number=probability_number,
+                               sex=sex)
     else:
         return render_template("/heart-disease-prediction.html")
 
@@ -139,8 +113,6 @@ def expert_system():
             infeasible = ''
         else:
             infeasible = infeasible[0]
-
-        # return [evidences, history, intolerance, infeasible, sex]
 
         # --getting measurement
         for i in range(6):
@@ -221,9 +193,6 @@ def bridge():
         except():
             return "patient sex and patient diagnose value didn't pass"
 
-        # return [ps_patient_diagnoses, ps_patient_sex]
-
-        # return [ps_patient_sex, ps_patient_diagnoses]
         return render_template('/expert_system.html',
                                eveident_selection_value=expertSystem.evident_data_value,
                                eveident_selection_desc=expertSystem.evident_data_desc,
