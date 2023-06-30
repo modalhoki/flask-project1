@@ -32,6 +32,7 @@
 
 
 
+
 <div class="container-fluid patient-form">
     <h2>Patient Data</h2>
     <hr>
@@ -40,7 +41,11 @@
         <div class="container-md">
             <select class="js-example-basic-multiple form-control form-control-lg" name="selected_evident" multiple="multiple" >
                 {% for i in range(total_eveident_selection) %}
-                    <option value="{{ eveident_selection_value[i] }}">{{ eveident_selection_desc[i] }}</option>
+                    <option value="{{ eveident_selection_value[i] }}"
+                         {% if eveident_selection_value[i] == ps_patient_diagnoses%}
+                                selected="selected"
+                        {% endif %}
+                    >{{ eveident_selection_desc[i] }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -80,13 +85,22 @@
 
         <span>Sex</span>
         <div class="container-md">
+
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio1" value="male">
+                <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio1" value="male"
+                       {% if ps_patient_sex == 'male' %}
+                                checked
+                       {% endif %}
+                >
                 <label class="form-check-label" for="inlineRadio1">Male</label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio2" value="female">
+                <input class="form-check-input" type="radio" name="selected_sex" id="inlineRadio2" value="female"
+                    {% if ps_patient_sex == 'female' %}
+                                checked
+                    {% endif %}
+                >
                 <label class="form-check-label" for="inlineRadio2">Female</label>
             </div>
         </div>

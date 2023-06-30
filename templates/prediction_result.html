@@ -9,45 +9,56 @@
   <div class="col-6 mx-auto">
     <div class="patient-form">
       <p class="card-text text-center hd_result">Patient Status :</p>
-        {% if prediction == 1 %}
-            <p class="hd_result22">Normal, Patient have low chance of having coronary heart disease</p>
-        {% elif prediction == 2 %}
-            <p class="hd_result22">Gray Area, Patient need to do get more check up from profession perspective</p>
-        {% elif prediction == 3 %}
-            <p class="hd_result21">Patient is having high change of coronary heart disease</p>
-        {% endif %}
+        <div class="explanation-hd-result">
+            {% if probability_level == 1 %}
+                <p class="hd-result-normal">Normal, Patient have low chance of having coronary heart disease</p>
+            {% elif probability_level == 2 %}
+                <p class="hd-result-gray">Gray Area, Patient need to do get more check up from profession perspective</p>
+            {% elif probability_level == 3 %}
+                <p class="hd-result-high">Patient is having high change of coronary heart disease</p>
+            {% endif %}
+        </div>
 
       <p class="card-text text-center hd_result">
         Probability of Coronary Heart Disease :
       </p>
-      <div class="hd_result2">{{ "{:.2f}".format(probability * 100) }} %</div>
+      <div class="
+      {% if probability_level == 1 %}
+        hd-result-number hd-normal
+      {% elif probability_level == 2 %}
+        hd-result-number hd-red
+      {% elif probability_level == 3 %}
+        hd-result-number hd-red
+      {% endif %}
+      ">{{ "{:.2f}".format(probability_number * 100) }} %</div>
 
-      <!-- <p class="card-text text-center hd_result">
 
-          In Detail :
-        </p>
-        <div class="explaination">
-          Sistem prediksi ini dapat mengklasifikasi pasien berdasarkan data yang sudah diberikan
-          dengan akurasi mencapai 92% menggunakan machine learning, apa bila hasil menunjukan bawah pasien
-          memiliki peluang besar memiliki penyakit jantung, pasien sangat disarankan untuk melakukan pemeriksaan
-          lebih lanjutan kepada layanan medis professinal untuk dapat segara dilakukan tidak pencegahan.
-        </div> -->
+      <div class="bridge-form">
+      <a href="#" onclick="document.getElementById('myform').submit()" class="btn-bridge">
+                 Try to implement patient diagnose into heart failure expert system we build
+              </a>
+          <form
+            id="myform"
+            action="/bridge"
+            method="POST">
 
-      <!-- <p class="card-text text-center hd_result">
-        Uji Coba Rekomendasi Expert System Untuk Penyakit Gagal jantung :
-      </p> -->
 
-      <!-- default number on testing -->
-      <!-- <form
-          class="rounded-4 p-5"
-          action="/expert_system"
-          method="POST"
-        >
-          <input name="patient_sex" type="text" class="form-control mb-4"/>
-          <input name="patient_diagonose_result" type="text" class="form-control mb-4" value="10"/>
+              <input name="ps_patient_sex" type="text" value="{{ sex }}" class="custom-hidden"/>
+              <input name="ps_patient_diagnose_result" type="text" class="custom-hidden"
+                        {% if probability_level == 1 %}
+                            value="-"
+                        {% elif probability_level == 2 %}
+                            value="high_risk_cvd"
+                        {% elif probability_level == 3 %}
+                            value="cvd"
+                        {% endif %}
+              />
 
-          <input type="submit" value="predict" class="btn btn-primary" />
-        </form> -->
+        </form>
+
+      </div>
+
+
     </div>
   </div>
 </div>
