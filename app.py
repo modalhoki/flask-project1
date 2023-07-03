@@ -18,6 +18,10 @@ def index():
 def heart_disease():
     if request.method == "POST":
 
+        # load the model from disk
+        filename = 'model.pkl'
+        load_model = joblib.load(filename)
+
         # get input
         age = int(request.form['age'])
         sex = int(request.form['sex'])
@@ -158,23 +162,20 @@ def bridge():
 
 
 if __name__ == "__main__":
-    
-    # load the model from disk
-    filename = 'model.pkl'
-    load_model = joblib.load(filename)
-        
+
+    # load data input for expert system input
     input_df = pd.read_csv('csv/input.csv')
     evidence_value = input_df[input_df['type'] == 'evidence']['input'].tolist()
     evidence_desc = input_df[input_df['type'] == 'evidence']['desc'].tolist()
-                
+
     history_value = input_df[input_df['type'] == 'History']['input'].tolist()
     history_desc = input_df[input_df['type'] == 'History']['desc'].tolist()
-    
+
     intolerant_value = input_df[input_df['type'] == 'intolerant']['input'].tolist()
     intolerant_desc = input_df[input_df['type'] == 'intolerant']['desc'].tolist()
-    
-    measurement_df = pd.read_csv('csv/measurement.csv')   
-    measurements_input =  measurement_df['measurement']
+
+    measurement_df = pd.read_csv('csv/measurement.csv')
+    measurements_input = measurement_df['measurement']
     measurements_desc = measurement_df['desc']
     measurements_unit = measurement_df['unit']
 
