@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block head %}
+<title>Prediction Result</title>
+{% endblock %} {% block body %}
+
+<h1>Heart Disease Prediction Result</h1>
+<hr />
+
+<div class="row justify-content-center">
+  <div class="col-6 mx-auto">
+    <div class="patient-form">
+      <p class="card-text text-center hd_result">Patient Status :</p>
+        <div class="explanation-hd-result">
+            {% if probability_level == 1 %}
+                <p class="hd-result-normal">Normal, Patient have low chance of having coronary heart disease</p>
+            {% elif probability_level == 2 %}
+                <p class="hd-result-gray">Gray Area, Patient need to do get more check up from profession perspective</p>
+            {% elif probability_level == 3 %}
+                <p class="hd-result-high">Patient is having high change of coronary heart disease</p>
+            {% endif %}
+        </div>
+
+      <p class="card-text text-center hd_result">
+        Probability of Coronary Heart Disease :
+      </p>
+      <div class="
+      {% if probability_level == 1 %}
+        hd-result-number hd-normal
+      {% elif probability_level == 2 %}
+        hd-result-number hd-red
+      {% elif probability_level == 3 %}
+        hd-result-number hd-red
+      {% endif %}
+      ">{{ "{:.2f}".format(probability_number * 100) }} %</div>
+
+
+      <div class="bridge-form">
+      <a href="#" onclick="document.getElementById('myform').submit()" class="btn-bridge">
+                 Try to implement patient diagnose into heart failure expert system we build
+              </a>
+          <form
+            id="myform"
+            action="/bridge"
+            method="POST">
+
+
+              <input name="ps_patient_sex" type="text" value="{{ sex }}" class="custom-hidden"/>
+              <input name="ps_patient_diagnose_result" type="text" class="custom-hidden"
+                        {% if probability_level == 1 %}
+                            value="-"
+                        {% elif probability_level == 2 %}
+                            value="high_risk_cvd"
+                        {% elif probability_level == 3 %}
+                            value="cvd"
+                        {% endif %}
+              />
+
+        </form>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

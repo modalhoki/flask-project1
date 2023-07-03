@@ -76,11 +76,12 @@
           </select>
   
           <label for="textInput" class="bg-input">Resting Blood Pressure</label>
-          <input
-            name="restingBloodPressure"
-            type="text"
-            class="form-control mb-4"
-          />
+          <div class="input-group mb-3">
+              <input name="restingBloodPressure" type="text" class="form-control form-control-md"/>
+              <div class="input-group-append">
+                <span class="input-group-text">mmHg</span>
+              </div>
+          </div>
   
           <label for="select" class="bg-input">Fasting Blood Sugar</label>
           <select
@@ -93,7 +94,12 @@
           </select>
   
           <label for="textInput" class="bg-input">Max Heart Rate</label>
-          <input name="maxHeartRate" type="text" class="form-control mb-4" />
+          <div class="input-group mb-3">
+              <input name="maxHeartRate" type="text" class="form-control form-control-md" />
+              <div class="input-group-append">
+                <span class="input-group-text">bpm</span>
+              </div>
+          </div>
   
           <label for="select" class="bg-input">Exercise Angina</label>
           <select
@@ -105,8 +111,14 @@
             <option value="1">Yes</option>
           </select>
   
-          <label for="textInput" class="bg-input">Oldpeak</label>
-          <input name="oldpeak" type="text" class="form-control mb-4" />
+          <label for="textInput" class="bg-input">ST Depression</label>
+          <div class="input-group mb-3">
+              <input name="oldpeak" type="text" class="form-control form-control-md" />
+              <div class="input-group-append">
+                <span class="input-group-text">mm</span>
+              </div>
+          </div>
+
   
           <label for="select" class="bg-input">ST Slope</label>
           <select

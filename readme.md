@@ -1,3 +1,5 @@
+sample input for prediction
+
 value = [
     ["age", 58],
     ["sex", 0],

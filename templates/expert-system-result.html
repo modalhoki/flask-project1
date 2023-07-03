@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>expert system</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Recommendations</h1>
+        <div class="container">
+
+            <div class="container result">
+                {% for result in recommendation_result %}
+                    <h3 class="title-recommendation">{{ result['output'] }}</h3>
+{#                    <hr>#}
+                    {% for text in result['detail'] %}
+                        <div class="explanation-recommendation">
+                            <div class="part">
+                                <b>COR Level - {{ text['COR'] }} <br></b>
+                                {{ text['Type'] }} <br> <br>
+                                {{ text['text']}} <br>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+{% endblock %}
