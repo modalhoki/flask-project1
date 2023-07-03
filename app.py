@@ -1,6 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
 import expertSystem
-import heart_prediction_default_input
 
 from flask import Flask, render_template, request
 import joblib
