@@ -23,7 +23,7 @@ recommendation(validated_multivariable_risk_score, 5):- evidence(accf_stage_a).
 recommendation(acei, 6):-
         evidence(accf_stage_b),
         measurement(lvef, X), X =< 40,
-        \+ intolerant(acei).
+        \+ (intolerant(acei);evidence(angioedema)).
 
 recommendation(statins, 7):- 
         evidence(accf_stage_b),
@@ -33,7 +33,7 @@ recommendation(arb, 8):-
         evidence(accf_stage_b),
         evidence(myocardial_infarction), 
         measurement(lvef, X), X =< 40,
-        intolerant(acei).
+        (intolerant(acei);evidence(angioedema)).
 
 recommendation(beta_blockers, 9):-
         evidence(accf_stage_b),
@@ -117,15 +117,12 @@ recommendation(arni, 27):-
         \+ evidence(angioedema).
 
 contraindication(acei, 29):- 
-        evidence(accf_stage_c),
         (recommendation(arni, 10); recommendation(arni, 14); recommendation(arni, 84)).
 
 contraindication(arni, 30):- 
-        evidence(accf_stage_c),
         evidence(angioedema).
 
 contraindication(acei, 31):- 
-        evidence(accf_stage_c),
         evidence(angioedema).
 
 recommendation(beta_blockers, 32):- 
