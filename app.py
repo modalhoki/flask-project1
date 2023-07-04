@@ -1,6 +1,5 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, request
 from expertSystem import inference
-from helperFunction import reshape
 import joblib
 import pandas as pd
 
