@@ -61,11 +61,6 @@ def inference(evidences = ["."],
 ):
     prolog = pyswip_alt.PrologMT()
     prolog.consult('prolog/rules.pl')
-    
-    print(evidences)
-    print(measurements)
-    print(intolerants)
-    print(sex)
 
     #Assert facts
     if evidences:
