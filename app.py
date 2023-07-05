@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from expertSystem import inference
+from helperFunction import reshape
 import joblib
 import pandas as pd
 
@@ -16,10 +17,6 @@ def index():
 # @cross_origin()
 def heart_disease():
     if request.method == "POST":
-
-        # load the model from disk
-        filename = 'model.pkl'
-        load_model = joblib.load(filename)
 
         # get input
         age = int(request.form['age'])
@@ -161,6 +158,9 @@ def bridge():
 
 
 if __name__ == "__main__":
+    # load the model from disk
+    filename = 'model.pkl'
+    load_model = joblib.load(filename)
 
     # load data input for expert system input
     input_df = pd.read_csv('csv/input.csv')
