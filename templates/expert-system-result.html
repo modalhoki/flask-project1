@@ -12,7 +12,6 @@
             <div class="container result">
                 {% for result in recommendation_result %}
                     <h3 class="title-recommendation">{{ result['output'] }}</h3>
-{#                    <hr>#}
                     {% for text in result['detail'] %}
                         <div class="explanation-recommendation">
                             <div class="part">

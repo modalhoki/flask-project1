@@ -71,21 +71,6 @@
             </select>
         </div>
 
-        {#<div class="custom-hidden">
-            <span>Infeasible</span>
-            <div class="container-md">
-                <select class="js-example-basic-multiple form-control form-control-lg" name="selected_infeasible" multiple="multiple" >
-                     {% for i in range(total_infeasible_selection) %}
-                        <option value="{{ infeasible_selection_value[i] }}">{{ infeasible_selection_desc[i] }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>#}
-
-
-
-
-
         <span>Sex</span>
         <div class="container-md">
 
@@ -117,7 +102,6 @@
         <hr>
 
 
-{#        <hr>#}
         <div class="container-md">
             {% for i in range(total_measurement) %}
                 <div class="form-group">
