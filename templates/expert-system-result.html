@@ -11,11 +11,17 @@
 
             <div class="container result">
                 {% for result in recommendation_result %}
-                    <h3 class="title-recommendation">{{ result['output'] }}</h3>
+                    <h3 class="title-recommendation">{{ result['output'] }} </h3>
                     {% for text in result['detail'] %}
                         <div class="explanation-recommendation">
                             <div class="part">
-                                <b>COR Level - {{ text['COR'] }} <br></b>
+                                {% if text['COR'] == '1' %}
+                                <span class="badge bg-success text-white">Highly recommended</span> <br>
+                                {% elif text['COR'] == '2a' or text['COR'] == '2b' %}
+                                <span class="badge bg-warning text-white">May be performed</span> <br>
+                                {% else %}
+                                <span class="badge bg-danger text-white">Should not be performed</span> <br>
+                                {% endif %}
                                 {{ text['Type'] }} <br> <br>
                                 {{ text['text']}} <br>
                             </div>

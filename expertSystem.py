@@ -128,6 +128,6 @@ def inference(evidences = ["."],
     final_contraindications = append_text(contradiction_outputs)
     final_no_benefits = append_text(no_benefit_outputs)
     
-    final_results = final_recommendations + final_contraindications + final_no_benefits
+    final_results = sorted(final_recommendations + final_contraindications + final_no_benefits, key=lambda x: x['detail'][0]['COR'])
 
     return final_results
