@@ -132,15 +132,17 @@ recommendation(beta_blockers, 32):-
 
 recommendation(mra, 34):-
         evidence(accf_stage_c),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
-        measurement(gfr, X), X > 30,
-        measurement(potassium, Y), Y < 5.
+        measurement(gfr, Y), Y > 30,
+        measurement(potassium, Z), Z < 5.
 
 contraindication(mra_precaution, 36):-
         evidence(accf_stage_c),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
-        measurement(gfr, X), X > 30,
-        measurement(potassium, Y), Y < 5.
+        measurement(gfr, Y), Y > 30,
+        measurement(potassium, Z), Z < 5.
 
 recommendation(sglt2i, 37):- 
         evidence(accf_stage_c),
