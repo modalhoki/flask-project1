@@ -1,7 +1,12 @@
 # Use an official Python runtime as the base image
-FROM python:3.9
+FROM swipl:7.6.4
 
-RUN apt-get update && apt-get install -y swi-prolog=7.6.4
+# Update stretch repositories
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+           -e 's|security.debian.org|archive.debian.org/|g' \
+           -e '/stretch-updates/d' /etc/apt/sources.list
+
+RUN apt-get update && apt-get install -y python3.9 python3-pip
 
 # Set the working directory in the container
 WORKDIR /app
