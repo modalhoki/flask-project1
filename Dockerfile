@@ -1,7 +1,8 @@
 # Use an official Python runtime as the base image
-FROM swipl:7.6.4
+FROM python:3.9
 
-RUN apt-get update && apt-get install -y python3.9 python3-pip
+RUN apt-add-repository ppa:swi-prolog/stable
+RUN apt-get update && apt-get install -y swi-prolog
 
 # Set the working directory in the container
 WORKDIR /app
