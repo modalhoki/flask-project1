@@ -1,7 +1,7 @@
 # Use an official Python runtime as the base image
 FROM python:3.9
 
-RUN apt-get update && apt-get install -y swi-prolog
+RUN apt-get update && apt-get install -y swi-prolog=7.6.4
 
 # Set the working directory in the container
 WORKDIR /app
