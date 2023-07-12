@@ -17,6 +17,9 @@ RUN wget https://www.python.org/ftp/python/3.9.17/Python-3.9.17.tgz && \
     ./configure --enable-optimizations && \
     make altinstall
 
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -33,4 +36,4 @@ COPY . .
 EXPOSE 5000
 
 # Set the command to run the application
-CMD [ "python3.9", "app.py" ]
+CMD [ "python3", "app.py" ]
