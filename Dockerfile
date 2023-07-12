@@ -1,5 +1,5 @@
 # Use an official Python runtime as the base image
-FROM swipl
+FROM swipl:stable
 
 RUN apt-get update && apt-get install -y python3.9 python3-pip
 
