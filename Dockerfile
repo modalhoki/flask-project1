@@ -8,7 +8,7 @@ RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
 
 RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7
 
-RUN apt-get update && apt-get install -y python3.9
+RUN apt-get update && apt-get install -y python3.9 curl
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.9 get-pip.py
 
