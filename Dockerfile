@@ -10,7 +10,7 @@ RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7
 
 RUN apt-get update && apt-get install -y python3.9 curl
 
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.9 get-pip.py
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.5 get-pip.py
 
 # Set the working directory in the container
 WORKDIR /app
@@ -28,4 +28,4 @@ COPY . .
 EXPOSE 5000
 
 # Set the command to run the application
-CMD [ "python3.9", "app.py" ]
+CMD [ "python3.5", "app.py" ]
