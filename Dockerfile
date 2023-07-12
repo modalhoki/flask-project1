@@ -6,6 +6,8 @@ RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
            -e 's|security.debian.org|archive.debian.org/|g' \
            -e '/stretch-updates/d' /etc/apt/sources.list
 
+RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7
+
 RUN apt-get update && apt-get install -y python3.9 python3-pip
 
 # Set the working directory in the container
