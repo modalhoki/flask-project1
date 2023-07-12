@@ -8,7 +8,7 @@ RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
 
 RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7
 
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y curl wget build-essential libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
 
 RUN wget https://www.python.org/ftp/python/3.9.17/Python-3.9.17.tgz && \
