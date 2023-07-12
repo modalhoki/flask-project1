@@ -1,77 +1,9 @@
-# import
+import pyswip_alt
 import pandas as pd
-import app
-
-# getting expert system 1st patient inputs - evidence, diagnose, history, and intolerant
-inputs = pd.read_csv("csv/input.csv", header=0)
-data_input = inputs["input"]
-data_description = inputs["desc"]
-data_type = inputs["type"]
-
-# getting expert system 2nd patient inputs
-measurements = pd.read_csv("csv/measurement.csv", header=0)
-measurement_input = measurements["measurement"]
-measurement_desc = measurements["desc"]
-measurement_unit = measurements["unit"]
-
-print("----measure on testing----")
-print(measurement_input)
-print(type(measurement_input))
-print(measurement_desc)
-print(len(measurement_input))
-print(measurement_unit)
-print(len(measurement_unit))
 
 # getting rules and user output to send on FE
 rules = pd.read_csv('csv/rules.csv')
 output = pd.read_csv('csv/output.csv')
-
-# temp memory for input
-evident_data_value = []
-evident_data_desc = []
-
-infeasible_data_value = []
-infeasible_data_desc = []
-
-history_data_value = []
-history_data_desc = []
-
-intolerant_data_value = []
-intolerant_data_desc = []
-
-unmarked_data_value = []
-unmarked_data_desc = []
-
-# sorting input into temp memory
-for i in range(len(data_input)):
-    current_type = data_type[i]
-    if current_type == "History":
-        history_data_value.append(data_input[i])
-        history_data_desc.append(data_description[i])
-
-    elif current_type == "evident":
-        evident_data_value.append(data_input[i])
-        evident_data_value.append(data_description[i])
-
-    elif current_type == "intolerant":
-        intolerant_data_value.append(data_input[i])
-        intolerant_data_desc.append(data_description[i])
-
-    elif current_type == "infeasible":
-        infeasible_data_value.append(data_input[i])
-        infeasible_data_desc.append(data_description[i])
-
-    else:
-        evident_data_value.append(data_input[i])
-        evident_data_desc.append(data_description[i])
-
-# getting selected input from user on FE
-evidences = app.evidences
-measurements = app.measurements
-intolerance = app.intolerance
-infeasible = app.infeasible
-sex = app.sex
-
 
 # adding index from cvs rules
 def output_and_rule_num(outputs, rule_nums):
@@ -122,48 +54,40 @@ def append_text(output_list):
 
 
 # initiate prolog
-def generate_recommendation(evidences_prolog_input,
-                            measurements_prolog_input,
-                            intolerance_prolog_input,
-                            infeasible_prolog_input,
-                            sex_prolog_input):
-    from pyswip import Prolog
-    import pyswip_alt
+def inference(evidences = ["."],
+  measurements = [{".": 0}],
+  intolerants = ["."],
+  sex = "."
+):
     prolog = pyswip_alt.PrologMT()
     prolog.consult('prolog/rules.pl')
 
-    # Assert facts on prolog and set default fact if input is null
-    if evidences_prolog_input:
-        for evidence in evidences_prolog_input:
-            prolog.assertz(f"evidence({evidence})")
-    else:
-        prolog.assertz("evidence(.)")
+    #Assert facts
+    if evidences:
+      for evidence in evidences:
+          prolog.assertz(f"evidence({evidence})")
+      else:
+          prolog.assertz("evidence(.)")
 
-    if measurements_prolog_input:
-        for measurement in measurements_prolog_input:
-            for key, value in measurement.items():
-                prolog.assertz(f"measurement({key}, {value})")
+    if measurements:
+      for measurement in measurements:
+          for key, value in measurement.items():
+            prolog.assertz(f"measurement({key}, {value})")
     else:
-        prolog.assertz("measurement(., .)")
+      prolog.assertz("measurement(., .)")
 
-    if intolerance_prolog_input:
-        for intolerant in intolerance_prolog_input:
-            prolog.assertz(f"intolerant({intolerant})")
+    if intolerants:
+      for intolerant in intolerants:
+          prolog.assertz(f"intolerant({intolerant})")
     else:
-        prolog.assertz("intolerant(.)")
+          prolog.assertz("intolerant(.)")
 
-    if infeasible_prolog_input == '':
-        prolog.assertz("infeasible(.)")
+    if sex == '':
+      prolog.assertz("sex(.)")
     else:
-        prolog.assertz(f"infeasible({infeasible_prolog_input})")
-
-    if sex_prolog_input == '':
-        prolog.assertz("sex(.)")
-    else:
-        prolog.assertz(f"sex({sex_prolog_input})")
+      prolog.assertz(f"sex({sex})")
 
     # initiate getting recommendation from prolog
-    print('-----Recommendation------')
     recommendation_query = "recommendation(X, _)"
     recommendations = list(prolog.query(recommendation_query))
 
@@ -171,10 +95,8 @@ def generate_recommendation(evidences_prolog_input,
     rules_nums = list(prolog.query(rules_num_query))
 
     recommendation_outputs = output_and_rule_num(recommendations, rules_nums)
-    print(recommendation_outputs)
 
     # initiate getting contraindication from prolog
-    print('\n------Contraindication------')
     contraindication_query = "contraindication(X, _)"
     contraindications = list(prolog.query(contraindication_query))
 
@@ -182,10 +104,8 @@ def generate_recommendation(evidences_prolog_input,
     contra_rules_nums = list(prolog.query(contra_rules_num_query))
 
     contradiction_outputs = output_and_rule_num(contraindications, contra_rules_nums)
-    print(contradiction_outputs)
 
     # initiate getting No Benefit  from prolog
-    print('\n-------No Benefit-------')
     no_benefit_query = "no_benefit(X, _)"
     no_benefits = list(prolog.query(no_benefit_query))
 
@@ -193,12 +113,10 @@ def generate_recommendation(evidences_prolog_input,
     no_benefit_rules_nums = list(prolog.query(no_benefit_rules_num_query))
 
     no_benefit_outputs = output_and_rule_num(no_benefits, no_benefit_rules_nums)
-    print(no_benefit_outputs)
 
     # resting all input for next run
     prolog.retractall("evidence(_)")
     prolog.retractall("measurement(_, _)")
-    prolog.retractall("infeasible(_)")
     prolog.retractall("intolerant(_)")
     prolog.retractall("sex(_)")
 
@@ -207,14 +125,9 @@ def generate_recommendation(evidences_prolog_input,
 
     # return recommendation_outputs
     final_recommendations = append_text(recommendation_outputs)
-    # return final_recommendations
-
     final_contraindications = append_text(contradiction_outputs)
     final_no_benefits = append_text(no_benefit_outputs)
+    
+    final_results = sorted(final_recommendations + final_contraindications + final_no_benefits, key=lambda x: x['detail'][0]['COR'])
 
-    # log
-    print(final_recommendations)
-    print(final_contraindications)
-    print(final_no_benefits)
-
-    return [final_recommendations, final_contraindications, final_no_benefits]
+    return final_results

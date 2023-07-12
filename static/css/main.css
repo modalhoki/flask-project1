@@ -211,6 +211,10 @@ h3{
     background-color: #46a73e;
 }
 
+.hd-orange{
+    background-color: #f09f36;
+}
+
 .hd-red{
     background-color: #d04552;
 }
@@ -227,7 +231,7 @@ h3{
 }
 
 .hd-result-gray {
-    color: #5a5a5a;
+    color: orange;
     font-weight: normal;
     text-align: center;
 }

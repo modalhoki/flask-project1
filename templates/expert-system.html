@@ -10,22 +10,27 @@
 
 <div class="explaination d-flex flex-column">
     <span class="part">
-        <b>Explaination</b><br>
+        <b>Explanation</b><br>
         <!-- <hr> -->
-        An expert system for heart failure is a program that uses the knowledge and expertise of heart medical specialist (Dokter Spesialis Jantung dan Pembuluh Darah) to assist in treatment and management of heart failure. It provides personalized recommendations based on patient data and helps help doctors make informed decisions. It improves accuracy, optimizes treatment plans, and supports patient education about heart failure.
-        
+        Heart Failure Expert System is a program that utilizes "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure" as its 
+        knowledge base to aid cardiologists in the treatment and management of heart failure. 
+        It offers personalized recommendations based on patient data and assists doctors in making well-informed decisions.
+        It is expected to provide ease in making decisions for the management of heart failure patients.
     </span>
 
     <span class="part">
-        <b>Data</b>
+        <b>Knowledge Base</b>
         <br>
         2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines.
     </span>
 
     <span class="part">
-        <b>system limitation</b>
-        <br>
-        currently we believe there this expert system is a god.
+        <b>Limitation</b>
+        <ol>
+            <li>The input fields doesn't have any validation, allowing contradictory values to be entered.</li>
+            <li>Incomplete information about the patient may result in recommendations that are not appropriate.</li>
+            <li>Currently, the system is unable to save any input and output.</li>
+        </ol>
     </span>
 
 </div>
@@ -37,7 +42,7 @@
     <h2>Patient Data</h2>
     <hr>
     <form action="/expert_system" method="POST" enctype="multipart/form-data">
-        <span>Evident and Diagnose</span>
+        <span>Evidence and Diagnose</span>
         <div class="container-md">
             <select class="js-example-basic-multiple form-control form-control-lg" name="selected_evident" multiple="multiple" >
                 {% for i in range(total_eveident_selection) %}
@@ -68,21 +73,6 @@
             </select>
         </div>
 
-        <div class="custom-hidden">
-            <span>Infeasible</span>
-            <div class="container-md">
-                <select class="js-example-basic-multiple form-control form-control-lg" name="selected_infeasible" multiple="multiple" >
-                     {% for i in range(total_infeasible_selection) %}
-                        <option value="{{ infeasible_selection_value[i] }}">{{ infeasible_selection_desc[i] }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-
-
-
-
-
         <span>Sex</span>
         <div class="container-md">
 
@@ -109,12 +99,12 @@
         <h2>Measurement</h2>
         <span class="part">
             <b>Non - Mandatory</b><br>
-            Measurements above is not mandatory, but highly suggested for recommendation accuracy on heart failure patients treatment
+            The measurements field below are not mandatory, but highly suggested for the accuracy of the recommendations. <br>
+            Note: Please use a period (.) if the number is in decimal form. (e.g, 4.1)
         </span>
         <hr>
 
 
-{#        <hr>#}
         <div class="container-md">
             {% for i in range(total_measurement) %}
                 <div class="form-group">

@@ -1,59 +1,59 @@
 input,desc,type
-accf_stage_a,Stage A,
-accf_stage_b,Stage B,
-accf_stage_c,Stage C,
-accf_stage_d,Stage D,
-nyha_class_1,NYHA Class I,
-nyha_class_2,NYHA Class II,
-nyha_class_3,NYHA Class III,
-nyha_class_4,NYHA Class IV,
-hf_with_improved_ef,Heart Failure with improved EF (HFimpEF),
+accf_stage_a,Stage A,evidence
+accf_stage_b,Stage B,evidence
+accf_stage_c,Stage C,evidence
+accf_stage_d,Stage D,evidence
+nyha_class_1,NYHA Class I,evidence
+nyha_class_2,NYHA Class II,evidence
+nyha_class_3,NYHA Class III,evidence
+nyha_class_4,NYHA Class IV,evidence
+hf_with_improved_ef,Heart Failure with improved EF (HFimpEF),evidence
 mi_post_40_days,40 days post-MI,History
-anemia,Anemia,
-angioderma,Angioderma,History
-arrhythmogenic_cardiomyopathy,Arrhythmogenic Cardiomyopathy,
-atrial_fibrillation,Atrial Fibrillation,
-cardiogenic_shock,Cardiogenic Shock,
-cvd,Cardiovascular Disease,
-central_sleep_apnea,Central sleep apnea,
-obstructive_sleep_apnea,Obstructive sleep apnea,
-congestion,Congestion,
-congestive_symptoms,Congestive Symptoms,
-decompensated_hf,Decompensated HF,
-dependence_of_continuous_iv_inotropes,Dependent on continuous intravenous inotropes,
-dependence_of_temporary_mcs,Dependent on temporary MCS,
-threatend_end_organ_function,End-organ function cannot be maintained,
-survival_year_greater_than_1,expectation of meaningful survival for >1 year,
-fluid_overload,Fluid overload,
-fluid_retention,Fluid Retention,
-hemodynamic_compromise_and_shock,Hemodynamic compromise and shock,
-high_risk_cvd,High Risk of Cardiovascular Disease,
-hospitalized,Hospitalized,
-hyperkalemia,Hyperkalemia,
-hypertension,Hypertension,
-hyponatremia,Hyponatremia,
-hypotension,Hypotension,
-iron_deficiency,Iron Deficiency,
-ischemic_hf,Ischemic cause of Heart Failure,
-ischemic_heart_disease,Ischemic Heart Disease,
-lbbb,Left Bundle Branch Block (LBBB),
-non_lbbb,Non-Left Bundle Branch Block (non-LBBB),
+anemia,Anemia,evidence
+angioedema,Angioedema,History
+arrhythmogenic_cardiomyopathy,Arrhythmogenic Cardiomyopathy,evidence
+atrial_fibrillation,Atrial Fibrillation,evidence
+cardiogenic_shock,Cardiogenic Shock,evidence
+cvd,Cardiovascular Disease,evidence
+central_sleep_apnea,Central sleep apnea,evidence
+obstructive_sleep_apnea,Obstructive sleep apnea,evidence
+congestion,Congestion,evidence
+congestive_symptoms,Congestive Symptoms,evidence
+decompensated_hf,Decompensated HF,evidence
+dependence_of_continuous_iv_inotropes,Dependent on continuous intravenous inotropes,evidence
+dependence_of_temporary_mcs,Dependent on temporary MCS,evidence
+threatend_end_organ_function,End-organ function cannot be maintained,evidence
+survival_year_greater_than_1,expectation of meaningful survival for >1 year,evidence
+fluid_overload,Fluid overload,evidence
+fluid_retention,Fluid Retention,evidence
+hemodynamic_compromise_and_shock,Hemodynamic compromise and shock,evidence
+high_risk_cvd,High Risk of Cardiovascular Disease,evidence
+hospitalized,Hospitalized,evidence
+hyperkalemia,Hyperkalemia,evidence
+hypertension,Hypertension,evidence
+hyponatremia,Hyponatremia,evidence
+hypotension,Hypotension,evidence
+iron_deficiency,Iron Deficiency,evidence
+ischemic_hf,Ischemic cause of Heart Failure,evidence
+ischemic_heart_disease,Ischemic Heart Disease,evidence
+lbbb,Left Bundle Branch Block (LBBB),evidence
+non_lbbb,Non-Left Bundle Branch Block (non-LBBB),evidence
 myocardial_infarction,Recent Myocardial Infarction (MI),History
-nonischemic_dcm,Non-ischemic Dilated Cardiomyopathy,
-does_not_respond_to_loop_diuretics,Patient doesn't respond to modearate or high-dose loop diuretics,
-permanent_persistent_paroxysmal_af,Permanent-persistent-paroxysmal AF,
-requires_ventricular_pacing,Requires ventricular pacing,
-second_degree_av_block,Second-degree atrioventricular (AV) block,
-third_degree_av_block,Third-degree atrioventricular (AV) block,
-secondary_mr,Secondary Mitral Regurgitation,
-sinus_rhythm,Sinus Rhythm,
-sleep_disorder_breathing,Sleep-disordered breathing,
-type_2_diabetes,Type 2 Diabetes,
-valvular_hd,Valvular Heart Disease,
-vte,Venous Thromboembolism [VTE],
-attr_v,Variant transthyretin amyloidosis,
-attr_wt,Wild-type transthyretin amyloidosis,
-worsen_hf,Worsening of HF,
+nonischemic_dcm,Non-ischemic Dilated Cardiomyopathy,evidence
+does_not_respond_to_loop_diuretics,Patient doesn't respond to modearate or high-dose loop diuretics,evidence
+permanent_persistent_paroxysmal_af,Permanent-persistent-paroxysmal AF,evidence
+requires_ventricular_pacing,Requires ventricular pacing,evidence
+second_degree_av_block,Second-degree atrioventricular (AV) block,evidence
+third_degree_av_block,Third-degree atrioventricular (AV) block,evidence
+secondary_mr,Secondary Mitral Regurgitation,evidence
+sinus_rhythm,Sinus Rhythm,evidence
+sleep_disorder_breathing,Sleep-disordered breathing,evidence
+type_2_diabetes,Type 2 Diabetes,evidence
+valvular_hd,Valvular Heart Disease,evidence
+vte,Venous Thromboembolism [VTE],evidence
+attr_v,Variant transthyretin amyloidosis,evidence
+attr_wt,Wild-type transthyretin amyloidosis,evidence
+worsen_hf,Worsening of HF,evidence
 acei,Intolerant of ACEi,intolerant
-arni,Intolerant of ARNi,intolerant
 arb,Intolerant of ARB,intolerant
+arni,Infeasible of ARNi,intolerant

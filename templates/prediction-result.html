@@ -11,9 +11,9 @@
       <p class="card-text text-center hd_result">Patient Status :</p>
         <div class="explanation-hd-result">
             {% if probability_level == 1 %}
-                <p class="hd-result-normal">Normal, Patient have low chance of having coronary heart disease</p>
+                <p class="hd-result-normal">Normal <br> Patient have low chance of having coronary heart disease</p>
             {% elif probability_level == 2 %}
-                <p class="hd-result-gray">Gray Area, Patient need to do get more check up from profession perspective</p>
+                <p class="hd-result-gray">Moderate <br> Further check-up on patient is necessary to confirm the presence of coronary heart disease.</p>
             {% elif probability_level == 3 %}
                 <p class="hd-result-high">Patient is having high change of coronary heart disease</p>
             {% endif %}
@@ -26,7 +26,7 @@
       {% if probability_level == 1 %}
         hd-result-number hd-normal
       {% elif probability_level == 2 %}
-        hd-result-number hd-red
+        hd-result-number hd-orange
       {% elif probability_level == 3 %}
         hd-result-number hd-red
       {% endif %}
@@ -35,7 +35,7 @@
 
       <div class="bridge-form">
       <a href="#" onclick="document.getElementById('myform').submit()" class="btn-bridge">
-                 Try to implement patient diagnose into heart failure expert system we build
+                 Try to implement patient diagnose into heart failure expert system
               </a>
           <form
             id="myform"

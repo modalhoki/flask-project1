@@ -23,7 +23,7 @@ recommendation(validated_multivariable_risk_score, 5):- evidence(accf_stage_a).
 recommendation(acei, 6):-
         evidence(accf_stage_b),
         measurement(lvef, X), X =< 40,
-        \+ intolerant(acei).
+        \+ (intolerant(acei);evidence(angioedema)).
 
 recommendation(statins, 7):- 
         evidence(accf_stage_b),
@@ -33,7 +33,7 @@ recommendation(arb, 8):-
         evidence(accf_stage_b),
         evidence(myocardial_infarction), 
         measurement(lvef, X), X =< 40,
-        intolerant(acei).
+        (intolerant(acei);evidence(angioedema)).
 
 recommendation(beta_blockers, 9):-
         evidence(accf_stage_b),
@@ -88,41 +88,42 @@ recommendation(arni, 23):-
         evidence(accf_stage_c),
         measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
-        \+ infeasible(arni).
+        \+ intolerant(arni),
+        \+ evidence(angioedema).
 
 recommendation(acei, 24):-
         evidence(accf_stage_c),
         measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
-        infeasible(arni),
-        \+ intolerant(acei).
+        intolerant(arni),
+        \+ intolerant(acei),
+        \+ evidence(angioedema).
 
 recommendation(arb, 25):-
         evidence(accf_stage_c),
         measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
-        intolerant(acei),
-        infeasible(arni).
+        ((intolerant(acei),
+        intolerant(arni));
+        evidence(angioedema)).
 
 recommendation(arni, 27):-
         evidence(accf_stage_c),
         measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
-        \+ infeasible(arni),
+        \+ intolerant(arni),
         \+ intolerant(acei),
-        \+ intolerant(arb).
+        \+ intolerant(arb),
+        \+ evidence(angioedema).
 
 contraindication(acei, 29):- 
-        evidence(accf_stage_c),
-        (recommendation(arni, 10); recommendation(arni, 14)).
+        (recommendation(arni, 10); recommendation(arni, 14); recommendation(arni, 84)).
 
 contraindication(arni, 30):- 
-        evidence(accf_stage_c),
-        evidence(angioderma).
+        evidence(angioedema).
 
 contraindication(acei, 31):- 
-        evidence(accf_stage_c),
-        evidence(angioderma).
+        evidence(angioedema).
 
 recommendation(beta_blockers, 32):- 
         evidence(accf_stage_c), 
@@ -131,15 +132,17 @@ recommendation(beta_blockers, 32):-
 
 recommendation(mra, 34):-
         evidence(accf_stage_c),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
-        measurement(gfr, X), X > 30,
-        measurement(potassium, Y), Y < 5.
+        measurement(gfr, Y), Y > 30,
+        measurement(potassium, Z), Z < 5.
 
 contraindication(mra_precaution, 36):-
         evidence(accf_stage_c),
+        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
-        measurement(gfr, X), X > 30,
-        measurement(potassium, Y), Y < 5.
+        measurement(gfr, Y), Y > 30,
+        measurement(potassium, Z), Z < 5.
 
 recommendation(sglt2i, 37):- 
         evidence(accf_stage_c),
@@ -215,7 +218,6 @@ recommendation(weekly_titration, 53):-
 
 recommendation(ivabradine, 54):-
         evidence(accf_stage_c),
-        measurement(lvef, X), X =< 40,
         (evidence(nyha_class_2);evidence(nyha_class_3)),
         measurement(lvef, X), X =< 35,
         measurement(resting_heart_rate, Y), Y >= 70,
@@ -269,7 +271,7 @@ recommendation(crt, 63):-
 recommendation(crt, 64):-
         evidence(accf_stage_c),
         evidence(sinus_rhythm),
-        (evidence(nyha_class_2);evidence(nyha_class_3), evidence(nyha_class_4)),
+        (evidence(nyha_class_2);evidence(nyha_class_3);evidence(nyha_class_4)),
         measurement(lvef, X), X =< 35,
         evidence(lbbb),
         measurement(qrs, Y), Y > 120, Y =< 149.
@@ -362,14 +364,14 @@ recommendation(mra, 82):-
 recommendation(arb, 83):-
         evidence(accf_stage_c),
         measurement(lvef, X), X >= 50,
-        infeasible(arni),
-        intolerant(acei),
-        \+ intolerant(arb).
+        ((intolerant(arni),
+        \+intolerant(arb));
+        evidence(angioedema)).
 
 recommendation(arni, 84):-
         evidence(accf_stage_c),
         measurement(lvef, X), X >= 50,
-        \+ infeasible(arni).
+        \+(intolerant(arni);evidence(angioedema)).
 
 no_benefit(nitrates_or_pde_5, 85):-
         evidence(accf_stage_c),
@@ -391,7 +393,7 @@ recommendation(fluid_restriction, 93):-
         evidence(hyponatremia).
 
 recommendation(durable_lvad_implantation, 97):-
-        evidence(accf_stage_c),
+        evidence(accf_stage_d),
         measurement(lvef, X), X =< 40,
         evidence(nyha_class_4),
         (evidence(dependence_of_continuous_iv_inotropes);evidence(dependence_of_temporary_mcs)).

@@ -1,10 +1,8 @@
-from flask import Flask, render_template, url_for, request, redirect
-import expertSystem
-# import heart_prediction_default_input
-
 from flask import Flask, render_template, request
+from expertSystem import inference
+from helperFunction import reshape
 import joblib
-import numpy as np
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -42,10 +40,6 @@ def heart_disease():
                       old_peak,
                       st_slope]
 
-        # load the model from disk
-        filename = 'model.pkl'
-        load_model = joblib.load(filename)
-
         # append input here
         # age, sex, chest pain type, fasting blood sugar, max heart rate, exercise angina, old-peak, ST slope
         pred_prob = load_model.predict([pred_input])
@@ -73,99 +67,48 @@ def heart_disease():
         return render_template("/heart-disease-prediction.html")
 
 
-# --set global variable for expert system
-evidences = ['']
-measurements = []
-intolerance = ['']
-infeasible = ['']
-sex = ''
-history = ''
-
-
 @app.route('/expert_system', methods=['POST', 'GET'])
 def expert_system():
     if request.method == 'POST':
 
-        # --getting global variable
-        global evidences
-        global history
-        global measurements
-        global intolerance
-        global infeasible
-        global sex
-
-        # --resting measurement value
+        # --getting value
+        evidences = request.form.getlist('selected_evident') + request.form.getlist('selected_history')
+        intolerance = request.form.getlist('selected_intolerance')
+        sex = request.form.get('selected_sex')
         measurements = []
 
-        # --getting value
-        evidences = request.form.getlist('selected_evident')
-        history = request.form.getlist('selected_history')
-        intolerance = request.form.getlist('selected_intolerance')
-        infeasible = request.form.getlist('selected_infeasible')
-        sex = request.form.get('selected_sex')
+        measurement_input = ['lvef', 'gfr', 'potassium', 
+                             'resting_heart_rate', 'qrs']
 
-        # --infeasible data fix
-        if not infeasible:
-            infeasible = ''
-        else:
-            infeasible = infeasible[0]
-
-        # --getting measurement
-        for i in range(6):
-            current_measurement_value = request.form.get(expertSystem.measurement_input[i])
-            if current_measurement_value == '':
-                break
-
-            measurements.append(
-                {expertSystem.measurement_input[i]: int(current_measurement_value)}
-            )
-
-        # --merging history into evidence
-        for current_history in history:
-            evidences.append(current_history)
+        for measurement in measurement_input:
+            input_value = request.form.get(measurement)
+            if input_value:
+                measurements.append({measurement: int(input_value)})
 
         # initiate prolog
-        prolog_final_result = expertSystem.generate_recommendation(evidences,
-                                                                   measurements,
-                                                                   intolerance,
-                                                                   infeasible,
-                                                                   sex)
-
-        recommendation_result = prolog_final_result[0]
-        contraindications_result = prolog_final_result[1]
-        no_benefits_result = prolog_final_result[2]
+        result = inference(evidences, measurements, intolerance, sex)
 
         return render_template('/expert-system-result.html',
-                               recommendation_result=recommendation_result,
-                               contraindications_result=contraindications_result,
-                               no_benefits_result=no_benefits_result)
+                               recommendation_result=result)
 
     else:
-
         return render_template('/expert-system.html',
-                               eveident_selection_value=expertSystem.evident_data_value,
-                               eveident_selection_desc=expertSystem.evident_data_desc,
-                               total_eveident_selection=len(expertSystem.evident_data_value),
+                               eveident_selection_value=evidence_value,
+                               eveident_selection_desc=evidence_desc,
+                               total_eveident_selection=len(evidence_value),
 
-                               infeasible_selection_value=expertSystem.infeasible_data_value,
-                               infeasible_selection_desc=expertSystem.infeasible_data_desc,
-                               total_infeasible_selection=len(expertSystem.infeasible_data_value),
+                               history_selection_value=history_value,
+                               history_selection_desc=history_desc,
+                               total_history_selection=len(history_value),
 
-                               history_selection_value=expertSystem.history_data_value,
-                               history_selection_desc=expertSystem.history_data_desc,
-                               total_history_selection=len(expertSystem.history_data_value),
+                               intolearant_selection_value=intolerant_value,
+                               intolearant_selection_desc=intolerant_desc,
+                               total_intolearant_selection=len(intolerant_value),
 
-                               intolearant_selection_value=expertSystem.intolerant_data_value,
-                               intolearant_selection_desc=expertSystem.intolerant_data_desc,
-                               total_intolearant_selection=len(expertSystem.intolerant_data_value),
-
-                               measurement_value=expertSystem.measurement_input,
-                               measurement_desc=expertSystem.measurement_desc,
-                               measurement_unit=expertSystem.measurement_unit,
-                               total_measurement=len(expertSystem.measurement_input),
-
-                               unmark_selection_value=expertSystem.unmarked_data_value,
-                               unmark_selection_desc=expertSystem.unmarked_data_desc,
+                               measurement_value=measurements_input,
+                               measurement_desc=measurements_desc,
+                               measurement_unit=measurements_unit,
+                               total_measurement=len(measurements_input)
                                )
 
 
@@ -190,29 +133,22 @@ def bridge():
             return "patient sex and patient diagnose value didn't pass"
 
         return render_template('/expert-system.html',
-                               eveident_selection_value=expertSystem.evident_data_value,
-                               eveident_selection_desc=expertSystem.evident_data_desc,
-                               total_eveident_selection=len(expertSystem.evident_data_value),
+                               eveident_selection_value=evidence_value,
+                               eveident_selection_desc=evidence_desc,
+                               total_eveident_selection=len(evidence_value),
 
-                               infeasible_selection_value=expertSystem.infeasible_data_value,
-                               infeasible_selection_desc=expertSystem.infeasible_data_desc,
-                               total_infeasible_selection=len(expertSystem.infeasible_data_value),
+                               history_selection_value=history_value,
+                               history_selection_desc=history_desc,
+                               total_history_selection=len(history_value),
 
-                               history_selection_value=expertSystem.history_data_value,
-                               history_selection_desc=expertSystem.history_data_desc,
-                               total_history_selection=len(expertSystem.history_data_value),
+                               intolearant_selection_value=intolerant_value,
+                               intolearant_selection_desc=intolerant_desc,
+                               total_intolearant_selection=len(intolerant_value),
 
-                               intolearant_selection_value=expertSystem.intolerant_data_value,
-                               intolearant_selection_desc=expertSystem.intolerant_data_desc,
-                               total_intolearant_selection=len(expertSystem.intolerant_data_value),
-
-                               measurement_value=expertSystem.measurement_input,
-                               measurement_desc=expertSystem.measurement_desc,
-                               measurement_unit=expertSystem.measurement_unit,
-                               total_measurement=len(expertSystem.measurement_input),
-
-                               unmark_selection_value=expertSystem.unmarked_data_value,
-                               unmark_selection_desc=expertSystem.unmarked_data_desc,
+                               measurement_value=measurements_input,
+                               measurement_desc=measurements_desc,
+                               measurement_unit=measurements_unit,
+                               total_measurement=len(measurements_input),
 
                                ps_patient_sex=ps_patient_sex,
                                ps_patient_diagnoses=ps_patient_diagnoses
@@ -222,8 +158,24 @@ def bridge():
 
 
 if __name__ == "__main__":
-    def reshape(arr):
-        return np.array(arr).reshape(-1, 1, arr.shape[1])
+    # load the model from disk
+    filename = 'model.pkl'
+    load_model = joblib.load(filename)
 
+    # load data input for expert system input
+    input_df = pd.read_csv('csv/input.csv')
+    evidence_value = input_df[input_df['type'] == 'evidence']['input'].tolist()
+    evidence_desc = input_df[input_df['type'] == 'evidence']['desc'].tolist()
+
+    history_value = input_df[input_df['type'] == 'History']['input'].tolist()
+    history_desc = input_df[input_df['type'] == 'History']['desc'].tolist()
+
+    intolerant_value = input_df[input_df['type'] == 'intolerant']['input'].tolist()
+    intolerant_desc = input_df[input_df['type'] == 'intolerant']['desc'].tolist()
+
+    measurement_df = pd.read_csv('csv/measurement.csv')
+    measurements_input = measurement_df['measurement']
+    measurements_desc = measurement_df['desc']
+    measurements_unit = measurement_df['unit']
 
     app.run(host='0.0.0.0', port=5000, debug=True)
