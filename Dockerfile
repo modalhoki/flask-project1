@@ -8,7 +8,9 @@ RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
 
 RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man7
 
-RUN apt-get update && apt-get install -y python3.9 python3-pip
+RUN apt-get update && apt-get install -y python3.9 python3.9-distutils
+
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.9 get-pip.py
 
 # Set the working directory in the container
 WORKDIR /app
